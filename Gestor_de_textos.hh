@@ -16,6 +16,7 @@ Classe encarregada de gestionar el main principal del programa.
 #include "Consultes.hh"
 #include <vector>
 #include <iostream>
+#include <string>
 
 /*
  * Classe Gestor_de_textos

@@ -93,5 +93,6 @@ class Conjunt_cites
 		map<string, p_cita> cites;
 		map<string, int> max_ref;
 		int maxima_referencia(string inicials);
+		private bool existeix_cita(Text text, int x, int y);
 }
 #endif
