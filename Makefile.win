@@ -1,11 +1,11 @@
-# Project: Proyecto1
+# Project: Gestor de textos
 # Makefile created by Dev-C++ 5.11
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = Gestos_de_textos.o Conjunt_de_cites.o
-LINKOBJ  = Gestos_de_textos.o Conjunt_de_cites.o
+OBJ      = Gestos_de_textos.o Conjunt_de_cites.o Text.o
+LINKOBJ  = Gestos_de_textos.o Conjunt_de_cites.o Text.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -29,3 +29,6 @@ Gestos_de_textos.o: Gestos_de_textos.cc
 
 Conjunt_de_cites.o: Conjunt_de_cites.cc
 	$(CPP) -c Conjunt_de_cites.cc -o Conjunt_de_cites.o $(CXXFLAGS)
+
+Text.o: Text.cc
+	$(CPP) -c Text.cc -o Text.o $(CXXFLAGS)
