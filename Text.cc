@@ -55,4 +55,8 @@ class Text {
 	public bool existeix_paraula (string paraula) {
 		
 	}
+	
+	public int consultar_numero_frases() {
+		return frases.size()+1;
+	}
 };
