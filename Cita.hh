@@ -63,3 +63,13 @@ class Cita
 }
 
 #endif
+#ifndef CITA_HH
+#define CITA_HH
+
+class Cita
+{
+	public:
+	protected:
+};
+
+#endif
