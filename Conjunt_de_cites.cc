@@ -15,6 +15,7 @@ class Conjunt_cites{
 	Conjunt_cites() {
 		cites = map<string, p_cita>();
 		max_ref = map<string, int>();
+		hola cacarruta
 	}
 	public bool afegir_cita(int x, int y) {
 		
