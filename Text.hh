@@ -88,7 +88,6 @@ class Text
 		map<string, int> frequencies;
 
 		//Modificadores
-		void modificar_titol(string paraula1, string paraula2);
 		void modificar_contingut(string paraula1, string paraula2);
 		void construir_taula_de_frequencies();
 
