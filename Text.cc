@@ -4,20 +4,31 @@ using namespace std;
 
 class Text {
 	string titol;
-	vector<string> frases;
-	map <string,int> frequencies;
+	vector<vector<string> > frases;
+	map <string, int> frequencies;
 	
 	private void modificar_contingut (string paraula1, string paraula2) {
-		
+		for (int f = 0; f < frases.size(); f++) {
+			for (int p = 0; p < frases[f].size(); p++) {
+				if (frases[f][p] == paraula1) frases[f][p] = paraula2;
+			}
+		}
 	}
 	
 	private void construir_taula_de_frequencies() {
 		
 	}
 	
-	Text (string titol, vector<string> frases) {
+	Text (string titol) {
 		this->titol = titol;
+	}
+	
+	public void afegir_contingut (vector<vector<string> > frases) {
 		this->frases = frases;
+	}
+	
+	public void modificar_titol(string titol) {
+		this->titol = titol;
 	}
 	
 	public string consultar_titol() {
@@ -28,12 +39,12 @@ class Text {
 		return frases[posicio-1];
 	}
 	
-	public vector<string> consultar_frases () {
+	public vector<vector<string> > consultar_contingut () {
 		return frases;
 	}
 	
-	public map<int, string> consultar_frases (int x, int y) {
-		map<int, string> aux;
+	public map<int, vector<string> > consultar_frases (int x, int y) {
+		map<int, vector<string> > aux;
 		for (int i = x; i <= y; i++) {
 			aux[i] = frases[i-1];
 		}
@@ -44,7 +55,7 @@ class Text {
 		
 	}
 	
-	public list<int> obtenir_frases_amb_paraules (string paraules) {
+	public list<int> obtenir_frases_amb_paraules (vector<string> paraules) {
 		
 	}
 	
@@ -53,7 +64,12 @@ class Text {
 	}
 	
 	public bool existeix_paraula (string paraula) {
-		
+		for (int f = 0; f < frases.size(); f++) {
+			for (int p = 0; p < frases[f].size(); p++) {
+				if (frases[f][p] == paraula) return true;
+			}
+		}
+		return false;
 	}
 	
 	public int consultar_numero_frases() {

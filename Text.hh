@@ -31,7 +31,21 @@ class Text
 			\pre cert
 			\post Retorna un nou objecte de tipus Text amb el titol i les frases inicialitzats.
 		*/
-		Text(string titol, vector<string> frases);
+		Text(string titol);
+		
+		//Modificadores
+		
+		/** @brief Afegeix el contingut al Text
+			\pre cert
+			\post El parametre implicit queda amb el seu contingut
+		*/
+		void afegir_contingut (vector<vector<string> > frases);
+		
+		/** @brief Modifica el titol del Text
+			\pre cert
+			\post el titol del Text queda modificat i ara es "titol"	
+		*/
+		void modificar_titol(string titol);
 
 		//Consultores
 
@@ -46,18 +60,18 @@ class Text
 			\post Retorna l'string equivalent a la frase de la posició demanada.
 		*/
 		string consultar_frase(int posicio);
-		/** @brief Retorna totes les frases del paràmetre implícit.
+		/** @brief Retorna el contingut del paràmetre implícit.
 			\pre cert
 			\post Retorna un vector amb totes les frases del paràmetre implícit (buit si no en té).
 		*/
-		vector<string> consultar_frases();
+		vector<vector<string> > consultar_contingut();
 		/** @brief Retorna totes les frases entre les posicions X i Y (ambdues incloses).
 			@param x Index més petit del conjunt de frases a consultar.
 			@param y Index més gran del conjunt de frases a consultar.
 			\pre El paràmetre implícit ha de cumplir que 1 <= X <= Y <= nº frases.
 			\post Retorna un vector amb totes les frases del paràmetre implícit (buit si no en té).
 		*/
-		map<int, string> consultar_frases(int x, int y);
+		map<int, vector<string> > consultar_frases (int x, int y);
 		/** @brief Retorna un vector amb la taula de frequencia del contingut del paràmetre implicit.
 			\pre cert
 			\post Retorna un vector amb la taula de frequencia del contingut del paràmetre implícit. 
@@ -67,7 +81,7 @@ class Text
 			\pre cert
 			\post Retorna una llista amb les posicions de les frases del paràmetre implícit que contenen les paraules del paràmetre.
 		*/
-		list<int> obtenir_frases_amb_paraules(string paraules);
+		list<int> obtenir_frases_amb_paraules(vector<string> paraules);
 		/** @brief Substitueix les aparicions de la "paraula1" per la "paraula2".
 			@param paraula1: Paraula que es vol substituir.
 			@param paraula2: Paraula per la que es substituirà la "paraula1".
@@ -89,10 +103,15 @@ class Text
 
 	private:
 		string Titol;
-		vector<string> frases;
+		vector<vector<string> > frases;
 		map<string, int> frequencies;
 
 		//Modificadores
+		
+		/**@brief Modifica el contingut del p.i.
+			\pre paraula1 es troba al p.i.
+			\post el p.i. queda modificat amb la paraula2 en comptes de la paraula1
+		*/
 		void modificar_contingut(string paraula1, string paraula2);
 		void construir_taula_de_frequencies();
 

@@ -58,7 +58,7 @@ class Autor
 		/** @brief Comprova si el paràmetre implícit té un text en el qual aparegui una paraula en concret (tant en el titol com en el contingut).
 			@param paraula: Paraula a cercar.
 			\pre cert
-			\post Retorna "True" si el paràmetre implícit té un text en el que aparegui la paraula del paràmetre. Retorna "False" en cas contrari.
+			\post Retorna el Text en el que apareix la paraula del paràmetre si n'existeix un al paràmetre implícit. Retorna un Text de titol "NULL" si no existeix cap o m�s d'un.
 		*/
 		Text existeix_text_amb_paraula(string paraula);
 
@@ -66,7 +66,7 @@ class Autor
 
 		/** @brief Afegeix un text al paràmetre implícit, retornant el resultat de l'operació.
 			@param text: Objecte del tipus Text a afegir.
-			\pre L'objecte del paràmetre ha d'estar correctament definit. No pot existir un altre Text amb el mateix titol.
+			\pre L'objecte del paràmetre ha d'estar correctament definit.
 			\post El paràmetre implícit tindrà afegit aquest nou Text sempre i quan no existís cap Text amb el mateix titol. El boolea ens diu si s'ha pogut afegir (True) o no (False).
 		*/
 		bool afegir_text(Text text);
