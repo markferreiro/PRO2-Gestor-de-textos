@@ -126,7 +126,7 @@ class Text {
 	}
 	
 	public int consultar_numero_frases() {
-		return frases.size()+1;
+		return frases.size();
 	}
 	private int consultar_frequencia_maxima() {
 		int freq = 0;
