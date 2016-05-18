@@ -1,6 +1,7 @@
 #include <iostream>
-using namespace std;
 #include "Cita.hh"
+
+using namespace std;
 
 class Cita {
 	string referencia, nom_autor, titol_text;
