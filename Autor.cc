@@ -45,8 +45,9 @@ class Autor {
 			if ((*it).existeix_paraula(paraula)) {
 				//Comprova si s'ha trobat un text amb la paraula anteriorment
 				if (aux.consultar_titol() == "NULL") {
-					aux.modificar_titol(*it.consultar_titol());
-					aux.afegir_contingut(*it.consultar_contingut());
+					aux = (*it);
+					/*aux.modificar_titol((*it).consultar_titol());
+					aux.afegir_contingut((*it).consultar_contingut());*/
 				}
 				//Si es cert retorna un Text de titol "NULL"
 				else {
