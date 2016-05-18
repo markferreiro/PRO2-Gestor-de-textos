@@ -11,6 +11,8 @@ Classe utilitzada per la caracterització dels autors dels textos.
 #include <set>
 #include "Text.hh"
 
+using namespace std;
+
 /*
  * Classe Autor
 */
@@ -80,7 +82,10 @@ class Autor
 	private:
 		string nom, referencia;
 		set<Text> textos;
+		struct custom_sort {
+		    bool operator()(Text a, Text b);
+		};
 
-}
+};
 
 #endif

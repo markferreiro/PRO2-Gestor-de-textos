@@ -11,7 +11,8 @@ Classe utilitzada per la caracterització dels textos que el sistema emmagatzema
 #include <vector>
 #include <map>
 #include <list>
-#include <string>
+
+using namespace std;
 
 /*
  * Classe Text
@@ -33,7 +34,7 @@ class Text
 			\post Retorna un nou objecte de tipus Text amb el titol i les frases inicialitzats.
 		*/
 		Text();
-		Text::Text(string titol, vector<vector<string>> frases);
+		Text(string titol, vector<vector<string> > frases);
 		
 		
 		//Modificadores
@@ -105,9 +106,12 @@ class Text
 		int consultar_numero_frases();
 
 	private:
-		string Titol;
+		string titol;
 		vector<vector<string> > frases;
-		map<string, int> frequencies;
+		struct custom_sort {
+		    bool operator()(string a, string b);
+		};
+		map <string, int, custom_sort> frequencies;
 
 		//Modificadores
 		
@@ -119,6 +123,6 @@ class Text
 		void construir_taula_de_frequencies();
 		int consultar_frequencia_maxima();
 
-}
+};
 
 #endif

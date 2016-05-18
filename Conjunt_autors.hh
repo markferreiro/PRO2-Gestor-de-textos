@@ -80,6 +80,6 @@ public:
 	
 private:
 	set<Autor> Autors;
-}
+};
 
 #endif

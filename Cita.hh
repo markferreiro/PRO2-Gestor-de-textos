@@ -10,6 +10,9 @@ Classe utilitzada per la caracterització de les cites que el sistema farà sobr
 
 #include <map>
 #include <string>
+#include <vector>
+
+using namespace std;
 
 /*
  * Classe Cita
@@ -32,7 +35,8 @@ class Cita
 			\pre cert
 			\post Retorna un nou objecte de tipus Cita amb tots els seus parametres inicialitzats.
 		*/
-		Cita (string nom_autor, string titol_text, string referencia, map<int, vector<string> frases);
+		Cita();
+		Cita (string nom_autor, string titol_text, string referencia, map<int, vector<string> > frases);
 
 		//Consultores
 
@@ -60,16 +64,6 @@ class Cita
 	private:
 		string referencia, nom_autor, titol_text;
 		map<int, vector<string> > frases;
-}
-
-#endif
-#ifndef CITA_HH
-#define CITA_HH
-
-class Cita
-{
-	public:
-	protected:
 };
 
 #endif

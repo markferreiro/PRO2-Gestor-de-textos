@@ -8,7 +8,12 @@
 #include "Cita.hh"
 #include <vector>
 #include <string>
+#include <sstream>
 #include <map>
+#include "Text.hh"
+#include "Gestor_de_textos.hh"
+
+using namespace std;
 
 /*
  * Classe Conjunt_cites
@@ -82,15 +87,18 @@ class Conjunt_cites
 		*/
 		vector<Cita> cites_text_seleccionat();
 		
+		string IntToString (int a);
+		
 	private:
 		struct p_cita {
-	  		string* autor;
-	  		Text* text;
-	  		vector<int> (2) frases; 
+	  		Autor *autor;
+	  		Text *text;
+	  		vector<int> frases; 
+	  		p_cita();
 		};
 		map<string, p_cita> cites;
 		map<string, int> max_ref;
 		int maxima_referencia(string inicials);
-		private bool existeix_cita(Text text, int x, int y);
-}
+		bool existeix_cita(Text *text, int x, int y);
+};
 #endif

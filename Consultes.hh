@@ -202,6 +202,6 @@ private:
 	*/
 	
 	void taula_de_frequencies();
-}
+};
 
 #endif

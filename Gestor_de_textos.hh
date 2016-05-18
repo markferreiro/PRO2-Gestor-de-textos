@@ -11,11 +11,13 @@ Classe encarregada de gestionar el main principal del programa.
 #include <vector>
 #include <iostream>
 #include <string>
-#include "Conjunt_autors.hh"
 #include "Conjunt_cites.hh"
+#include "Conjunt_autors.hh"
 #include "Text.hh"
 #include "Autor.hh"
 #include "Consultes.hh"
+
+using namespace std;
 
 /*
  * Classe Gestor_de_textos
@@ -39,12 +41,12 @@ public:
 		\pre Ha d'haber un text seleccionat previament.
 		\post Retorna l'objecte Text corresponent al text seleccionat per la consulta "triar text"
 	*/
-	static Text obtenir_text_seleccionat();
+	static Text* obtenir_text_seleccionat();
 	/** @brief Obté l'autor del text seleccionat.
 		\pre Ha d'haber un text seleccionat previament i com a conseqüencia un autor seleccionat.
 		\post Retorna l'objecte Autor corresponent al text seleccionat per la consulta "triar text"
 	*/
-	static Autor obtenir_autor_text_seleccionat();
+	static Autor* obtenir_autor_text_seleccionat();
 	/** @brief Obtenir el conjunt de cites de la classe.
 		\pre cert
 		\post Retorna l'objecte Conjunt_cites de la classe.
@@ -114,6 +116,6 @@ private:
 	*/
 	void substituir_paraules(string consulta);
 
-}
+};
 
 #endif
