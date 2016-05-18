@@ -35,7 +35,7 @@ LeftChar=1
 [Editor_2]
 CursorCol=15
 CursorRow=35
-TopLine=15
+TopLine=18
 LeftChar=1
 [Editor_5]
 CursorCol=55
@@ -47,4 +47,9 @@ CursorRow=1
 CursorCol=18
 CursorRow=19
 TopLine=1
+LeftChar=1
+[Editor_11]
+CursorCol=25
+CursorRow=14
+TopLine=3
 LeftChar=1

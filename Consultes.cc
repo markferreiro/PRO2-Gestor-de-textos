@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+
 class Consultes {
 	public void processar_consulta(string consulta) {
 		
