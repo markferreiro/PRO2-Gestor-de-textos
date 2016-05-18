@@ -9,7 +9,6 @@ class Text {
 	map <string, int, custom_sort> frequencies;
 	struct custom_sort {
 	    bool operator()(string a, string b) {
-	        return cntBits(a) < cntBits(b);
 	        if (a.length() < b.length()) {
 	        	return true;
 			} else if (a.size() > b.size()) {

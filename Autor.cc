@@ -6,7 +6,12 @@ using namespace std;
 
 class Autor {
 	string nom, referencia;
-	set <Text> textos;
+	set <Text, custom_sort> textos;
+	struct custom_sort {
+	    bool operator()(Text a, Text b) {
+	        return a.consultar_titol() < b.consultar_titol();
+	    }
+	};
 	
 	public Autor (string nom, string referencia) {
 		this->nom = nom;
@@ -26,7 +31,10 @@ class Autor {
 	}
 	
 	public bool existeix_titol (string titol) {
-		return (textos.find(titol) == textos.end());
+		for (auto it = textos.begin() ; it != textos.end() ; it++) {
+			if ((*it).consultar_titol() == titol) return true;
+		}
+		return false;
 	}
 	
 	public Text existeix_text_amb_paraula (string paraula) {
@@ -34,7 +42,7 @@ class Autor {
 		Text("NULL") aux;
 		//Comprova si existeix un text amb la paraula
 		while (it != textos.end()) {
-			if (*it.existeix_paraula(paraula)) {
+			if ((*it).existeix_paraula(paraula)) {
 				//Comprova si s'ha trobat un text amb la paraula anteriorment
 				if (aux.consultar_titol() == "NULL") {
 					aux.modificar_titol(*it.consultar_titol());
