@@ -32,7 +32,7 @@ class Cita
 			\pre cert
 			\post Retorna un nou objecte de tipus Cita amb tots els seus parametres inicialitzats.
 		*/
-		Cita(string nom_autor, string titol_text, string referencia, map<int, vector<string> frases);
+		Cita (string nom_autor, string titol_text, string referencia, map<int, vector<string> frases);
 
 		//Consultores
 

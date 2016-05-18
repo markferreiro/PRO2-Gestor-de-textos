@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 using namespace std;
 #include "Text.hh"
 
@@ -62,7 +63,7 @@ class Text {
 	public void substitueix_paraula (string paraula1, string paraula2) {
 		modificar_contingut(paraula1, paraula2);
 	}
-	
+	/*
 	public bool existeix_paraula (string paraula) {
 		for (int f = 0; f < frases.size(); f++) {
 			for (int p = 0; p < frases[f].size(); p++) {
@@ -70,6 +71,20 @@ class Text {
 			}
 		}
 		return false;
+	}*/
+	
+	public pair<int,int> existeix_paraula (string paraula) {
+		int f = 0, p = 0;
+		while (f < frases.size()) {
+			while (p < frases[f].size()) {
+				if (frases[f][p] == paraula) {
+					return (pair<int,int>(f,p));
+				}
+				p++;
+			}
+			f++;
+		}
+		return (pair<int,int>(f,p));
 	}
 	
 	public int consultar_numero_frases() {
