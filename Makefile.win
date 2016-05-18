@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = Gestos_de_textos.o Conjunt_de_cites.o Text.o Autor.o
-LINKOBJ  = Gestos_de_textos.o Conjunt_de_cites.o Text.o Autor.o
+OBJ      = Gestos_de_textos.o Conjunt_cites.o Text.o Autor.o Cita.o Consultes.o Conjunt_autors.o
+LINKOBJ  = Gestos_de_textos.o Conjunt_cites.o Text.o Autor.o Cita.o Consultes.o Conjunt_autors.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -27,11 +27,20 @@ $(BIN): $(OBJ)
 Gestos_de_textos.o: Gestos_de_textos.cc
 	$(CPP) -c Gestos_de_textos.cc -o Gestos_de_textos.o $(CXXFLAGS)
 
-Conjunt_de_cites.o: Conjunt_de_cites.cc
-	$(CPP) -c Conjunt_de_cites.cc -o Conjunt_de_cites.o $(CXXFLAGS)
+Conjunt_cites.o: Conjunt_cites.cc
+	$(CPP) -c Conjunt_cites.cc -o Conjunt_cites.o $(CXXFLAGS)
 
 Text.o: Text.cc
 	$(CPP) -c Text.cc -o Text.o $(CXXFLAGS)
 
 Autor.o: Autor.cc
 	$(CPP) -c Autor.cc -o Autor.o $(CXXFLAGS)
+
+Cita.o: Cita.cc
+	$(CPP) -c Cita.cc -o Cita.o $(CXXFLAGS)
+
+Consultes.o: Consultes.cc
+	$(CPP) -c Consultes.cc -o Consultes.o $(CXXFLAGS)
+
+Conjunt_autors.o: Conjunt_autors.cc
+	$(CPP) -c Conjunt_autors.cc -o Conjunt_autors.o $(CXXFLAGS)

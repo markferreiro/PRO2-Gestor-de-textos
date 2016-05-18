@@ -10,8 +10,6 @@
 #include <string>
 #include <map>
 
-#endif
-
 /*
  * Classe Conjunt_cites
  */

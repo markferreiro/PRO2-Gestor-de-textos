@@ -10,8 +10,6 @@
 #include <string>
 #include <set>
 
-#endif
-
 /*
  * Classe Conjunt_autors
  */

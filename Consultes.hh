@@ -5,12 +5,10 @@
 #ifndef CONSULTES_HH
 #define CONSULTES_HH
 
-#include "utils.PRO2"
 #include <vector>
 #include <string>
 #include <iostream>
 
-#endif
 
 /*
  * Classe Consultes

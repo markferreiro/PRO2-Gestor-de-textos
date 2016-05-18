@@ -1,12 +1,13 @@
-#include "utils.PRO2"
+#include <vector>
+#include <iostream>
+#include <string>
 #include "Conjunt_autors.hh"
 #include "Conjunt_cites.hh"
 #include "Text.hh"
 #include "Autor.hh"
 #include "Consultes.hh"
-#include <vector>
-#include <iostream>
-#include <string>
+
+using namespace std;
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 

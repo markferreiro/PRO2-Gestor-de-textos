@@ -11,6 +11,7 @@ Classe utilitzada per la caracterització dels textos que el sistema emmagatzema
 #include <vector>
 #include <map>
 #include <list>
+#include <string>
 
 /*
  * Classe Text
@@ -31,7 +32,9 @@ class Text
 			\pre cert
 			\post Retorna un nou objecte de tipus Text amb el titol i les frases inicialitzats.
 		*/
-		Text(string titol);
+		Text();
+		Text::Text(string titol, vector<vector<string>> frases);
+		
 		
 		//Modificadores
 		

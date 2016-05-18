@@ -8,15 +8,14 @@ Classe encarregada de gestionar el main principal del programa.
 #ifndef GESTOR_DE_TEXTOS_HH
 #define GESTOR_DE_TEXTOS_HH
 
-#include "utils.PRO2"
+#include <vector>
+#include <iostream>
+#include <string>
 #include "Conjunt_autors.hh"
 #include "Conjunt_cites.hh"
 #include "Text.hh"
 #include "Autor.hh"
 #include "Consultes.hh"
-#include <vector>
-#include <iostream>
-#include <string>
 
 /*
  * Classe Gestor_de_textos
