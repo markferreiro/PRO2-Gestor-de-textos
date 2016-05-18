@@ -9,6 +9,7 @@ class Text {
 	map <string, int, custom_sort> frequencies;
 	struct custom_sort {
 	    bool operator()(string a, string b) {
+	        return cntBits(a) < cntBits(b);
 	        if (a.length() < b.length()) {
 	        	return true;
 			} else if (a.size() > b.size()) {
@@ -18,14 +19,6 @@ class Text {
 			}
 	    }
 	};
-	
-	private void modificar_contingut (string paraula1, string paraula2) {
-		for (int frase = 0; frase < frases.size(); frase++) {
-			for (int paraula = 0; paraula < frases[frase].size(); paraula++) {
-				if (frases[frase][paraula] == paraula1) frases[frase][paraula] = paraula2;
-			}
-		}
-	}
 	
 	private void construir_taula_de_frequencies() {
 		for(int frase = 0 ; frase < frases.size() ; frase++) {
@@ -79,36 +72,48 @@ class Text {
 	
 	public list<int> obtenir_frases_amb_paraules (vector<string> paraules) {
 		
+		pair<int,int> pos = existeix_paraula(paraules[0]);	
 		list<int> aux;
-		for (int f = 0; f < frases.size(); f++) {
-			int paraula = 0;
-			for (int p = 0; p < frases[f].size(); p++) {
-				if (paraula < paraules.size()) {
-					if (frases[f][p] == paraules[paraula]) {
-						paraula++;
+		if(pos.first() == -1) return aux;
+		else {
+			int f = pos.first(), p = pos.second();
+			while (f < frases.size()) {
+				int paraula = 0;
+				while (p < frases[f].size()) {
+					if (paraula < paraules.size()) {
+						if (frases[f][p] == paraules[paraula]) {
+							paraula++;
+						} else {
+							paraula = 0;
+						}
 					} else {
-						paraula = 0;
+						aux.insert(aux.end(), f);
+						p = frases[f].size();
 					}
-				} else {
-					aux.insert(aux.end(), f);
-					p = frases[f].size();
+					p++;
 				}
+				p = 0;
+				f++;
 			}
 		}
+		
 	}
 	
 	public void substitueix_paraula (string paraula1, string paraula2) {
-		modificar_contingut(paraula1, paraula2);
-	}
-	/*
-	public bool existeix_paraula (string paraula) {
-		for (int f = 0; f < frases.size(); f++) {
-			for (int p = 0; p < frases[f].size(); p++) {
-				if (frases[f][p] == paraula) return true;
+		
+		pair<int,int> pos = existeix_paraula(paraula1);
+		if (pos.first() != -1) {
+			int f = pos.first(), p = pos.second();
+			while (f < frases.size()) {
+				while (p < frases[f].size()) {
+					if (frases[f][p] == paraula1) frases[f][p] = paraula2;
+					p++;
+				}
+				p = 0;
+				f++;
 			}
 		}
-		return false;
-	}*/
+	}
 	
 	public pair<int,int> existeix_paraula (string paraula) {
 		for (int f = 0; f < frases.size(); f++) {
