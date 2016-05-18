@@ -6,7 +6,19 @@ using namespace std;
 class Text {
 	string titol;
 	vector<vector<string> > frases;
-	map <string, int> frequencies;
+	map <string, int, custom_sort> frequencies;
+	struct custom_sort {
+	    bool operator()(string a, string b) {
+	        return cntBits(a) < cntBits(b);
+	        if (a.length() < b.length()) {
+	        	return true;
+			} else if (a.size() > b.size()) {
+				return false;
+			} else {
+				return a < b;
+			}
+	    }
+	};
 	
 	private void modificar_contingut (string paraula1, string paraula2) {
 		for (int f = 0; f < frases.size(); f++) {
@@ -17,7 +29,12 @@ class Text {
 	}
 	
 	private void construir_taula_de_frequencies() {
-		
+		for(int frase = 0 ; frase < frases.size() ; frase++) {
+			for (int paraula = 0 ; paraula < frases[frase].size() ; paraula++) {
+				string p = frases[frase][paraula];
+				frequencies[p]++;
+			}
+		}
 	}
 	
 	Text (string titol) {
