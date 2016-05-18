@@ -20,9 +20,9 @@ class Text {
 	};
 	
 	private void modificar_contingut (string paraula1, string paraula2) {
-		for (int f = 0; f < frases.size(); f++) {
-			for (int p = 0; p < frases[f].size(); p++) {
-				if (frases[f][p] == paraula1) frases[f][p] = paraula2;
+		for (int frase = 0; frase < frases.size(); frase++) {
+			for (int paraula = 0; paraula < frases[frase].size(); paraula++) {
+				if (frases[frase][paraula] == paraula1) frases[frase][paraula] = paraula2;
 			}
 		}
 	}
@@ -111,17 +111,14 @@ class Text {
 	}*/
 	
 	public pair<int,int> existeix_paraula (string paraula) {
-		int f = 0, p = 0;
-		while (f < frases.size()) {
-			while (p < frases[f].size()) {
+		for (int f = 0; f < frases.size(); f++) {
+			while (int p = 0; p < frases[f].size(); p++) {
 				if (frases[f][p] == paraula) {
 					return (pair<int,int>(f,p));
 				}
-				p++;
 			}
-			f++;
 		}
-		return (pair<int,int>(f,p));
+		return (pair<int,int>(-1,-1));
 	}
 	
 	public int consultar_numero_frases() {
