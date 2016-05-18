@@ -114,6 +114,7 @@ class Text
 		*/
 		void modificar_contingut(string paraula1, string paraula2);
 		void construir_taula_de_frequencies();
+		int consultar_frequencia_maxima();
 
 }
 
