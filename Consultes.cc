@@ -3,58 +3,56 @@
 #include <string>
 #include <iostream>
 
-class Consultes {
-	public void processar_consulta(string consulta) {
-		
-	}
-	private void tots(string consulta) {
-		
-	}
-	private void tots_textos() {
-		
-	}
-	private void tots_autors() {
-		
-	}
-	private void totes_cites() {
-		
-	}
-	private void info(string consulta) {
-		
-	}
-	private void info_cita(string referencia) {
-		
-	}
-	private void frases(string consulta) {
-		
-	}
-	private void frases_text_triat(int x, int y) {
-		
-	}
-	private void frases_expressio(string expressio) {
-		
-	}
-	private void frases_sequencia(string sequencia) {
-		
-	}
-	private void nombre_de(string consulta) {
-		
-	}
-	private void nombre_de_frases() {
-		
-	}
-	private void nombre_de_paraules() {
-		
-	}
-	private void textos_autor(string nom) {
-		
-	}
-	private void autor() {
-		
-	}
-	private void contingut() {
-		
-	}
-	private void taula_de_frequencies() {
-	}
-};
+void Consultes::processar_consulta(string consulta) {
+	
+}
+void Consultes::tots(string consulta) {
+	
+}
+void Consultes::tots_textos() {
+	
+}
+void Consultes::tots_autors() {
+	
+}
+void Consultes::totes_cites() {
+	
+}
+void Consultes::info(string consulta) {
+	
+}
+void Consultes::info_cita(string referencia) {
+	
+}
+void Consultes::frases(string consulta) {
+	
+}
+void Consultes::frases_text_triat(int x, int y) {
+	
+}
+void Consultes::frases_expressio(string expressio) {
+	
+}
+void Consultes::frases_sequencia(string sequencia) {
+	
+}
+void Consultes::nombre_de(string consulta) {
+	
+}
+void Consultes::nombre_de_frases() {
+	
+}
+void Consultes::nombre_de_paraules() {
+	
+}
+void Consultes::textos_autor(string nom) {
+	
+}
+void Consultes::autor() {
+	
+}
+void Consultes::contingut() {
+	
+}
+void Consultes::taula_de_frequencies() {
+}

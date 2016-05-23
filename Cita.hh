@@ -36,7 +36,7 @@ class Cita
 			\post Retorna un nou objecte de tipus Cita amb tots els seus parametres inicialitzats.
 		*/
 		Cita();
-		Cita(string nom_autor, string titol_text, string referencia, map<int, vector<string> > frases);
+		Cita(string nom_autor, string titol_text, string referencia, map<int, string > frases);
 
 		//Consultores
 

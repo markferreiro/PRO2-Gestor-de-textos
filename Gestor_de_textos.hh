@@ -8,14 +8,14 @@ Classe encarregada de gestionar el main principal del programa.
 #ifndef GESTOR_DE_TEXTOS_HH
 #define GESTOR_DE_TEXTOS_HH
 
-#include <vector>
-#include <iostream>
-#include <string>
 #include "Conjunt_cites.hh"
 #include "Conjunt_autors.hh"
 #include "Text.hh"
 #include "Autor.hh"
 #include "Consultes.hh"
+#include <vector>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -51,12 +51,12 @@ public:
 		\pre cert
 		\post Retorna l'objecte Conjunt_cites de la classe.
 	*/
-	static Conjunt_cites obtenir_conjunt_cites();
+	//static Conjunt_cites obtenir_conjunt_cites();
 private:
 	static Conjunt_autors autors;
 	static Text* text_seleccionat;
 	static Autor* autor_text_seleccionat;
-	static Conjunt_cites cites;
+	//static Conjunt_cites cites;
 	Consultes consultes;
 
 	//Constructores

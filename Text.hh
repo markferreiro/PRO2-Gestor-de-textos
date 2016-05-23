@@ -11,6 +11,8 @@ Classe utilitzada per la caracterització dels textos que el sistema emmagatzema
 #include <vector>
 #include <map>
 #include <list>
+#include <sstream>
+#include <iterator>
 
 using namespace std;
 
@@ -34,6 +36,7 @@ class Text
 			\post Retorna un nou objecte de tipus Text amb el titol i les frases inicialitzats.
 		*/
 		Text();
+		Text(string titol);
 		Text(string titol, vector<vector<string> > frases);
 		
 		
@@ -43,7 +46,7 @@ class Text
 			\pre cert
 			\post El parametre implicit queda amb el seu contingut
 		*/
-		void afegir_contingut (vector<vector<string> > frases);
+		void afegir_contingut (vector<string> frases);
 		
 		/** @brief Modifica el titol del Text
 			\pre cert
@@ -68,14 +71,14 @@ class Text
 			\pre cert
 			\post Retorna un vector amb totes les frases del paràmetre implícit (buit si no en té).
 		*/
-		vector<vector<string> > consultar_contingut();
+		vector<string> consultar_contingut();
 		/** @brief Retorna totes les frases entre les posicions X i Y (ambdues incloses).
 			@param x Index més petit del conjunt de frases a consultar.
 			@param y Index més gran del conjunt de frases a consultar.
 			\pre El paràmetre implícit ha de cumplir que 1 <= X <= Y <= nº frases.
 			\post Retorna un vector amb totes les frases del paràmetre implícit (buit si no en té).
 		*/
-		map<int, vector<string> > consultar_frases (int x, int y);
+		map<int, string > consultar_frases (int x, int y);
 		/** @brief Retorna un vector amb la taula de frequencia del contingut del paràmetre implicit.
 			\pre cert
 			\post Retorna un vector amb la taula de frequencia del contingut del paràmetre implícit. 
@@ -98,7 +101,7 @@ class Text
 			\pre cert
 			\post Es retornarà un True si s'ha trobat la paraula al titol o al contingut del paràmetre implícit. Es retornarà False en cas contrari.
 		*/
-		bool existeix_paraula(string paraula);
+		pair<int,int> existeix_paraula (string paraula);
 		/**@brief Consulta el nombre de frases del text
 			\pre cert
 			\post Retorna el numero de frases del text
@@ -107,7 +110,7 @@ class Text
 
 	private:
 		string titol;
-		vector<vector<string> > frases;
+		vector< string > frases;
 		struct custom_sort {
 		    bool operator()(string a, string b);
 		};
@@ -122,6 +125,7 @@ class Text
 		void modificar_contingut(string paraula1, string paraula2);
 		void construir_taula_de_frequencies();
 		int consultar_frequencia_maxima();
+		vector<string> split(string str, char delimiter);
 
 };
 
