@@ -17,7 +17,7 @@ string Autor::consultar_referencia() {
 	return referencia;
 }
 
-set<Text> Autor::tots_textos() {
+set<Text, Autor::custom_sort> Autor::tots_textos() {
 	return textos;
 }
 

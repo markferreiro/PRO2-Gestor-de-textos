@@ -23,6 +23,13 @@ using namespace std;
 */
 class Autor
 {
+	private:
+		struct custom_sort {
+				bool operator()(Text a, Text b);
+		};
+		string nom, referencia;
+		set<Text, custom_sort> textos;
+
 	public:
 		//Constructores
 
@@ -50,7 +57,7 @@ class Autor
 			\pre cert
 			\post Retorna un objecte "set" amb els textos del paràmetre implícit. Si el paràmetre implícit no té textos, el set estarà buit.
 		*/
-		set<Text> tots_textos();
+		set<Text, custom_sort> tots_textos();
 		/** @brief Comprova si el paràmetre implícit ja té un text amb un titol rebut per paràmetre.
 			@param titol: Titol del text a buscar.
 			\pre cert
@@ -60,7 +67,7 @@ class Autor
 		/** @brief Comprova si el paràmetre implícit té un text en el qual aparegui una paraula en concret (tant en el titol com en el contingut).
 			@param paraula: Paraula a cercar.
 			\pre cert
-			\post Retorna el Text en el que apareix la paraula del paràmetre si n'existeix un al paràmetre implícit. Retorna un Text de titol "NULL" si no existeix cap o m�s d'un.
+			\post Retorna el Text en el que apareix la paraula del paràmetre si n'existeix un al paràmetre implícit. Retorna un Text de titol "NULL" si no existeix cap o m�s d'un.
 		*/
 		Text existeix_text_amb_paraula(string paraula);
 
@@ -78,13 +85,6 @@ class Autor
 			\post El parametre implicit ja no té el Text amb titol = paràmetre. Retorna "True" si s'ha eliminat el Text. Retorna "False" en cas que no s'hagi trobat cap text.
 		*/
 		bool eliminar_text(string titol);
-
-	private:
-		string nom, referencia;
-		set<Text> textos;
-		struct custom_sort {
-		    bool operator()(Text a, Text b);
-		};
 
 };
 

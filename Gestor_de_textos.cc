@@ -37,7 +37,6 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	consulta = "";
 }
 
-<<<<<<< HEAD
 Conjunt_autors Gestor_de_textos::obtenir_conjunt_autors() {
 	return Conjunt_autors();
 }
