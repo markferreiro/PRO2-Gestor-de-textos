@@ -3,21 +3,27 @@
 Conjunt_autors::Conjunt_autors() {
 	
 }
-Conjunt_autors::bool afegir_autor(string nom) {
+
+bool Conjunt_autors::afegir_autor(string nom) {
 	
 }
-Conjunt_autors::void eliminar_autor(string nom) {
+
+void Conjunt_autors::eliminar_autor(string nom) {
 	
 }
-Conjunt_autors::bool existeix_titol(string titol) {
+
+bool Conjunt_autors::existeix_titol(string titol) {
 	
 }
-Conjunt_autors::Autor obtenir_autor(string nom) {
+
+Autor Conjunt_autors::obtenir_autor(string nom) {
 	
 }
-Conjunt_autors::set<Autor> tots_autors() {
+
+set<Autor> Conjunt_autors::tots_autors() {
 	
 }
-Conjunt_autors::bool triar_text (vector<string> paraules) {
+
+bool Conjunt_autors::triar_text (vector<string> paraules) {
 	
 }

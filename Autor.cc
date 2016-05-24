@@ -1,10 +1,10 @@
 #include "Autor.hh"
 
-Autor::bool operator()(Text a, Text b) {
+bool Autor::operator()(Text a, Text b) {
     return a.consultar_titol() < b.consultar_titol();
 }
 
-Autor::bool operator()(Text a, Text b) {
+bool Autor::operator()(Text a, Text b) {
     return a.consultar_titol() < b.consultar_titol();
 }
 
@@ -13,26 +13,26 @@ Autor::Autor (string nom, string referencia) {
 	this->referencia = referencia;	
 }
 
-Autor::string consultar_nom() {
+string Autor::consultar_nom() {
 	return nom;
 }
 
-Autor::string consultar_referencia() {
+string Autor::consultar_referencia() {
 	return referencia;
 }
 
-Autor::set<Text> tots_textos() {
+set<Text> Autor::tots_textos() {
 	return textos;
 }
 
-Autor::bool existeix_titol (string titol) {
+bool Autor::existeix_titol (string titol) {
 	for (auto it = textos.begin() ; it != textos.end() ; it++) {
 		if ((*it).consultar_titol() == titol) return true;
 	}
 	return false;
 }
 
-Autor::Text existeix_text_amb_paraula (string paraula) {
+Text Autor::existeix_text_amb_paraula (string paraula) {
 	set<Text>::iterator it = textos.begin();
 	Text("NULL") aux;
 	//Comprova si existeix un text amb la paraula
@@ -54,7 +54,7 @@ Autor::Text existeix_text_amb_paraula (string paraula) {
 	return aux;
 }
 
-Autor::bool afegir_text (Text text) {
+bool Autor::afegir_text (Text text) {
 	//Comprova si existeix un text al p.i. amb el mateix titol que "text"
 	if (textos.existeix_titol(text.consultar_titol())) {
 		return false;
@@ -65,6 +65,6 @@ Autor::bool afegir_text (Text text) {
 	}
 }
 
-Autor::bool eliminar_text (string titol) {
+bool Autor::eliminar_text (string titol) {
 	return (1 == textos.erase(titol));
 }

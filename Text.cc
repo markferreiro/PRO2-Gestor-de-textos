@@ -22,7 +22,7 @@ void Text::modificar_contingut (string paraula1, string paraula2) {
 	}
 }
 
-Text::void construir_taula_de_frequencies() {
+void Text::construir_taula_de_frequencies() {
 	for(int frase = 0 ; frase < frases.size() ; frase++) {
 		for (int paraula = 0 ; paraula < frases[frase].size() ; paraula++) {
 			string p = frases[frase][paraula];
@@ -35,27 +35,27 @@ Text::Text (string titol) {
 	this->titol = titol;
 }
 
-Text::void afegir_contingut (vector<vector<string> > frases) {
+void Text::afegir_contingut (vector<vector<string> > frases) {
 	this->frases = frases;
 }
 
-Text::void modificar_titol(string titol) {
+void Text::modificar_titol(string titol) {
 	this->titol = titol;
 }
 
-Text::string consultar_titol() {
+string Text::consultar_titol() {
 	return titol;
 }
 
-Text::string consultar_frase (int posicio) {
+string Text::consultar_frase (int posicio) {
 	return frases[posicio-1];
 }
 
-Text::vector<vector<string> > consultar_contingut () {
+vector<vector<string> > Text::consultar_contingut () {
 	return frases;
 }
 
-Text::map<int, vector<string> > consultar_frases (int x, int y) {
+map<int, vector<string> > Text::consultar_frases (int x, int y) {
 	map<int, vector<string> > aux;
 	for (int i = x; i <= y; i++) {
 		aux[i] = frases[i-1];
@@ -63,7 +63,7 @@ Text::map<int, vector<string> > consultar_frases (int x, int y) {
 	return aux;
 }
 
-Text::vector<list<string> > consultar_taula_frequencies() {
+vector<list<string> > Text::consultar_taula_frequencies() {
 	
 	vector<list<string> > aux[consultar_frequencia_maxima()];
 	for (auto it = frequencies.begin() ; it != frequencies.end() ; it++) {
@@ -72,7 +72,7 @@ Text::vector<list<string> > consultar_taula_frequencies() {
 	return aux;
 }
 
-Text::list<int> obtenir_frases_amb_paraules (vector<string> paraules) {
+list<int> Text::obtenir_frases_amb_paraules (vector<string> paraules) {
 	
 	list<int> aux;
 	for (int f = 0; f < frases.size(); f++) {
@@ -92,20 +92,11 @@ Text::list<int> obtenir_frases_amb_paraules (vector<string> paraules) {
 	}
 }
 
-Text::void substitueix_paraula (string paraula1, string paraula2) {
+void Text::substitueix_paraula (string paraula1, string paraula2) {
 	modificar_contingut(paraula1, paraula2);
 }
-/*
-public bool existeix_paraula (string paraula) {
-	for (int f = 0; f < frases.size(); f++) {
-		for (int p = 0; p < frases[f].size(); p++) {
-			if (frases[f][p] == paraula) return true;
-		}
-	}
-	return false;
-}*/
 
-Text::pair<int,int> existeix_paraula (string paraula) {
+pair<int,int> Text::existeix_paraula (string paraula) {
 	for (int f = 0; f < frases.size(); f++) {
 		while (int p = 0; p < frases[f].size(); p++) {
 			if (frases[f][p] == paraula) {
@@ -116,10 +107,11 @@ Text::pair<int,int> existeix_paraula (string paraula) {
 	return (pair<int,int>(-1,-1));
 }
 
-Text::int consultar_numero_frases() {
+int Text::consultar_numero_frases() {
 	return frases.size();
 }
-Text::int consultar_frequencia_maxima() {
+
+int Text::consultar_frequencia_maxima() {
 	int freq = 0;
 	for (auto it = frequencies.begin() ; it != frequencies.end() ; it++) {
 		if (it->second > freq) freq = it->second;
