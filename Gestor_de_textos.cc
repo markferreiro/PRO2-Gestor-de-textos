@@ -10,18 +10,23 @@ Gestor_de_textos::Gestor_de_textos() {
 void Gestor_de_textos::afegir(string consulta) {
 	consulta = "";
 }
+
 void Gestor_de_textos::afegir_text(string consulta) {
 	consulta = "";
 }
+
 void Gestor_de_textos::afegir_cita(string consulta) {
 	consulta = "";
 }
+
 void Gestor_de_textos::eliminar(string consulta) {
 	consulta = "";
 }
+
 void Gestor_de_textos::eliminar_text(string consulta) {
 	consulta = "";
 }
+
 void Gestor_de_textos::eliminar_cita(string consulta) {
 	consulta = "";
 }
@@ -32,6 +37,7 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	consulta = "";
 }
 
+<<<<<<< HEAD
 Conjunt_autors Gestor_de_textos::obtenir_conjunt_autors() {
 	return Conjunt_autors();
 }

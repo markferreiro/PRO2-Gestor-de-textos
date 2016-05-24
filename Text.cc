@@ -8,11 +8,11 @@ vector<string> Text::split(string str, char delimiter) {
   vector<string> internal;
   stringstream ss(str); // Turn the string into a stream.
   string tok;
-  
+
   while(getline(ss, tok, delimiter)) {
     internal.push_back(tok);
   }
-  
+
   return internal;
 }
 
@@ -75,7 +75,7 @@ map<int, string > Text::consultar_frases (int x, int y) {
 }
 
 vector<list<string> > Text::consultar_taula_frequencies() {
-	
+
 	vector<list<string> > aux(consultar_frequencia_maxima());
 	for (map<string, int>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
 		aux[it->second].insert(aux[it->second].end(), it->first);
@@ -84,7 +84,7 @@ vector<list<string> > Text::consultar_taula_frequencies() {
 }
 
 list<int> Text::obtenir_frases_amb_paraules (vector<string> paraules) {
-	
+
 	list<int> aux;
 	for (int f = 0; f < frases.size(); f++) {
 		int paraula = 0;
@@ -107,15 +107,6 @@ list<int> Text::obtenir_frases_amb_paraules (vector<string> paraules) {
 void Text::substitueix_paraula (string paraula1, string paraula2) {
 	modificar_contingut(paraula1, paraula2);
 }
-/*
-public bool existeix_paraula (string paraula) {
-	for (int f = 0; f < frases.size(); f++) {
-		for (int p = 0; p < frases[f].size(); p++) {
-			if (frases[f][p] == paraula) return true;
-		}
-	}
-	return false;
-}*/
 
 pair<int,int> Text::existeix_paraula (string paraula) {
 	for (int f = 0; f < frases.size(); f++) {
@@ -132,6 +123,7 @@ pair<int,int> Text::existeix_paraula (string paraula) {
 int Text::consultar_numero_frases() {
 	return frases.size();
 }
+
 int Text::consultar_frequencia_maxima() {
 	int freq = 0;
 	for (map<string, int>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
