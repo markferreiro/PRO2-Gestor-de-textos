@@ -41,7 +41,7 @@ vector<Cita> Conjunt_cites::totes_cites() {
 	map<string, p_cita>::iterator it = cites.begin();
 	for (int i = 0 ; i < size ; i++) {
 		p_cita pcita = it->second;
-		Cita c = Cita(pcita.autor, pcita.text->consultar_titol(), it->first, pcita.text->consultar_frases(pcita.frases[0], pcita.frases[1]));
+		Cita c = Cita((*pcita.autor).consultar_nom(), (*pcita.text).consultar_titol(), it->first, (*pcita.text).consultar_frases(pcita.frases[0], pcita.frases[1]));
 		cites_to_return[i] = c; 
 		it++;
 	}
@@ -61,28 +61,28 @@ vector<Cita> Conjunt_cites::cites_autor(string nom_autor) {
 	return cites_to_return;
 }
 Cita Conjunt_cites::cita_referencia (string referencia) {
+	int size = cites.size();
 	vector<Cita> cites_to_return(size);
 	map<string, p_cita>::iterator iterator = cites.begin();
 	int i = 0;
 	while (iterator != cites.end()) {
 		if (iterator->first == referencia) {
-			p_cita = iterator->second;
-			Cita c = Cita(p_cita->autor, p_cita->text.consultar_titol(), iterator->first, p_cita->text.consultar_frases(p_cita->frases[0], p_cita->frases[1]));
-			cites_to_return[i] = c;
-			i++;
+			p_cita p = iterator->second;
+			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, (*p.text).consultar_frases(p.frases[0], p.frases[1]));
+			return c;
 		}
 		iterator++;
 	}
-	return cites_to_return;
+	return Cita();
 }
 vector<Cita> Conjunt_cites::cites_text_seleccionat() {
-	Text text_seleccionat = Gestor_de_textos.obtenir_text_seleccionat();
-	vector<Cita> cites_to_return();
+	Text *text_seleccionat = Gestor_de_textos::obtenir_text_seleccionat();
+	vector<Cita> cites_to_return(0);
 	map<string, p_cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
-		p_cita = iterator->second;
-		if (p_cita.text == &text_seleccionat) {
-			Cita c = Cita(p_cita->autor, p_cita->text.consultar_titol(), iterator->first, p_cita->text.consultar_frases(p_cita->frases[0], p_cita->frases[1]));
+		p_cita p = iterator->second;
+		if (p.text == text_seleccionat) {
+			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, (*p.text).consultar_frases(p.frases[0], p.frases[1]));
 			cites_to_return.push_back(c);
 		}
 		iterator++;
@@ -102,8 +102,8 @@ bool Conjunt_cites::existeix_cita(Text *text, int x, int y) {
 	bool resultat = false;
 	map<string, p_cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end() && !resultat) {
-		p_cita = iterator->second;
-		if (p_cita->text.consultar_titol() == text.consultar_titol() && p_cita.frases[0] == x && p_cita.frases[1] == y) {
+		p_cita p = iterator->second;
+		if ((*p.text).consultar_titol() == text->consultar_titol() && p.frases[0] == x && p.frases[1] == y) {
 			resultat = true;
 		}
 		iterator++;
