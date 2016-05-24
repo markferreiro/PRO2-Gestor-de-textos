@@ -63,7 +63,7 @@ class Cita
 
 	private:
 		string referencia, nom_autor, titol_text;
-		map<int, vector<string> > frases;
+		map<int, string > frases;
 };
 
 #endif

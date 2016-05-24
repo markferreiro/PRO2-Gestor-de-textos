@@ -51,12 +51,12 @@ public:
 		\pre cert
 		\post Retorna l'objecte Conjunt_cites de la classe.
 	*/
-	//static Conjunt_cites obtenir_conjunt_cites();
+	static Conjunt_cites obtenir_conjunt_cites();
 private:
 	static Conjunt_autors autors;
 	static Text* text_seleccionat;
 	static Autor* autor_text_seleccionat;
-	//static Conjunt_cites cites;
+	static Conjunt_cites cites;
 	Consultes consultes;
 
 	//Constructores
@@ -67,7 +67,7 @@ private:
 
 	/** @brief Primer nivell d'accés a una consulta de l'estil "afegir".
 		@param consulta: String corresponent a la consulta a tractar.
-		\pre La consulta enviada havia de tenir (l'string enviat per paràmetre 
+		\pre La consulta enviada havia de tenir (l'string enviat per paràmetre
 		ja no té aquesta paraula) la paraula "afegir" en la posició inicial.
 		\post S'haurà afegit el text o la cita (depenent del tipus de consulta) o s'haurà emés un error.
 	*/
@@ -86,7 +86,7 @@ private:
 	void afegir_cita(string consulta);
 	/** @brief Primer nivell d'accés a una consulta de l'estil "eliminar".
 		@param consulta: String corresponent a la consulta a tractar.
-		\pre La consulta enviada habia de tenir (l'string enviat per paràmetre 
+		\pre La consulta enviada habia de tenir (l'string enviat per paràmetre
 		ja no té aquesta paraula) la paraula "eliminar" en la posició inicial.
 		\post S'haurà eliminat el text seleccionat o la cita especificada.
 	*/

@@ -11,6 +11,7 @@ Classe utilitzada per la caracterització dels textos que el sistema emmagatzema
 #include <vector>
 #include <map>
 #include <list>
+#include <string>
 #include <sstream>
 #include <iterator>
 
@@ -38,19 +39,19 @@ class Text
 		Text();
 		Text(string titol);
 		Text(string titol, vector<vector<string> > frases);
-		
-		
+
+
 		//Modificadores
-		
+
 		/** @brief Afegeix el contingut al Text
 			\pre cert
 			\post El parametre implicit queda amb el seu contingut
 		*/
 		void afegir_contingut (vector<string> frases);
-		
+
 		/** @brief Modifica el titol del Text
 			\pre cert
-			\post el titol del Text queda modificat i ara es "titol"	
+			\post el titol del Text queda modificat i ara es "titol"
 		*/
 		void modificar_titol(string titol);
 
@@ -81,7 +82,7 @@ class Text
 		map<int, string > consultar_frases (int x, int y);
 		/** @brief Retorna un vector amb la taula de frequencia del contingut del paràmetre implicit.
 			\pre cert
-			\post Retorna un vector amb la taula de frequencia del contingut del paràmetre implícit. 
+			\post Retorna un vector amb la taula de frequencia del contingut del paràmetre implícit.
 		*/
 		vector<list<string> > consultar_taula_frequencies();
 		/** @brief Retorna les frases que contenen l'string del paràmetre.
@@ -117,7 +118,7 @@ class Text
 		map <string, int, custom_sort> frequencies;
 
 		//Modificadores
-		
+
 		/**@brief Modifica el contingut del p.i.
 			\pre paraula1 es troba al p.i.
 			\post el p.i. queda modificat amb la paraula2 en comptes de la paraula1
