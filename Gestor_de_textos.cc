@@ -48,5 +48,23 @@ Conjunt_cites Gestor_de_textos::obtenir_conjunt_cites() {
 }
 
 int main() {
-
+	Gestor_de_textos gestor();
+  string linia, paraula;
+  getline(cin,linia);
+  while (linia != "sortir"){
+    cout << linia << endl;
+    istringstream iss(linia);
+    iss >> paraula;
+    if (paraula == "afegir"){
+			gestor.afegir(linia);
+		} else if (paraula == "eliminar") {
+			gestor.eliminar(linia);
+		} else if (paraula == "triar") {
+			gestor.triar_text(linia);
+		} else if (paraula == "substituir") {
+			gestor.substituir_paraules(linia);
+		} else {
+			Gestor_de_textos::consultes.processar_consulta(linia);
+		}
+	}
 }
