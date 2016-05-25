@@ -11,14 +11,14 @@ Conjunt_autors::Conjunt_autors() {
 	autors = set<Autor, classcomp>();
 }
 
-Text* Conjunt_autors::obtenir_text_seleccionat() {
+/*Text* Conjunt_autors::obtenir_text_seleccionat() {
 	Text t = Text();
 	return &t;
 }
 Autor* Conjunt_autors::obtenir_autor_text_seleccionat() {
 	Autor a = Autor("Antonio Lopes", "AL2");
 	return &a;
-}
+}*/
 
 bool Conjunt_autors::afegir_autor(string nom) {
 	string referencia;
@@ -67,10 +67,14 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 		Text text = autor.existeix_text_amb_paraules(paraules);
 		//Si existeix nomes un Text
 		if (text.consultar_titol() != "NULL") {
-			if (trobat) return false;
+			if (trobat) {
+				return false;
+			}
 			else {
 				trobat = true;
-				//punters
+				//assignar punters
+				autor_text_seleccionat = &autor;
+				text_seleccionat = &text;
 			}
 		}
 	}

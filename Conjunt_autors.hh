@@ -21,13 +21,14 @@
 class Conjunt_autors
 {
 private:
-  struct classcomp
-  {
-      bool operator() (const Autor& lhs, const Autor& rhs) const;
-  };
+	struct classcomp
+	{
+		bool operator() (const Autor& lhs, const Autor& rhs) const;
+	};
 	set<Autor, classcomp> autors;
-  static Autor* autor_text_seleccionat;
-  static Text* text_seleccionat;
+	static bool text_esta_seleccionat;
+	static Autor* autor_text_seleccionat;
+	static Text* text_seleccionat;
 
 public:
 	//Constructores
