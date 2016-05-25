@@ -6,6 +6,7 @@
 #define CONJUNT_AUTORS_HH
 
 #include "Autor.hh"
+#include "Text.hh"
 #include <vector>
 #include <string>
 #include <set>
@@ -26,6 +27,8 @@ private:
       bool operator() (const Autor& lhs, const Autor& rhs) const;
   };
 	set<Autor, classcomp> autors;
+  static Autor* autor_text_seleccionat;
+  static Text* text_seleccionat;
 
 public:
 	//Constructores
@@ -55,6 +58,18 @@ public:
 	void eliminar_autor(string nom);
 
 	//Consultores
+
+  /** @brief Obté l'autor del text seleccionat.
+		\pre Ha d'haber un text seleccionat previament i com a conseqüencia un autor seleccionat.
+		\post Retorna l'objecte Autor corresponent al text seleccionat per la consulta "triar text"
+	*/
+	static Autor* obtenir_autor_text_seleccionat();
+
+  /** @brief Obté el Text seleccionat.
+		\pre Ha d'haber un text seleccionat previament.
+		\post Retorna l'objecte Text corresponent al text seleccionat per la consulta "triar text"
+	*/
+	static Text* obtenir_text_seleccionat();
 
 	/** @brief Consulta si existeix un text pel titol
 		@param titol: Titol del text que es vol cercar.

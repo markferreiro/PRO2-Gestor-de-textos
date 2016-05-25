@@ -2,7 +2,11 @@ OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -ansi -O2 -Wall -Wextra -Wno-uninitialized 
 OPCIONS2 = -D_GLIBCXX_DEBUG
 
 Gestor_de_textos.exe: Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o
+<<<<<<< Updated upstream
 	g++ Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o Gestor_de_textos.o -o Gestor_de_textos.exe
+=======
+	g++ -o Gestor_de_textos ./Gestor_de_textos.o ./Cita.o ./Autor.o ./Text.o ./Conjunt_autors.o ./Conjunt_cites.o ./Consultes.o
+>>>>>>> Stashed changes
 	rm *.o
 
 Gestor_de_textos.o: Gestor_de_textos.cc Conjunt_cites.hh Conjunt_autors.hh Text.hh Autor.hh Consultes.hh
