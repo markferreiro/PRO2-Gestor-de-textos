@@ -11,6 +11,15 @@ Conjunt_autors::Conjunt_autors() {
 	autors = set<Autor, classcomp>();
 }
 
+Text* Conjunt_autors::obtenir_text_seleccionat() {
+	Text t = Text();
+	return &t;
+}
+Autor* Conjunt_autors::obtenir_autor_text_seleccionat() {
+	Autor a = Autor("Antonio Lopes", "AL2");
+	return &a;
+}
+
 bool Conjunt_autors::afegir_autor(string nom) {
 	string referencia;
 	for (int i = 0; i < nom.length(); ++i) {

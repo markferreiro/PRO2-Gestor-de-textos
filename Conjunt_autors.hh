@@ -6,7 +6,6 @@
 #define CONJUNT_AUTORS_HH
 
 #include "Autor.hh"
-#include "Text.hh"
 #include <vector>
 #include <string>
 #include <set>

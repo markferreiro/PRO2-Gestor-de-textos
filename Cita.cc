@@ -1,5 +1,8 @@
 #include "Cita.hh"
 
+Cita::Cita() {
+	
+}
 Cita::Cita (string nom_autor, string titol_text, string referencia, map<int, string> frases) {
 	this->nom_autor = nom_autor;
 	this->titol_text = titol_text;

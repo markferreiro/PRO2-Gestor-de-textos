@@ -2,14 +2,10 @@ OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -ansi -O2 -Wall -Wextra -Wno-uninitialized 
 OPCIONS2 = -D_GLIBCXX_DEBUG
 
 Gestor_de_textos.exe: Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o
-<<<<<<< Updated upstream
-	g++ Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o Gestor_de_textos.o -o Gestor_de_textos.exe
-=======
-	g++ -o Gestor_de_textos ./Gestor_de_textos.o ./Cita.o ./Autor.o ./Text.o ./Conjunt_autors.o ./Conjunt_cites.o ./Consultes.o
->>>>>>> Stashed changes
+	g++ Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o -o Gestor_de_textos.exe
 	rm *.o
 
-Gestor_de_textos.o: Gestor_de_textos.cc Conjunt_cites.hh Conjunt_autors.hh Text.hh Autor.hh Consultes.hh
+Gestor_de_textos.o: Gestor_de_textos.cc Conjunt_cites.hh Conjunt_autors.hh Consultes.hh
 	g++ -c Gestor_de_textos.cc $(OPCIONS)
 
 Conjunt_autors.o: Conjunt_autors.cc Autor.hh
@@ -17,16 +13,16 @@ Conjunt_autors.o: Conjunt_autors.cc Autor.hh
 
 Conjunt_cites.o: Conjunt_cites.cc Cita.hh Text.hh Autor.hh
 	g++ -c Conjunt_cites.cc $(OPCIONS)
-	
+
 Autor.o: Autor.cc Text.hh
 	g++ -c Autor.cc $(OPCIONS)
-	
+
 Text.o: Text.cc Text.hh
 	g++ -c Text.cc $(OPCIONS)
 
 Cita.o: Cita.cc Cita.hh
 	g++ -c Cita.cc $(OPCIONS)
-	
+
 Consultes.o: Consultes.cc Consultes.hh
 	g++ -c Consultes.cc $(OPCIONS)
 

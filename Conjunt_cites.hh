@@ -11,7 +11,7 @@
 #include <map>
 #include "Cita.hh"
 #include "Autor.hh"
-#include "Gestor_de_textos.hh"
+#include "Conjunt_autors.hh"
 
 
 using namespace std;
@@ -94,7 +94,9 @@ class Conjunt_cites
 	  		Autor *autor;
 	  		Text *text;
 	  		vector<int> frases;
-	  		p_cita();
+	  		p_cita() {
+
+				}
 		};
 		map<string, p_cita> cites;
 		map<string, int> max_ref;

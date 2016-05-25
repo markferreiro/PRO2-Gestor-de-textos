@@ -42,6 +42,9 @@ void Text::construir_taula_de_frequencies() {
 	}
 }
 
+Text::Text() {
+  
+}
 Text::Text (string titol) {
 	this->titol = titol;
 }

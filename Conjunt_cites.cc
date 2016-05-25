@@ -8,8 +8,8 @@ Conjunt_cites::Conjunt_cites() {
 }
 
 bool Conjunt_cites::afegir_cita(int x, int y) {
-	Text *text_seleccionat = Gestor_de_textos::obtenir_text_seleccionat();
-	Autor *autor_text_seleccionat = Gestor_de_textos::obtenir_autor_text_seleccionat();
+	Text *text_seleccionat = Conjunt_autors::obtenir_text_seleccionat();
+	Autor *autor_text_seleccionat = Conjunt_autors::obtenir_autor_text_seleccionat();
 	//Comprovar si el rang de frases es correcte ( 1 <= x <= y <= n� frases )
 		//Comprovant aix� primer, en certs casos ens estalviarem la comprovaci� seg�ent.
 	if ( (x >= 1 && y >= x) && text_seleccionat->consultar_numero_frases() >= y) {
@@ -74,7 +74,7 @@ Cita Conjunt_cites::cita_referencia (string referencia) {
 	return Cita();
 }
 vector<Cita> Conjunt_cites::cites_text_seleccionat() {
-	Text* text_seleccionat = Gestor_de_textos::obtenir_text_seleccionat();
+	Text* text_seleccionat = Conjunt_autors::obtenir_text_seleccionat();
 	vector<Cita> cites_to_return;
 	map<string, p_cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
