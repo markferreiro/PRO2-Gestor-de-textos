@@ -30,7 +30,7 @@ LeftChar=1
 [Editor_1]
 CursorCol=3
 CursorRow=89
-TopLine=70
+TopLine=48
 LeftChar=1
 [Editor_2]
 <<<<<<< HEAD
@@ -60,9 +60,9 @@ CursorRow=205
 TopLine=185
 LeftChar=1
 [Editor_10]
-CursorCol=2
-CursorRow=70
-TopLine=1
+CursorCol=1
+CursorRow=68
+TopLine=11
 LeftChar=1
 [Editor_11]
 CursorCol=2

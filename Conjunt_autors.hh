@@ -1,5 +1,5 @@
 /** @file Conjunt_autors.hh
-	@brief Especificació de la classe Conjunt_autors
+	@brief Especificaciï¿½ de la classe Conjunt_autors
 */
 
 #ifndef CONJUNT_AUTORS_HH
@@ -74,12 +74,12 @@ public:
 		/pre cert
 		/post Retorna true si ha trobat un unic text que conte "paraules" 
 		 i el selecciona; retorna false si no ha trobat cap que 
-		 contingui "paraules" o s'ha trobat més d'un. 
+		 contingui "paraules" o s'ha trobat mï¿½s d'un. 
 	*/
 	bool triar_text (vector<string> paraules);
 	
 private:
-	set<Autor> Autors;
+	set<Autor> autors;
 };
 
 #endif

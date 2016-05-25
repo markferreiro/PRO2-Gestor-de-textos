@@ -64,12 +64,12 @@ class Autor
 			\post Retorna "True" si el paràmetre implícit ja té un text amb el titol rebut. Retorna "False" en cas contrari.
 		*/
 		bool existeix_titol(string titol);
-		/** @brief Comprova si el paràmetre implícit té un text en el qual aparegui una paraula en concret (tant en el titol com en el contingut).
-			@param paraula: Paraula a cercar.
+		/** @brief Comprova si el paràmetre implícit té un text en el qual aparegui unes paraules no necessariament seguides (tant en el titol com en el contingut).
+			@param paraula: Paraules a cercar.
 			\pre cert
-			\post Retorna el Text en el que apareix la paraula del paràmetre si n'existeix un al paràmetre implícit. Retorna un Text de titol "NULL" si no existeix cap o m�s d'un.
+			\post Retorna el Text en el que apareixen les paraules del paràmetre si n'existeix un al paràmetre implícit. Retorna un Text de titol "NULL" si no existeix cap o m�s d'un.
 		*/
-		Text existeix_text_amb_paraula(string paraula);
+		Text existeix_text_amb_paraules(vector<string> paraules);
 
 		//Modificadores
 
