@@ -5,14 +5,14 @@
 #ifndef CONJUNT_CITES_HH
 #define CONJUNT_CITES_HH
 
-#include "Cita.hh"
-#include "Autor.hh"
 #include <vector>
 #include <string>
 #include <sstream>
 #include <map>
-#include "Text.hh"
+#include "Cita.hh"
+#include "Autor.hh"
 #include "Gestor_de_textos.hh"
+
 
 using namespace std;
 
@@ -23,7 +23,6 @@ using namespace std;
 /** @class Conjunt_cites
 	@brief Representa un conjunt de cites
 */
-class Gestor_de_textos;
 class Conjunt_cites
 {
 	public:

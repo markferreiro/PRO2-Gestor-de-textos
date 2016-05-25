@@ -10,8 +10,6 @@ Classe encarregada de gestionar el main principal del programa.
 
 #include "Conjunt_cites.hh"
 #include "Conjunt_autors.hh"
-#include "Text.hh"
-#include "Autor.hh"
 #include "Consultes.hh"
 #include "Cita.hh"
 #include <vector>
@@ -28,7 +26,6 @@ using namespace std;
 	@brief Representa un gestor de de textos, autors i cites.
 
 */
-class Conjunt_cites;
 class Gestor_de_textos
 {
 private:
