@@ -27,31 +27,9 @@ using namespace std;
 	@brief Representa un gestor de de textos, autors i cites.
 
 */
+class Conjunt_cites;
 class Gestor_de_textos
 {
-public:
-	//Consultores
-
-	/** @brief Obtenir el conjunt d'autors de la classe.
-		\pre cert
-		\post Retorna l'objecte Conjunt_autors de la classe.
-	*/
-	static Conjunt_autors obtenir_conjunt_autors();
-	/** @brief Obté el Text seleccionat.
-		\pre Ha d'haber un text seleccionat previament.
-		\post Retorna l'objecte Text corresponent al text seleccionat per la consulta "triar text"
-	*/
-	static Text* obtenir_text_seleccionat();
-	/** @brief Obté l'autor del text seleccionat.
-		\pre Ha d'haber un text seleccionat previament i com a conseqüencia un autor seleccionat.
-		\post Retorna l'objecte Autor corresponent al text seleccionat per la consulta "triar text"
-	*/
-	static Autor* obtenir_autor_text_seleccionat();
-	/** @brief Obtenir el conjunt de cites de la classe.
-		\pre cert
-		\post Retorna l'objecte Conjunt_cites de la classe.
-	*/
-	static Conjunt_cites obtenir_conjunt_cites();
 private:
 	static Conjunt_autors autors;
 	static Text* text_seleccionat;
@@ -115,6 +93,30 @@ private:
 		\post S'hauran substituit totes les aparicions de la paraula a substituir per la paraula de substitució.
 	*/
 	void substituir_paraules(string consulta);
+
+public:
+	//Consultores
+
+	/** @brief Obtenir el conjunt d'autors de la classe.
+		\pre cert
+		\post Retorna l'objecte Conjunt_autors de la classe.
+	*/
+	static Conjunt_autors obtenir_conjunt_autors();
+	/** @brief Obté el Text seleccionat.
+		\pre Ha d'haber un text seleccionat previament.
+		\post Retorna l'objecte Text corresponent al text seleccionat per la consulta "triar text"
+	*/
+	static Text* obtenir_text_seleccionat();
+	/** @brief Obté l'autor del text seleccionat.
+		\pre Ha d'haber un text seleccionat previament i com a conseqüencia un autor seleccionat.
+		\post Retorna l'objecte Autor corresponent al text seleccionat per la consulta "triar text"
+	*/
+	static Autor* obtenir_autor_text_seleccionat();
+	/** @brief Obtenir el conjunt de cites de la classe.
+		\pre cert
+		\post Retorna l'objecte Conjunt_cites de la classe.
+	*/
+	static Conjunt_cites obtenir_conjunt_cites();
 
 };
 

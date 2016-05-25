@@ -23,7 +23,7 @@ using namespace std;
 /** @class Conjunt_cites
 	@brief Representa un conjunt de cites
 */
-
+class Gestor_de_textos;
 class Conjunt_cites
 {
 	public:

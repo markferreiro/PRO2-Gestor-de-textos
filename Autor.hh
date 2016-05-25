@@ -25,7 +25,7 @@ class Autor
 {
 	private:
 		struct custom_sort {
-				bool operator()(Text a, Text b);
+				bool operator()(const Text& a, const Text& b) const;
 		};
 		string nom, referencia;
 		set<Text, custom_sort> textos;
@@ -47,7 +47,7 @@ class Autor
 			\pre El paràmetre implícit ha de tenir un nom.
 			\post Retorna l'string equivalent al nom de l'autor.
 		*/
-		string consultar_nom();
+		string consultar_nom() const;
 		/** @brief Retorna la referencia del paràmetre implicit.
 			\pre El paràmetre implícit ha de tenir una referencia.
 			\post Retorna l'string equivalent a la referencia del paràmetre implícit.
@@ -63,7 +63,7 @@ class Autor
 			\pre cert
 			\post Retorna "True" si el paràmetre implícit ja té un text amb el titol rebut. Retorna "False" en cas contrari.
 		*/
-		bool existeix_titol(string titol);
+		bool existeix_titol(string titol) const;
 		/** @brief Comprova si el paràmetre implícit té un text en el qual aparegui unes paraules no necessariament seguides (tant en el titol com en el contingut).
 			@param paraula: Paraules a cercar.
 			\pre cert

@@ -10,8 +10,8 @@ Conjunt_cites::Conjunt_cites() {
 bool Conjunt_cites::afegir_cita(int x, int y) {
 	Text *text_seleccionat = Gestor_de_textos::obtenir_text_seleccionat();
 	Autor *autor_text_seleccionat = Gestor_de_textos::obtenir_autor_text_seleccionat();
-	//Comprovar si el rang de frases es correcte ( 1 <= x <= y <= nº frases )
-		//Comprovant aixó primer, en certs casos ens estalviarem la comprovació següent.
+	//Comprovar si el rang de frases es correcte ( 1 <= x <= y <= nï¿½ frases )
+		//Comprovant aixï¿½ primer, en certs casos ens estalviarem la comprovaciï¿½ segï¿½ent.
 	if ( (x >= 1 && y >= x) && text_seleccionat->consultar_numero_frases() >= y) {
 		if (!existeix_cita(text_seleccionat, x, y)) {
 			string referencia = autor_text_seleccionat->consultar_referencia();
@@ -42,8 +42,8 @@ vector<Cita> Conjunt_cites::totes_cites() {
 	map<string, p_cita>::iterator it = cites.begin();
 	for (int i = 0 ; i < size ; i++) {
 		p_cita pcita = it->second;
-		Cita c = Cita(pcita.autor, pcita.text->consultar_titol(), it->first, pcita.text->consultar_frases(pcita.frases[0], pcita.frases[1]));
-		cites_to_return[i] = c; 
+		Cita c = Cita((*pcita.autor).consultar_nom(), (*pcita.text).consultar_titol(), it->first, (*pcita.text).consultar_frases(pcita.frases[0], pcita.frases[1]));
+		cites_to_return[i] = c;
 		it++;
 	}
 	return cites_to_return;
@@ -55,36 +55,33 @@ vector<Cita> Conjunt_cites::cites_autor(string nom_autor) {
 		p_cita p = iterator->second;
 		if ((*p.autor).consultar_nom() == nom_autor) {
 			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, (*p.text).consultar_frases(p.frases[0], p.frases[1]));
-			cites_to_return.push_back (c); 
+			cites_to_return.push_back (c);
 		}
 		iterator++;
 	}
 	return cites_to_return;
 }
 Cita Conjunt_cites::cita_referencia (string referencia) {
-	vector<Cita> cites_to_return(size);
 	map<string, p_cita>::iterator iterator = cites.begin();
-	int i = 0;
 	while (iterator != cites.end()) {
 		if (iterator->first == referencia) {
-			p_cita = iterator->second;
-			Cita c = Cita(p_cita->autor, p_cita->text.consultar_titol(), iterator->first, p_cita->text.consultar_frases(p_cita->frases[0], p_cita->frases[1]));
-			cites_to_return[i] = c;
-			i++;
+			p_cita p = iterator->second;
+			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, (*p.text).consultar_frases(p.frases[0], p.frases[1]));
+			return c;
 		}
 		iterator++;
 	}
-	return cites_to_return;
+	return Cita();
 }
 vector<Cita> Conjunt_cites::cites_text_seleccionat() {
-	Text text_seleccionat = Gestor_de_textos.obtenir_text_seleccionat();
-	vector<Cita> cites_to_return();
+	Text* text_seleccionat = Gestor_de_textos::obtenir_text_seleccionat();
+	vector<Cita> cites_to_return;
 	map<string, p_cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
-		p_cita = iterator->second;
-		if (p_cita.text == &text_seleccionat) {
-			Cita c = Cita(p_cita->autor, p_cita->text.consultar_titol(), iterator->first, p_cita->text.consultar_frases(p_cita->frases[0], p_cita->frases[1]));
-			cites_to_return.push_back(c);
+		p_cita p = iterator->second;
+		if (p.text == text_seleccionat) {
+			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, (*p.text).consultar_frases(p.frases[0], p.frases[1]));
+			cites_to_return.push_back (c);
 		}
 		iterator++;
 	}
@@ -92,7 +89,7 @@ vector<Cita> Conjunt_cites::cites_text_seleccionat() {
 }
 
 int Conjunt_cites::maxima_referencia(string inicials) {
-	map<string,int>::iterator it = max_ref.find(inicials); 
+	map<string,int>::iterator it = max_ref.find(inicials);
 	if (it != max_ref.end()) {
 		return (it->second) + 1;
 	}
@@ -103,8 +100,8 @@ bool Conjunt_cites::existeix_cita(Text *text, int x, int y) {
 	bool resultat = false;
 	map<string, p_cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end() && !resultat) {
-		p_cita = iterator->second;
-		if (p_cita->text.consultar_titol() == text.consultar_titol() && p_cita.frases[0] == x && p_cita.frases[1] == y) {
+		p_cita p = iterator->second;
+		if ((*p.text).consultar_titol() == text->consultar_titol() && p.frases[0] == x && p.frases[1] == y) {
 			resultat = true;
 		}
 		iterator++;

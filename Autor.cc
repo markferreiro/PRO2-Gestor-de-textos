@@ -1,6 +1,6 @@
 #include "Autor.hh"
 
-bool Autor::custom_sort::operator()(Text a, Text b) {
+bool Autor::custom_sort::operator()(const Text& a, const Text& b) const {
     return a.consultar_titol() < b.consultar_titol();
 }
 
@@ -9,7 +9,7 @@ Autor::Autor (string nom, string referencia) {
 	this->referencia = referencia;
 }
 
-string Autor::consultar_nom() {
+string Autor::consultar_nom() const {
 	return nom;
 }
 
@@ -17,11 +17,11 @@ string Autor::consultar_referencia() {
 	return referencia;
 }
 
-set<Text, Autor::custom_sort::operator()> Autor::tots_textos() {
+set<Text, Autor::custom_sort> Autor::tots_textos() {
 	return textos;
 }
 
-bool Autor::existeix_titol (string titol) {
+bool Autor::existeix_titol (string titol) const{
 	for (auto it = textos.begin() ; it != textos.end() ; it++) {
     Text text = *it;
 		if (text.consultar_titol() == titol) return true;
@@ -30,7 +30,7 @@ bool Autor::existeix_titol (string titol) {
 }
 
 Text Autor::existeix_text_amb_paraules (vector<string> paraules) {
-	set<Text>::iterator it = textos.begin();
+	set<Text, custom_sort>::iterator it = textos.begin();
 	Text aux = Text("NULL");
 	//Comprova si existeix un text amb les paraules
 	while (it != textos.end()) {
@@ -55,8 +55,8 @@ Text Autor::existeix_text_amb_paraules (vector<string> paraules) {
 		}
 	}
 	return aux;
-}			
-			
+}
+
 bool Autor::afegir_text (Text text) {
 	//Comprova si existeix un text al p.i. amb el mateix titol que "text"
 	if (existeix_titol(text.consultar_titol())) {

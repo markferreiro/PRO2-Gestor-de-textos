@@ -61,7 +61,7 @@ class Text
 			\pre El paràmetre implícit ha de tenir un titol.
 			\post Retorna l'string equivalent al titol del text.
 		*/
-		string consultar_titol();
+		string consultar_titol() const;
 		/** @brief Retorna la frase del paràmetre implícit d'una posició X determinada (1 <= X <= nº frases).
 			@param posicio: Posició de la frase que es vol consultar.
 			\pre Sent X la posició demanada, el paràmetre implícit ha de cumplir que 1 <= X <= nº frases.
@@ -112,10 +112,11 @@ class Text
 	private:
 		string titol;
 		vector< string > frases;
-		struct custom_sort {
-		    bool operator()(string a, string b);
+		struct classcomp
+		{
+		    bool operator() (const std::string& lhs, const std::string& rhs) const;
 		};
-		map <string, int, custom_sort> frequencies;
+		map <string, int, classcomp> frequencies;
 
 		//Modificadores
 

@@ -16,20 +16,22 @@ vector<string> Text::split(string str, char delimiter) {
   return internal;
 }
 
-bool Text::custom_sort::operator()(string a, string b) {
-    if (a.length() < b.length()) {
-    	return true;
-	} else if (a.size() > b.size()) {
-		return false;
-	} else {
-		return a < b;
-	}
+bool Text::classcomp::operator() (const std::string& lhs, const std::string& rhs) const
+{
+    if (lhs.length() < rhs.length()) {
+      return true;
+    } else if (lhs.size() > rhs.size()) {
+      return false;
+    } else {
+      return lhs < rhs;
+    }
 }
 
-void Text::modificar_contingut (string paraula1, string paraula2) {
+void Text::modificar_contingut (const string paraula1, const string paraula2) {
 	for (int frase = 0; frase < frases.size(); frase++) {
-		//string frase = frases[frase];
-		frases[frase] = frases[frase].replace(frases[frase].begin(), frases[frase].end(), paraula1, paraula2);
+    //string f = frases[frase];
+		replace(frases.begin(), frases.end(), paraula1, paraula2);
+    //frases[frase] = f;
 	}
 }
 
@@ -54,7 +56,7 @@ void Text::modificar_titol(string titol) {
 	this->titol = titol;
 }
 
-string Text::consultar_titol() {
+string Text::consultar_titol() const{
 	return titol;
 }
 
@@ -84,7 +86,6 @@ vector<list<string> > Text::consultar_taula_frequencies() {
 }
 
 list<int> Text::obtenir_frases_amb_paraules (vector<string> paraules) {
-
 	list<int> aux;
 	for (int f = 0; f < frases.size(); f++) {
 		int paraula = 0;
@@ -102,6 +103,7 @@ list<int> Text::obtenir_frases_amb_paraules (vector<string> paraules) {
 			}
 		}
 	}
+  return aux;
 }
 
 void Text::substitueix_paraula (string paraula1, string paraula2) {
