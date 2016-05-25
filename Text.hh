@@ -14,6 +14,7 @@ Classe utilitzada per la caracterització dels textos que el sistema emmagatzema
 #include <string>
 #include <sstream>
 #include <iterator>
+#include <algorithm>
 
 using namespace std;
 

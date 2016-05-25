@@ -13,6 +13,7 @@ Classe encarregada de gestionar el main principal del programa.
 #include "Text.hh"
 #include "Autor.hh"
 #include "Consultes.hh"
+#include "Cita.hh"
 #include <vector>
 #include <iostream>
 #include <string>

@@ -1,5 +1,3 @@
-#include <iostream>
-#include <utility>
 #include "Text.hh"
 
 using namespace std;
@@ -79,7 +77,7 @@ map<int, string > Text::consultar_frases (int x, int y) {
 vector<list<string> > Text::consultar_taula_frequencies() {
 
 	vector<list<string> > aux(consultar_frequencia_maxima());
-	for (map<string, int>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
+	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
 		aux[it->second].insert(aux[it->second].end(), it->first);
 	}
 	return aux;
@@ -128,7 +126,7 @@ int Text::consultar_numero_frases() {
 
 int Text::consultar_frequencia_maxima() {
 	int freq = 0;
-	for (map<string, int>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
+	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
 		if (it->second > freq) freq = it->second;
 	}
 	return freq;

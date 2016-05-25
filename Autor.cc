@@ -22,7 +22,7 @@ set<Text, Autor::custom_sort> Autor::tots_textos() {
 }
 
 bool Autor::existeix_titol (string titol) const{
-	for (auto it = textos.begin() ; it != textos.end() ; it++) {
+	for (set<Text, Autor::custom_sort>::iterator it = textos.begin() ; it != textos.end() ; it++) {
     Text text = *it;
 		if (text.consultar_titol() == titol) return true;
 	}
