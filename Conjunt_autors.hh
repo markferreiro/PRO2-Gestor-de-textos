@@ -83,7 +83,7 @@ public:
 		/pre cert
 		/post retorna l'autor de nom = "nom", sino existeix retorna NULL
 	*/
-	Autor obtenir_autor(string nom);
+	Autor* obtenir_autor(string nom);
 
 	/** @brief Consulta tots els autors del sistema
 		/pre cert
@@ -99,6 +99,8 @@ public:
 		 contingui "paraules" o s'ha trobat m�s d'un.
 	*/
 	bool triar_text (vector<string> paraules);
+
+	bool afegir_text_a_autor (Text text, string nom_autor);
 };
 
 #endif

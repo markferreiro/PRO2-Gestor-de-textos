@@ -1,6 +1,15 @@
 #include "Conjunt_autors.hh"
 
+Text* Conjunt_autors::text_seleccionat;
+Autor* Conjunt_autors::autor_text_seleccionat;
 
+Text* Conjunt_autors::obtenir_text_seleccionat() {
+	return text_seleccionat;
+}
+
+Autor* Conjunt_autors::obtenir_autor_text_seleccionat() {
+	return autor_text_seleccionat;
+}
 
 bool Conjunt_autors::classcomp::operator() (const Autor& lhs, const Autor& rhs) const
 {
@@ -44,14 +53,14 @@ bool Conjunt_autors::existeix_titol(string titol) {
 	return false;
 }
 
-Autor Conjunt_autors::obtenir_autor(string nom) {
+Autor* Conjunt_autors::obtenir_autor(string nom) {
 	set<Autor, classcomp>::iterator it;
 	for (it =  autors.begin(); it != autors.end(); it++) {
-		Autor aux = *it;
+		Autor* aux = it;
 		if (aux.consultar_nom() == nom) return aux;
 	}
 	Autor autor = Autor("NULL", "NULL");
-	return autor;
+	return &autor;
 }
 
 set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
@@ -79,4 +88,18 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 		}
 	}
 	return trobat;
+}
+
+bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
+  set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
+  bool done = false;
+  while(it != autors.end()) {
+    if (*it.consultar_nom() == nom_autor) {
+      *it.afegir_text(text);
+      it = autors.end()-1;
+      done = true;
+    }
+    it++;
+  }
+  return done;
 }
