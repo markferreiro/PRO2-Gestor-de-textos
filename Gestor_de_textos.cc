@@ -41,7 +41,7 @@ void Gestor_de_textos::afegir_text(string consulta) {
 			}
 		} else {
 			frase += " " + paraula;
-			if (paraula[paraula.size()-1] == '.' || paraula[paraula.size()-1] == '?' ||Â paraula[paraula.size()-1] == '!' ) {
+			if (paraula[paraula.size()-1] == '.' || paraula[paraula.size()-1] == '?' || paraula[paraula.size()-1] == '!' ) {
 				frases.push_back(frase);
 				frase = "";
 			}
@@ -61,8 +61,15 @@ void Gestor_de_textos::afegir_text(string consulta) {
 }
 
 void Gestor_de_textos::afegir_cita(string consulta) {
-	consulta = "afegint cita";
-	cout << consulta << endl;
+	istringstream iss(consulta);
+	int x, y;
+	iss >> x >> y;
+	if(!autors.hi_ha_text_seleccionat() or !cites.afegir_cita(x, y))
+		cout << "error" << endl;
+	else {
+		consulta = "afegint cita";
+		cout << consulta << endl;
+	}
 }
 
 void Gestor_de_textos::eliminar(string consulta) {

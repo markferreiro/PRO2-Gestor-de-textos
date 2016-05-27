@@ -77,6 +77,8 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 		//Si existeix nomes un Text
 		if (text.consultar_titol() != "NULL") {
 			if (trobat) {
+				autor_text_seleccionat = "NULL";
+				text_seleccionat = "NULL";
 				return false;
 			}
 			else {
@@ -86,6 +88,10 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 				text_seleccionat = &text;
 			}
 		}
+	}
+	if (!trobat) {
+		autor_text_seleccionat = "NULL";
+		text_seleccionat = "NULL";
 	}
 	return trobat;
 }
@@ -102,4 +108,8 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
     it++;
   }
   return done;
+}
+
+bool Conjunt_autors::hi_ha_text_seleccionat() {
+	return text_esta_seleccionat;
 }

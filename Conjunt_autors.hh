@@ -101,6 +101,8 @@ public:
 	bool triar_text (vector<string> paraules);
 
 	bool afegir_text_a_autor (Text text, string nom_autor);
+	
+	bool hi_ha_text_seleccionat();
 };
 
 #endif
