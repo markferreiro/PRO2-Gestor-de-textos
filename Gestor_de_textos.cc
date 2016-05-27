@@ -152,7 +152,7 @@ int main() {
 			gestor.eliminar(linia.substr(paraula.size()));
 		} else if (paraula == "triar") {
 			gestor.triar_text(linia.substr(paraula.size()));
-		} else if (paraula == "substituir") {
+		} else if (paraula == "substitueix") {
 			gestor.substituir_paraules(linia.substr(paraula.size()));
 		} else {
 			gestor.consultes.processar_consulta(paraula);
