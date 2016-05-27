@@ -74,9 +74,9 @@ public:
 	/** @brief Consulta si existeix un text pel titol
 		@param titol: Titol del text que es vol cercar.
 		/pre cert
-		/post retorna true si existeix un text amb titol = "titol"; sino retorna false
+		/post retorna el nom de l'autor  del text si existeix un text amb titol = "titol"; sino retorna "NULL"
 	*/
-	bool existeix_titol(string titol);
+	string existeix_titol(string titol);
 
 	/** @brief Consulta un autor pel nom
 		@param nom: Nom de l'autor que es vol cercar.

@@ -81,7 +81,15 @@ void Gestor_de_textos::eliminar(string consulta) {
 }
 
 void Gestor_de_textos::eliminar_text(string consulta) {
-	consulta = "eliminant text";
+	istringstream iss(consulta);
+	string titol;
+	iss >> titol;
+	string nom_autor = autors.existeix_titol(titol);
+	if (nom_autor != "NULL") {
+		if(!autors.eliminar_text_de_autor(titol, nom_autor)) cout << "error" << endl;
+		else consulta = "eliminant text";
+	}
+	else cout << "error" << endl;
 	cout << consulta << endl;
 }
 

@@ -44,13 +44,13 @@ void Conjunt_autors::eliminar_autor(string nom) {
 	autors.erase(aux);
 }
 
-bool Conjunt_autors::existeix_titol(string titol) {
+string Conjunt_autors::existeix_titol(string titol) {
 	set<Autor, classcomp>::iterator it;
 	for (it =  autors.begin(); it != autors.end(); it++) {
 		Autor aux = *it;
-		if (aux.existeix_titol(titol)) return true;
+		if (aux.existeix_titol(titol)) return aux.consultar_nom();
 	}
-	return false;
+	return "NULL";
 }
 
 Autor* Conjunt_autors::obtenir_autor(string nom) {
@@ -101,13 +101,24 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
   bool done = false;
   while(it != autors.end()) {
     if (*it.consultar_nom() == nom_autor) {
-      *it.afegir_text(text);
+      done = *it.afegir_text(text);
       it = autors.end()-1;
-      done = true;
     }
     it++;
   }
   return done;
+}
+
+bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
+	set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
+	bool done = false;
+	while(it != autors.end()) {
+    	if (*it.consultar_nom() == nom_autor) {
+    		done = *it.eliminar_text(titol);
+    		it = autors.end()-1;
+    	}
+    	it++;
+	}
 }
 
 bool Conjunt_autors::hi_ha_text_seleccionat() {
