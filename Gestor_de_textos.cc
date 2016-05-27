@@ -41,7 +41,7 @@ void Gestor_de_textos::afegir_text(string consulta) {
 			}
 		} else {
 			frase += " " + paraula;
-			if (paraula[paraula.size()-1] == '.' || paraula[paraula.size()-1] == '?' || paraula[paraula.size()-1] == '!' ) {
+			if (paraula[paraula.size()-1] == '.' || paraula[paraula.size()-1] == '?' || paraula[paraula.size()-1] == '!') { //aquesta linia tampoc compila, he intentat mirar perq pero no hi ha manera
 				frases.push_back(frase);
 				frase = "";
 			}
@@ -56,8 +56,7 @@ void Gestor_de_textos::afegir_text(string consulta) {
 	for (int i = 0 ; i < frases.size() ; i++) {
 		cout << i << ": " << frases[i] << endl;
 	}
-
-	//Gestor_de_textos::autors.afegir_text_a_autor(text, autor_llegit);
+	autors.afegir_text_a_autor(text, autor_llegit);
 }
 
 void Gestor_de_textos::afegir_cita(string consulta) {

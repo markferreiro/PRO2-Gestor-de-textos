@@ -56,8 +56,8 @@ string Conjunt_autors::existeix_titol(string titol) {
 Autor* Conjunt_autors::obtenir_autor(string nom) {
 	set<Autor, classcomp>::iterator it;
 	for (it =  autors.begin(); it != autors.end(); it++) {
-		Autor* aux = it;
-		if (aux.consultar_nom() == nom) return aux;
+		//Autor* aux = it;
+		if (it->consultar_nom() == nom) return it; //pendent mirar com retornar l'adreça
 	}
 	Autor autor = Autor("NULL", "NULL");
 	return &autor;
@@ -77,8 +77,6 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 		//Si existeix nomes un Text
 		if (text.consultar_titol() != "NULL") {
 			if (trobat) {
-				autor_text_seleccionat = "NULL";
-				text_seleccionat = "NULL";
 				return false;
 			}
 			else {
@@ -89,10 +87,6 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 			}
 		}
 	}
-	if (!trobat) {
-		autor_text_seleccionat = "NULL";
-		text_seleccionat = "NULL";
-	}
 	return trobat;
 }
 
@@ -100,9 +94,9 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
   set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
   bool done = false;
   while(it != autors.end()) {
-    if (*it.consultar_nom() == nom_autor) {
-      done = *it.afegir_text(text);
-      it = autors.end()-1;
+    if (it->consultar_nom() == nom_autor) {
+      done = it->afegir_text(text); //mira't aixo que nose pq no compila
+      it = autors.end();
     }
     it++;
   }
@@ -113,9 +107,9 @@ bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
 	set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
 	bool done = false;
 	while(it != autors.end()) {
-    	if (*it.consultar_nom() == nom_autor) {
-    		done = *it.eliminar_text(titol);
-    		it = autors.end()-1;
+    	if (it->consultar_nom() == nom_autor) {
+    		done = it->eliminar_text(titol); //aixo igual que l'anterior
+    		it = autors.end();
     	}
     	it++;
 	}
