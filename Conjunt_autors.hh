@@ -102,6 +102,8 @@ public:
 
 	bool afegir_text_a_autor (Text text, string nom_autor);
 	
+	bool eliminar_text_de_autor(string titol, string nom_autor);
+	
 	bool hi_ha_text_seleccionat();
 };
 

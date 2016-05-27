@@ -94,13 +94,39 @@ void Gestor_de_textos::eliminar_text(string consulta) {
 }
 
 void Gestor_de_textos::eliminar_cita(string consulta) {
-	consulta = "eliminant cita";
-	cout << consulta << endl;
+	istringstream iss(consulta);
+	string referencia;
+	iss >> referencia;
+	referencia = referencia.substr(1, referencia.size()-2);
+	if (!cites.eliminar_cita(referencia)) cout << "error" << endl;
+	else {
+		consulta = "eliminant cita";
+		cout << consulta << endl;
+	}
 }
 void Gestor_de_textos::triar_text(string consulta) {
-	consulta = "";
+	istringstream iss(consulta);
+	string paraula;
+	iss >> paraula;
+	vector<string> paraules;
+	if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
+	else if (paraula[paraula.size()-1] == '}') paraula = paraula.substr(0, paraula.size()-2);
+	paraules.push_back(paraula); 
+	if(!autors.triar_text(paraules)) cout << "error" << endl;
+	else {
+		consulta = "text triat";
+		cout << consulta << endl;
+	} 
 }
 void Gestor_de_textos::substituir_paraules(string consulta) {
+	istringstream iss(consulta);
+	string paraula1, paraula2;
+	iss >> paraula1;
+	iss >> paraula2;
+	iss >> paraula2;
+	paraula1 = paraula1.substr(1, paraula1.size()-2);
+	paraula2 = paraula2.substr(1, paraula2.size()-2);
+	
 	consulta = "";
 }
 
