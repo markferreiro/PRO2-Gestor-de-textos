@@ -41,7 +41,7 @@ void Gestor_de_textos::afegir_text(string consulta) {
 			}
 		} else {
 			frase += " " + paraula;
-			if (paraula[paraula.size()-1] == '.' || paraula[paraula.size()-1] == '?' || paraula[paraula.size()-1] == '!') { //aquesta linia tampoc compila, he intentat mirar perq pero no hi ha manera
+			if (paraula[paraula.size()-1] == '.'/* || paraula[paraula.size()-1] == '?' || paraula[paraula.size()-1] == '!'*/) { //aquesta linia tampoc compila, he intentat mirar perq pero no hi ha manera
 				frases.push_back(frase);
 				frase = "";
 			}
@@ -125,7 +125,8 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	iss >> paraula2;
 	paraula1 = paraula1.substr(1, paraula1.size()-2);
 	paraula2 = paraula2.substr(1, paraula2.size()-2);
-	
+	Text* text = autors.obtenir_text_seleccionat();
+	text->substitueix_paraula(paraula1, paraula2);
 	consulta = "";
 }
 
@@ -138,14 +139,14 @@ Conjunt_cites Gestor_de_textos::obtenir_conjunt_cites() {
 
 int main() {
 	Gestor_de_textos gestor = Gestor_de_textos();
-  string linia, paraula;
-  getline(cin,linia);
+	string linia, paraula;
+	getline(cin,linia);
 
-  while (linia != "sortir"){
-    cout << linia << endl;
-    istringstream iss(linia);
-    iss >> paraula;
-    if (paraula == "afegir"){
+	while (linia != "sortir"){
+	    cout << linia << endl;
+	    istringstream iss(linia);
+	    iss >> paraula;
+	    if (paraula == "afegir"){
 			gestor.afegir(linia.substr(paraula.size()));
 		} else if (paraula == "eliminar") {
 			gestor.eliminar(linia.substr(paraula.size()));
