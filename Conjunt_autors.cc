@@ -2,6 +2,7 @@
 
 Text* Conjunt_autors::text_seleccionat;
 Autor* Conjunt_autors::autor_text_seleccionat;
+bool Conjunt_autors::text_esta_seleccionat;
 
 Text* Conjunt_autors::obtenir_text_seleccionat() {
 	return text_seleccionat;
@@ -53,11 +54,13 @@ string Conjunt_autors::existeix_titol(string titol) {
 	return "NULL";
 }
 
-Autor* Conjunt_autors::obtenir_autor(string nom) {
+const Autor* Conjunt_autors::obtenir_autor(string nom) {
 	set<Autor, classcomp>::iterator it;
 	for (it =  autors.begin(); it != autors.end(); it++) {
 		//Autor* aux = it;
-		if (it->consultar_nom() == nom) return it; //pendent mirar com retornar l'adreça
+		if (it->consultar_nom() == nom)  { //pendent mirar com retornar l'adreï¿½a
+			return &*it;
+		}
 	}
 	Autor autor = Autor("NULL", "NULL");
 	return &autor;
@@ -95,7 +98,10 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
   bool done = false;
   while(it != autors.end()) {
     if (it->consultar_nom() == nom_autor) {
-      done = it->afegir_text(text); //mira't aixo que nose pq no compila
+			Autor a = *it;
+			done = a.afegir_text(text);
+			autors.insert(it, a);
+      //done = (*it).afegir_text(text); //mira't aixo que nose pq no compila
       it = autors.end();
     }
     it++;
@@ -108,7 +114,10 @@ bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
 	bool done = false;
 	while(it != autors.end()) {
     	if (it->consultar_nom() == nom_autor) {
-    		done = it->eliminar_text(titol); //aixo igual que l'anterior
+				Autor a = *it;
+				done = a.eliminar_text(titol);
+				autors.insert(it, a);
+    		//done = (*it).eliminar_text(titol); //aixo igual que l'anterior
     		it = autors.end();
     	}
     	it++;

@@ -9,7 +9,7 @@ void Consultes::processar_consulta(string consulta) {
 	else if (paraula == "frases") frases(consulta.substr(paraula.size()));
 	else if (paraula == "nombre") {
 		iss >> paraula;
-		nombre(consulta.substr(paraula.size()));
+		nombre_de(consulta.substr(paraula.size()));
 	}
 	else if (paraula == "textos") {
 		string nom;
@@ -34,7 +34,7 @@ void Consultes::tots(string consulta) {
 	else if (paraula == "autors") tots_autors();
 }
 void Consultes::tots_textos() {
-	
+
 }
 
 void Consultes::tots_autors() {
@@ -55,7 +55,7 @@ void Consultes::info(string consulta) {
 		info_cita(referencia.substr(1,referencia.size()-2));
 	}
 	else {
-		
+
 	}
 }
 
@@ -68,13 +68,13 @@ void Consultes::frases(string consulta) {
 	char lletra;
 	iss >> lletra;
 	if (lletra >= '0' and lletra <= '9') {
-		
+
 	}
 	else if (lletra == '\(') {
-		
+
 	}
 	else if (lletra == '\"') {
-		
+
 	}
 }
 
@@ -119,4 +119,3 @@ void Consultes::contingut() {
 void Consultes::taula_de_frequencies() {
 
 }
-
