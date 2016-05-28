@@ -9,6 +9,10 @@ Autor::Autor (string nom, string referencia) {
 	this->referencia = referencia;
 }
 
+Autor::Autor (string nom) {
+	this->nom = nom;
+}
+
 string Autor::consultar_nom() const {
 	return nom;
 }

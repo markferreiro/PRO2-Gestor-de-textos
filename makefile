@@ -3,7 +3,7 @@ OPCIONS2 = -D_GLIBCXX_DEBUG
 
 Gestor_de_textos.exe: Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o
 	g++ Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o -o Gestor_de_textos.exe
-	rm *.o
+	#rm *.o
 
 Gestor_de_textos.o: Gestor_de_textos.cc Conjunt_cites.hh Conjunt_autors.hh Consultes.hh
 	g++ -c Gestor_de_textos.cc $(OPCIONS)

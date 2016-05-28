@@ -1,0 +1,2 @@
+afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
+sortir

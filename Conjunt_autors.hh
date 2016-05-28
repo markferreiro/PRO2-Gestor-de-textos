@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <set>
+#include <iostream>
 
 /*
  * Classe Conjunt_autors

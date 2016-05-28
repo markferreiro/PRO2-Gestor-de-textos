@@ -14,34 +14,37 @@ void Gestor_de_textos::afegir(string consulta) {
 	istringstream iss(consulta);
 	string paraula;
 	iss >> paraula;
-	if (paraula == "text") afegir_text(consulta.substr(paraula.size()));
-	else if (paraula == "cita") afegir_cita(consulta.substr(paraula.size()));
+	if (paraula == "text") afegir_text(consulta.substr(paraula.size()+1));
+	else if (paraula == "cita") afegir_cita(consulta.substr(paraula.size()+1));
 }
 
 void Gestor_de_textos::afegir_text(string consulta) {
 	istringstream iss(consulta);
 	string paraula, titol_llegit, autor_llegit, frase;
+	cout << "M'entra: " << consulta << endl;
 	vector<string> frases(0);
 	bool titol_acabat = false, autor_acabat = false;
 	iss >> paraula;
 	Text text = Text();
 	while(paraula != "****") {
+		cout << "Loop" << endl;
 		if (!titol_acabat) {
 			titol_llegit += " " + paraula;
 			if (paraula[paraula.size()-1] == '\"') {
 				titol_acabat = true;
-				titol_llegit = titol_llegit.substr(1, titol_llegit.size()-2);
+				titol_llegit = titol_llegit.substr(2, titol_llegit.size()-3);
 				text.modificar_titol(titol_llegit);
+				iss >> paraula; //llegim la paraula "autor".
 			}
 		} else if (!autor_acabat) {
 			autor_llegit += " " + paraula;
 			if (paraula[paraula.size()-1] == '\"') {
 				autor_acabat = true;
-				autor_llegit = autor_llegit.substr(1, autor_llegit.size()-2);
+				autor_llegit = autor_llegit.substr(2, autor_llegit.size()-3);
 			}
 		} else {
 			frase += " " + paraula;
-			if (paraula[paraula.size()-1] == '.'/* || paraula[paraula.size()-1] == '?' || paraula[paraula.size()-1] == '!'*/) { //aquesta linia tampoc compila, he intentat mirar perq pero no hi ha manera
+			if (paraula[paraula.size()-1] == '.' || paraula[paraula.size()-1] == '?' || paraula[paraula.size()-1] == '!') { //aquesta linia tampoc compila, he intentat mirar perq pero no hi ha manera
 				frases.push_back(frase);
 				frase = "";
 			}
@@ -52,8 +55,8 @@ void Gestor_de_textos::afegir_text(string consulta) {
 	cout << "Text llegit!" << endl;
 	cout << "Titol: " << text.consultar_titol() << endl;
 	cout << "Autor: " << autor_llegit << endl;
-	cout << "Contingut: " << endl;
-	for (int i = 0 ; i < frases.size() ; i++) {
+	cout << "Contingut(" << frases.size() << "): "  << endl;
+	for (int i = 0 ; i < frases.size()-1 ; i++) {
 		cout << i << ": " << frases[i] << endl;
 	}
 	autors.afegir_text_a_autor(text, autor_llegit);
@@ -110,12 +113,12 @@ void Gestor_de_textos::triar_text(string consulta) {
 	vector<string> paraules;
 	if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
 	else if (paraula[paraula.size()-1] == '}') paraula = paraula.substr(0, paraula.size()-2);
-	paraules.push_back(paraula); 
+	paraules.push_back(paraula);
 	if(!autors.triar_text(paraules)) cout << "error" << endl;
 	else {
 		consulta = "text triat";
 		cout << consulta << endl;
-	} 
+	}
 }
 void Gestor_de_textos::substituir_paraules(string consulta) {
 	istringstream iss(consulta);
@@ -145,7 +148,9 @@ int main() {
 	while (linia != "sortir"){
 	    cout << linia << endl;
 	    istringstream iss(linia);
+			cout << "Reading first word... ";
 	    iss >> paraula;
+			cout << ": " << paraula << endl;
 	    if (paraula == "afegir"){
 			gestor.afegir(linia.substr(paraula.size()));
 		} else if (paraula == "eliminar") {
@@ -157,6 +162,9 @@ int main() {
 		} else {
 			gestor.consultes.processar_consulta(paraula);
 		}
+		cout << "Reading new line..." << endl;
+		paraula = "";
+		linia = "";
 		getline(cin, linia);
 	}
 }

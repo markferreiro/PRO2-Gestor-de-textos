@@ -40,6 +40,7 @@ class Autor
 			\post Retorna un nou objecte de tipus Autor amb el nom i la referencia inicialitzats.
 		*/
 		Autor(string nom, string referencia);
+		Autor(string nom);
 
 		//Consultores
 

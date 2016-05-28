@@ -33,7 +33,7 @@ Autor* Conjunt_autors::obtenir_autor_text_seleccionat() {
 bool Conjunt_autors::afegir_autor(string nom) {
 	string referencia;
 	for (int i = 0; i < nom.length(); ++i) {
-		if (nom[i] >= 'A' and nom[i] <= 'Z') referencia.push_back(nom[i]);
+		if ((nom[i] >= 'A' and nom[i] <= 'Z')) referencia.push_back(nom[i]);
 	}
 	Autor aux = Autor(nom, referencia);
 	pair<set<Autor, classcomp>::iterator,bool> res = autors.insert(aux);
@@ -106,6 +106,9 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
     }
     it++;
   }
+	if (!done) {
+		afegir_autor(nom_autor);
+	}
   return done;
 }
 
