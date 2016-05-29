@@ -48,12 +48,13 @@ vector<Cita> Conjunt_cites::totes_cites() {
 	}
 	return cites_to_return;
 }
-vector<Cita> Conjunt_cites::cites_autor(string nom_autor) {
+vector<Cita> Conjunt_cites::cites_autor(string referencia) {
 	vector<Cita> cites_to_return;
+	referencia = referencia.substr(0,referencia.size()-2);
 	map<string, p_cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
 		p_cita p = iterator->second;
-		if ((*p.autor).consultar_nom() == nom_autor) {
+		if ((*p.autor).consultar_referencia() == referencia) {
 			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, (*p.text).consultar_frases(p.frases[0], p.frases[1]));
 			cites_to_return.push_back (c);
 		}
@@ -61,6 +62,7 @@ vector<Cita> Conjunt_cites::cites_autor(string nom_autor) {
 	}
 	return cites_to_return;
 }
+
 Cita Conjunt_cites::cita_referencia (string referencia) {
 	map<string, p_cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {

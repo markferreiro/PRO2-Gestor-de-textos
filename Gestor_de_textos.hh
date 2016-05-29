@@ -64,6 +64,7 @@ private:
 
 public:
 	Consultes consultes;
+	
 	//Consultores
 
 	Gestor_de_textos();

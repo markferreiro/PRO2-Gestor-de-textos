@@ -127,6 +127,15 @@ int Text::consultar_numero_frases() {
 	return frases.size();
 }
 
+int Text::consultar_numero_paraules() {
+	int paraules = 0;
+	for (int f = 0; f < frases.size(); f++) {
+		vector<string> par = split(frases[f], ' ');
+		paraules += par.size();
+	}
+	return paraules;
+}
+
 int Text::consultar_frequencia_maxima() {
 	int freq = 0;
 	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {

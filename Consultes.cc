@@ -1,4 +1,5 @@
 #include "Consultes.hh"
+#include <set>
 
 void Consultes::processar_consulta(string consulta) {
 	istringstream iss(consulta);
@@ -34,7 +35,8 @@ void Consultes::tots(string consulta) {
 	else if (paraula == "autors") tots_autors();
 }
 void Consultes::tots_textos() {
-
+	//Gestor_de_textos::set<Autor, Conjunt_autors::classcomp::operator()>::iterator it = Gestor_de_textos::autors.tots_autors();
+	
 }
 
 void Consultes::tots_autors() {
@@ -55,7 +57,27 @@ void Consultes::info(string consulta) {
 		info_cita(referencia.substr(1,referencia.size()-2));
 	}
 	else {
-
+		if (Gestor_de_textos::autors.hi_ha_text_seleccionat()) {
+			Text* text = Gestor_de_textos::autors.obtenir_text_seleccionat();
+			Autor* autor = Gestor_de_textos::autors.obtenir_autor_text_seleccionat();
+			//info text
+			cout << autor->consultar_nom() << " ";
+			cout << "\"" << text->consultar_titol() << "\" ";
+			cout << text->consultar_numero_frases() << " " << text->consulta_numero_paraules() << endl;
+			//cites associades
+			cout << "Cites Associades:" << endl;
+			vector<Cites> aux = Gestor_de_textos::cites.cites_autor(autor->consultar_referencia());
+			for (int c = 0; c < aux.size(); c++) {
+				cout << aux[c].consultar_referencia();
+				map <int, string> frases = aux[c].consultar_frases();
+				map <int, string>::iterator it = frases.begin();
+				while (it != frases.end()) {
+					cout << it->first << " " << it->second << endl;
+					it++;
+				}
+			}
+		}
+		else cout << error << endl;
 	}
 }
 
@@ -79,7 +101,16 @@ void Consultes::frases(string consulta) {
 }
 
 void Consultes::frases_text_triat(int x, int y) {
-	x = 1; y = 2;
+	if (Gestor_de_textos::autors.hi_ha_text_seleccionat()) {
+		Text* text = Gestor_de_textos::autors.obtenir_text_seleccionat();
+		map<int, string> frases = text->consultar_frases(x, y);
+		map<int, string>::iterator it = frases.begin();
+		while (it != frases.end()) {
+			cout << it->first << " " << it->second << endl;
+			it++;
+		}
+	}
+	else cout << "error" << endl;
 }
 
 void Consultes::frases_expressio(string expressio) {

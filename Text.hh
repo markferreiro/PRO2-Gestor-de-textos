@@ -104,11 +104,18 @@ class Text
 			\post Es retornarà un True si s'ha trobat la paraula al titol o al contingut del paràmetre implícit. Es retornarà False en cas contrari.
 		*/
 		pair<int,int> existeix_paraula (string paraula);
+		
 		/**@brief Consulta el nombre de frases del text
 			\pre cert
 			\post Retorna el numero de frases del text
 		*/
 		int consultar_numero_frases();
+		
+		/**@brief Consulta el nombre de paraules del text
+			\pre cert
+			\post Retorna el numero de paraules del text
+		*/
+		int consultar_numero_paraules();
 
 	private:
 		string titol;

@@ -9,7 +9,6 @@
 #include <vector>
 #include <string>
 #include <set>
-#include <iostream>
 
 /*
  * Classe Conjunt_autors
@@ -82,7 +81,7 @@ public:
 	/** @brief Consulta un autor pel nom
 		@param nom: Nom de l'autor que es vol cercar.
 		/pre cert
-		/post retorna l'autor de nom = "nom", sino existeix retorna NULL
+		/post retorna l'autor de nom = "nom", sino existeix retorna 0
 	*/
 	const Autor* obtenir_autor(string nom);
 
@@ -90,7 +89,7 @@ public:
 		/pre cert
 		/post retorna tots els autors del conjunt ordenats alfabeticament
 	*/
-	set<Autor, classcomp> tots_autors();
+	const set<Autor, classcomp>* tots_autors();
 
 	/** @brief Tria el text que contingui paraules
 		@param paraules: Vector d'strings amb les paraules que es vol que contingui el text triat.
@@ -102,10 +101,10 @@ public:
 	bool triar_text (vector<string> paraules);
 
 	bool afegir_text_a_autor (Text text, string nom_autor);
-
+	
 	bool eliminar_text_de_autor(string titol, string nom_autor);
-
-	static bool hi_ha_text_seleccionat();
+	
+	bool hi_ha_text_seleccionat();
 };
 
 #endif

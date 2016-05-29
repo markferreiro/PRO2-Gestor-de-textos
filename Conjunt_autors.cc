@@ -21,15 +21,6 @@ Conjunt_autors::Conjunt_autors() {
 	autors = set<Autor, classcomp>();
 }
 
-/*Text* Conjunt_autors::obtenir_text_seleccionat() {
-	Text t = Text();
-	return &t;
-}
-Autor* Conjunt_autors::obtenir_autor_text_seleccionat() {
-	Autor a = Autor("Antonio Lopes", "AL2");
-	return &a;
-}*/
-
 bool Conjunt_autors::afegir_autor(string nom) {
 	string referencia;
 	for (int i = 0; i < nom.length(); ++i) {
@@ -57,17 +48,16 @@ string Conjunt_autors::existeix_titol(string titol) {
 const Autor* Conjunt_autors::obtenir_autor(string nom) {
 	set<Autor, classcomp>::iterator it;
 	for (it =  autors.begin(); it != autors.end(); it++) {
-		//Autor* aux = it;
-		if (it->consultar_nom() == nom)  { //pendent mirar com retornar l'adre�a
+		if (it->consultar_nom() == nom)  { 
 			return &*it;
 		}
 	}
-	Autor autor = Autor("NULL", "NULL");
-	return &autor;
+	//Autor autor = Autor("NULL", "NULL");
+	return 0;
 }
 
-set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
-	return autors;
+const set<Autor, Conjunt_autors::classcomp>* Conjunt_autors::tots_autors() {
+	return &autors;
 }
 
 bool Conjunt_autors::triar_text (vector<string> paraules) {
