@@ -11,7 +11,7 @@ bool Conjunt_cites::afegir_cita(int x, int y) {
 	Text *text_seleccionat = Conjunt_autors::obtenir_text_seleccionat();
 	Autor *autor_text_seleccionat = Conjunt_autors::obtenir_autor_text_seleccionat();
 	//Comprovar si el rang de frases es correcte ( 1 <= x <= y <= n� frases )
-		//Comprovant aix� primer, en certs casos ens estalviarem la comprovaci� seg�ent.
+	//Comprovant aix� primer, en certs casos ens estalviarem la comprovaci� seg�ent.
 	if ( (x >= 1 && y >= x) && text_seleccionat->consultar_numero_frases() >= y) {
 		if (!existeix_cita(text_seleccionat, x, y)) {
 			string referencia = autor_text_seleccionat->consultar_referencia();
@@ -68,7 +68,7 @@ Cita Conjunt_cites::cita_referencia (string referencia) {
 	while (iterator != cites.end()) {
 		if (iterator->first == referencia) {
 			p_cita p = iterator->second;
-			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, (*p.text).consultar_frases(p.frases[0], p.frases[1]));
+			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, make_pair(x,y), (*p.text).consultar_frases(p.frases[0], p.frases[1]));
 			return c;
 		}
 		iterator++;
@@ -110,6 +110,7 @@ bool Conjunt_cites::existeix_cita(Text *text, int x, int y) {
 	}
 	return resultat;
 }
+
 string Conjunt_cites::IntToString(int a) {
 	ostringstream temp;
     temp<<a;

@@ -21,8 +21,45 @@ string Autor::consultar_referencia() {
 	return referencia;
 }
 
+vector <string> Autor::consultar_titol_textos() {
+	vector<string> textos_to_return;
+	set<Text, Autor::custom_sort>::iterator it = textos.begin();
+	while (it != textos.end()) {
+		Text text = *it;
+		textos_to_return.push_back(text.consultar_titol());
+		it++;
+	}
+	return textos_to_return;
+}
+
 set<Text, Autor::custom_sort> Autor::tots_textos() {
 	return textos;
+}
+
+int Autor::nombre_de_textos() {
+	return textos.size();
+}
+
+int Autor::nombre_de_frases() {
+	int frases = 0;
+	set<Text, custom_sort>::iterator it = textos.begin();
+	while (it != textos.end()) {
+		Text text = *it;
+		frases += text.consultar_numero_frases();
+		it++;
+	}
+	return frases;
+}
+
+int Autor::nombre_de_paraules() {
+	int paraules = 0;
+	set<Text, custom_sort>::iterator it = textos.begin();
+	while (it != textos.end()) {
+		Text text = *it;
+		paraules += text.consultar_numero_paraules();
+		it++;
+	}
+	return paraules;
 }
 
 bool Autor::existeix_titol (string titol) const{

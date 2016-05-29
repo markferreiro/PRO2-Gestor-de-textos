@@ -54,11 +54,30 @@ class Autor
 			\post Retorna l'string equivalent a la referencia del paràmetre implícit.
 		*/
 		string consultar_referencia();
+		/** @brief Retorna el titol de cada text de l'autor
+			\pre cert
+			\post Retorna un vector amb el titol de cada text del parametre implicit.
+		vector<string> consultar_titol_textos();
 		/** @brief Retorna un objecte "set" amb tots els Textos del paràmetre implícit.
 			\pre cert
 			\post Retorna un objecte "set" amb els textos del paràmetre implícit. Si el paràmetre implícit no té textos, el set estarà buit.
 		*/
 		set<Text, custom_sort> tots_textos();
+		/** @brief Retorna el nombre de textos de l'autor.
+			\pre cert
+			\post Retorna retorna el nombre de textos de l'autor.
+		*/
+		int nombre_de_textos();
+		/** @brief Retorna el nombre de frases de l'autor.
+			\pre cert
+			\post Retorna retorna el nombre de frases de l'autor.
+		*/
+		int nombre_de_frases();
+		/** @brief Retorna el nombre de paraules de l'autor.
+			\pre cert
+			\post Retorna retorna el nombre de paraules de l'autor.
+		*/
+		int nombre_de_paraules();
 		/** @brief Comprova si el paràmetre implícit ja té un text amb un titol rebut per paràmetre.
 			@param titol: Titol del text a buscar.
 			\pre cert

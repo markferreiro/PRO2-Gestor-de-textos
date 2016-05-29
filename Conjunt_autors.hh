@@ -90,7 +90,7 @@ public:
 		/pre cert
 		/post retorna tots els autors del conjunt ordenats alfabeticament
 	*/
-	const set<Autor, classcomp>* tots_autors();
+	set<Autor, classcomp> tots_autors();
 
 	/** @brief Tria el text que contingui paraules
 		@param paraules: Vector d'strings amb les paraules que es vol que contingui el text triat.
