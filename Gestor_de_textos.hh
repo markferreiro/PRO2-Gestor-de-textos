@@ -25,11 +25,12 @@ using namespace std;
 	@brief Representa un gestor de de textos, autors i cites.
 
 */
+class Consultes;
 class Gestor_de_textos
 {
 private:
-	static Conjunt_autors autors;
-	static Conjunt_cites cites;
+	Conjunt_autors autors;
+	Conjunt_cites cites;
 
 	//Constructores
 
@@ -64,7 +65,7 @@ private:
 
 public:
 	Consultes consultes;
-	
+
 	//Consultores
 
 	Gestor_de_textos();
@@ -73,13 +74,13 @@ public:
 		\pre cert
 		\post Retorna l'objecte Conjunt_autors de la classe.
 	*/
-	static Conjunt_autors obtenir_conjunt_autors();
+	Conjunt_autors obtenir_conjunt_autors();
 
 	/** @brief Obtenir el conjunt de cites de la classe.
 		\pre cert
 		\post Retorna l'objecte Conjunt_cites de la classe.
 	*/
-	static Conjunt_cites obtenir_conjunt_cites();
+	Conjunt_cites obtenir_conjunt_cites();
 
 	/** @brief Primer nivell d'accés a una consulta de l'estil "afegir".
 		@param consulta: String corresponent a la consulta a tractar.

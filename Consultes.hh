@@ -10,6 +10,9 @@
 #include <iostream>
 #include <set>
 #include <sstream>
+#include "Conjunt_autors.hh"
+#include "Conjunt_cites.hh"
+#include "Cita.hh"
 
 using namespace std;
 /*
@@ -24,14 +27,15 @@ using namespace std;
 class Consultes
 {
 public:
-
+	Conjunt_autors autors;
+	Conjunt_cites cites;
 	/** @brief Processador de consultes
 		@param consulta: String corresponent a la consulta a processar.
 		/pre cert
 		/post haura fet la consulta que ens indica "consulta"
 
 	*/
-	void processar_consulta (string consulta);
+	void processar_consulta (string consulta, Conjunt_autors autors, Conjunt_cites cites);
 private:
 
 	/** @brief Processador consultes que comencen per "tots"

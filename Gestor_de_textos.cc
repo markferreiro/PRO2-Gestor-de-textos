@@ -2,9 +2,6 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-Conjunt_autors Gestor_de_textos::autors;
-Conjunt_cites Gestor_de_textos::cites;
-
 Gestor_de_textos::Gestor_de_textos() {
 	Gestor_de_textos::autors = Conjunt_autors();
 	Gestor_de_textos::cites = Conjunt_cites();
@@ -52,13 +49,13 @@ void Gestor_de_textos::afegir_text(string consulta) {
 		iss >> paraula;
 	}
 	text.afegir_contingut(frases);
-	cout << "Text llegit!" << endl;
+	/*cout << "Text llegit!" << endl;
 	cout << "Titol: " << text.consultar_titol() << endl;
 	cout << "Autor: " << autor_llegit << endl;
 	cout << "Contingut(" << frases.size() << "): "  << endl;
 	for (int i = 0 ; i < frases.size()-1 ; i++) {
 		cout << i << ": " << frases[i] << endl;
-	}
+	}*/
 	autors.afegir_text_a_autor(text, autor_llegit);
 }
 
@@ -110,10 +107,14 @@ void Gestor_de_textos::triar_text(string consulta) {
 	istringstream iss(consulta);
 	string paraula;
 	iss >> paraula;
-	vector<string> paraules;
-	if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
-	else if (paraula[paraula.size()-1] == '}') paraula = paraula.substr(0, paraula.size()-2);
+	vector<string> paraules(0);
+	while(paraula[paraula.size()-1] != '}') {
+			if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
+			paraules.push_back(paraula);
+	}
+	paraula = paraula.substr(1, paraula.size()-2);
 	paraules.push_back(paraula);
+
 	if(!autors.triar_text(paraules)) cout << "error" << endl;
 	else {
 		consulta = "text triat";
@@ -160,7 +161,7 @@ int main() {
 		} else if (paraula == "substitueix") {
 			gestor.substituir_paraules(linia.substr(paraula.size()));
 		} else {
-			gestor.consultes.processar_consulta(paraula);
+			gestor.consultes.processar_consulta(paraula, gestor.obtenir_conjunt_autors(), gestor.obtenir_conjunt_cites());
 		}
 		cout << "Reading new line..." << endl;
 		paraula = "";

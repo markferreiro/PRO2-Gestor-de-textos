@@ -48,7 +48,7 @@ string Conjunt_autors::existeix_titol(string titol) {
 const Autor* Conjunt_autors::obtenir_autor(string nom) {
 	set<Autor, classcomp>::iterator it;
 	for (it =  autors.begin(); it != autors.end(); it++) {
-		if (it->consultar_nom() == nom)  { 
+		if (it->consultar_nom() == nom)  {
 			return &*it;
 		}
 	}
@@ -85,21 +85,21 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 
 bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
   set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
-  bool done = false;
+	bool result = afegir_autor(nom_autor);
   while(it != autors.end()) {
     if (it->consultar_nom() == nom_autor) {
 			Autor a = *it;
-			done = a.afegir_text(text);
+			bool done = a.afegir_text(text);
+			if (done) {
+				cout << "inserted!" << endl;
+			}
 			autors.insert(it, a);
       //done = (*it).afegir_text(text); //mira't aixo que nose pq no compila
       it = autors.end();
     }
     it++;
-  }
-	if (!done) {
-		afegir_autor(nom_autor);
 	}
-  return done;
+  return result;
 }
 
 bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
