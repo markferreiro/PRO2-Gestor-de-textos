@@ -18,13 +18,13 @@ void Gestor_de_textos::afegir(string consulta) {
 void Gestor_de_textos::afegir_text(string consulta) {
 	istringstream iss(consulta);
 	string paraula, titol_llegit, autor_llegit, frase;
-	cout << "M'entra: " << consulta << endl;
+	//cout << "M'entra: " << consulta << endl;
 	vector<string> frases(0);
 	bool titol_acabat = false, autor_acabat = false;
 	iss >> paraula;
 	Text text = Text();
 	while(paraula != "****") {
-		cout << "Loop" << endl;
+		//cout << "Loop" << endl;
 		if (!titol_acabat) {
 			titol_llegit += " " + paraula;
 			if (paraula[paraula.size()-1] == '\"') {
@@ -56,7 +56,9 @@ void Gestor_de_textos::afegir_text(string consulta) {
 	for (int i = 0 ; i < frases.size()-1 ; i++) {
 		cout << i << ": " << frases[i] << endl;
 	}*/
+	//cout << "intentem afegir" << endl;
 	autors.afegir_text_a_autor(text, autor_llegit);
+	//cout << "text afegit" << endl;
 }
 
 void Gestor_de_textos::afegir_cita(string consulta) {
@@ -109,8 +111,10 @@ void Gestor_de_textos::triar_text(string consulta) {
 	iss >> paraula;
 	vector<string> paraules(0);
 	while(paraula[paraula.size()-1] != '}') {
+		cout << "paraula: " << paraula << endl;
 			if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
 			paraules.push_back(paraula);
+			iss >> paraula;
 	}
 	paraula = paraula.substr(1, paraula.size()-2);
 	paraules.push_back(paraula);
