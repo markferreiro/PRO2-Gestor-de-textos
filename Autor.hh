@@ -23,14 +23,10 @@ using namespace std;
 */
 class Autor
 {
-	private:
+	public:
 		struct custom_sort {
 				bool operator()(const Text& a, const Text& b) const;
 		};
-		string nom, referencia;
-		set<Text, custom_sort> textos;
-
-	public:
 		//Constructores
 
 		/** @brief Constructor de la classe.
@@ -57,7 +53,8 @@ class Autor
 		/** @brief Retorna el titol de cada text de l'autor
 			\pre cert
 			\post Retorna un vector amb el titol de cada text del parametre implicit.
-		vector<string> consultar_titol_textos();
+			*/
+		vector<string> consultar_titol_textos() const;
 		/** @brief Retorna un objecte "set" amb tots els Textos del paràmetre implícit.
 			\pre cert
 			\post Retorna un objecte "set" amb els textos del paràmetre implícit. Si el paràmetre implícit no té textos, el set estarà buit.
@@ -106,6 +103,9 @@ class Autor
 		*/
 		bool eliminar_text(string titol);
 
+	private:
+		string nom, referencia;
+		set<Text, custom_sort> textos;
 };
 
 #endif

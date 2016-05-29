@@ -68,7 +68,7 @@ Cita Conjunt_cites::cita_referencia (string referencia) {
 	while (iterator != cites.end()) {
 		if (iterator->first == referencia) {
 			p_cita p = iterator->second;
-			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, make_pair(x,y), (*p.text).consultar_frases(p.frases[0], p.frases[1]));
+			Cita c = Cita((*p.autor).consultar_nom(), (*p.text).consultar_titol(), iterator->first, (*p.text).consultar_frases(p.frases[0], p.frases[1]));
 			return c;
 		}
 		iterator++;

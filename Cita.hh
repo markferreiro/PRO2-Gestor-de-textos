@@ -36,7 +36,7 @@ class Cita
 			\post Retorna un nou objecte de tipus Cita amb tots els seus parametres inicialitzats.
 		*/
 		Cita();
-		Cita(string nom_autor, string titol_text, string referencia, pair<int, int> interval, map<int, string > frases);
+		Cita(string nom_autor, string titol_text, string referencia, map<int, string > frases);
 
 		//Consultores
 
@@ -55,16 +55,6 @@ class Cita
 			\post Retorna l'string equivalent al nom de l'autor del text al que fà referencia el paràmetre implícit.
 		*/
 		string consultar_nom_autor();
-		/** @brief Retorna l'id de la primera frase de la cita.
-			\pre cert
-			\post Retorna un int que representa l'id de la primera frase de la cita.
-		*/
-		int consultar_x();
-		/** @brief Retorna l'id de la segona frase de la cita.
-			\pre cert
-			\post Retorna un int que representa l'id de la segona frase de la cita.
-		*/
-		int consultar_y();
 		/** @brief Retorna totes les frases del paràmetre implícit.
 			\pre cert
 			\post Retorna un vector amb totes les frases del paràmetre implícit (buit si no en té).
@@ -73,7 +63,6 @@ class Cita
 
 	private:
 		string referencia, nom_autor, titol_text;
-		pair<int, int> interval;
 		map<int, string > frases;
 };
 

@@ -37,7 +37,11 @@ public:
 	*/
 	void processar_consulta (string consulta, Conjunt_autors autors, Conjunt_cites cites);
 private:
-
+	struct classcomp
+	{
+		bool operator() (const Autor& lhs, const Autor& rhs) const;
+		bool operator() (const Text& lhs, const Text& rhs) const;
+	};
 	/** @brief Processador consultes que comencen per "tots"
 		@param consulta: String corresponent a la consulta a processar.
 		/pre s'ha llegit la primera paraula de la consulta i es "tots"

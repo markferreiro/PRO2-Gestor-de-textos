@@ -21,7 +21,7 @@ string Autor::consultar_referencia() {
 	return referencia;
 }
 
-vector <string> Autor::consultar_titol_textos() {
+vector <string> Autor::consultar_titol_textos() const {
 	vector<string> textos_to_return;
 	set<Text, Autor::custom_sort>::iterator it = textos.begin();
 	while (it != textos.end()) {

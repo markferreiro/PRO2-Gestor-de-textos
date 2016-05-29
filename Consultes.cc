@@ -1,6 +1,15 @@
 #include "Consultes.hh"
 #include <set>
 
+bool Consultes::classcomp::operator() (const Autor& lhs, const Autor& rhs) const
+{
+    return lhs.consultar_nom() < rhs.consultar_nom();
+}
+bool Consultes::classcomp::operator() (const Text& lhs, const Text& rhs) const
+{
+    return lhs.consultar_titol() < rhs.consultar_titol();
+}
+
 void Consultes::processar_consulta(string consulta, Conjunt_autors autors, Conjunt_cites cites) {
 	this->autors = autors;
 	this->cites = cites;
@@ -38,14 +47,14 @@ void Consultes::tots(string consulta) {
 	else if (paraula == "autors") tots_autors();
 }
 void Consultes::tots_textos() {
-	set<Autor, classcomp>::iterator it_autors = autors.begin(); 
-	while (it_autors != autors.end()) { 
+	set<Autor, Consultes::classcomp>::iterator it_autors = autors.tots_autors().begin();
+	while (it_autors != autors.tots_autors().end()) {
 		Autor autor = *it_autors;
-		set<Text, Autor::custom_sort> textos = autor.tots_textos(); 
-		set<Text, Autor::custom_sort>::iterator it_textos = textos.end(); 
-		while (it_textos != textos.end()) { 
+		set<Text, Autor::custom_sort> textos = autor.tots_textos();
+		set<Text, Autor::custom_sort>::iterator it_textos = textos.end();
+		while (it_textos != textos.end()) {
 			Text text = *it_textos;
-			cout << autor->consultar_nom() << " ";
+			cout << autor.consultar_nom() << " ";
 			cout << "\"" << text.consultar_titol() << "\" " << endl;
 			it_textos++;
 		}
@@ -54,8 +63,8 @@ void Consultes::tots_textos() {
 }
 
 void Consultes::tots_autors() {
-	set<Autor, classcomp>::iterator it = autors.begin();
-	while (it != autors.end()) {
+	set<Autor, classcomp>::iterator it = autors.tots_autors().begin();
+	while (it != autors.tots_autors().end()) {
 		Autor autor = *it;
 		cout << autor.consultar_nom() << " " << autor.nombre_de_textos();
 		cout << " " << autor.nombre_de_frases() << " " << autor.nombre_de_paraules() << endl;
@@ -116,7 +125,7 @@ void Consultes::info_cita(string referencia) {
 	Cita cita = cites.cita_referencia(referencia);
 	cout << cita.consultar_nom_autor() << " ";
 	cout << "\"" << cita.consultar_titol() << "\"" << endl;
-	cout << cita.consultar_x() << "-" << cita.consultar_y() << endl;
+	cout << cita.consultar_frases().begin()->first << "-" << cita.consultar_frases().rbegin()->first << endl;
 	map<int, string> frases = cita.consultar_frases();
 	map<int, string>::iterator it = frases.begin();
 	while (it != frases.end()) {

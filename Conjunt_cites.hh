@@ -85,7 +85,9 @@ class Conjunt_cites
 			/post retorna un vector amb totes les cites de l'ultim Text_seleccionat,
 			 retorna NULL si no hi ha cap text triat
 		*/
+		vector<Cita> cites_text_seleccionat();
 
+		
 		string IntToString (int a);
 
 	private:

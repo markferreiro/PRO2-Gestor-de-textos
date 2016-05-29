@@ -57,7 +57,7 @@ const Autor* Conjunt_autors::obtenir_autor(string nom) {
 }
 
 set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
-	return &autors;
+	return autors;
 }
 
 bool Conjunt_autors::triar_text (vector<string> paraules) {
