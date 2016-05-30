@@ -151,7 +151,7 @@ bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
 }
 
 bool Conjunt_autors::hi_ha_text_seleccionat() {
-	return text_esta_seleccionat;
+	return (autor_text_seleccionat != "" && text_seleccionat != "");
 }
 
 void Conjunt_autors::esborrar_text_triat() {

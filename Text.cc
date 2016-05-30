@@ -72,11 +72,19 @@ vector<string> Text::consultar_contingut () {
 }
 
 map<int, string > Text::consultar_frases (int x, int y) {
-	map<int, string > aux;
-	for (int i = x; i <= y; i++) {
-		aux[i] = frases[i-1];
+	map<int, string > aux = map<int, string>();
+  //cout << "Preparat per llegir de la " << x << " a la " << y << endl;
+	for (int i = 0; i <= y-x; i++) {
+		//aux[i-x] = frases[i];
+    //cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
+    aux[i+x+1] = frases[i+x];
+    cout << "Extrayendo frase: " << frases[i+x] << " (" << i << "," << y-x << ")" << endl;
 	}
 	return aux;
+}
+
+vector<string> Text::consultar_frases() {
+  return frases;
 }
 
 vector<list<string> > Text::consultar_taula_frequencies() {

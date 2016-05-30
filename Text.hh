@@ -82,6 +82,8 @@ class Text
 			\post Retorna un vector amb totes les frases del paràmetre implícit (buit si no en té).
 		*/
 		map<int, string > consultar_frases (int x, int y);
+
+		vector<string> consultar_frases();
 		/** @brief Retorna un vector amb la taula de frequencia del contingut del paràmetre implicit.
 			\pre cert
 			\post Retorna un vector amb la taula de frequencia del contingut del paràmetre implícit.
