@@ -151,8 +151,10 @@ void Consultes::frases(string consulta) {
 
 void Consultes::frases_text_triat(int x, int y) {
 	if (autors.hi_ha_text_seleccionat()) {
-		Text* text = autors.obtenir_text_seleccionat();
-		map<int, string> frases = text->consultar_frases(x, y);
+		string titol_text = autors.obtenir_text_seleccionat();
+		string nom_autor = autors.existeix_titol(titol_text);
+		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
+		map<int, string> frases = text.consultar_frases(x, y);
 		map<int, string>::iterator it = frases.begin();
 		while (it != frases.end()) {
 			cout << it->first << " " << it->second << endl;

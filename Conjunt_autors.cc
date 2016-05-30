@@ -55,6 +55,19 @@ const Autor Conjunt_autors::obtenir_autor(string nom) {
 	return autor;
 }
 
+Text Conjunt_autors::obtenir_text_autor(string nom, string titol) {
+	bool troat = false;
+	set<Autor, classcomp>::iterator it = autors.begin();
+	while (it != autors.end() and not false) {
+		if (it->consultar_nom() == nom) {
+			Text text = it->obtenir_text(titol);
+			trobat = true;
+		}
+		it++;
+	}
+	return text;
+}
+
 set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
 	return autors;
 }
