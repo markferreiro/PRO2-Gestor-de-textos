@@ -10,6 +10,7 @@ Classe utilitzada per la caracterització dels autors dels textos.
 
 #include <set>
 #include "Text.hh"
+#include <iostream>
 
 using namespace std;
 
@@ -59,12 +60,12 @@ class Autor
 			\pre cert
 			\post Retorna un objecte "set" amb els textos del paràmetre implícit. Si el paràmetre implícit no té textos, el set estarà buit.
 		*/
-		set<Text, custom_sort> tots_textos();
+		set<Text, custom_sort> tots_textos() const ;
 		/** @brief Retorna el nombre de textos de l'autor.
 			\pre cert
 			\post Retorna retorna el nombre de textos de l'autor.
 		*/
-		int nombre_de_textos();
+		int nombre_de_textos() const;
 		/** @brief Retorna el nombre de frases de l'autor.
 			\pre cert
 			\post Retorna retorna el nombre de frases de l'autor.
@@ -80,13 +81,15 @@ class Autor
 			\pre cert
 			\post Retorna "True" si el paràmetre implícit ja té un text amb el titol rebut. Retorna "False" en cas contrari.
 		*/
-		bool existeix_titol(string titol) const;
+		set<Text, custom_sort>::iterator existeix_titol(string titol) const;
 		/** @brief Comprova si el paràmetre implícit té un text en el qual aparegui unes paraules no necessariament seguides (tant en el titol com en el contingut).
 			@param paraula: Paraules a cercar.
 			\pre cert
 			\post Retorna el Text en el que apareixen les paraules del paràmetre si n'existeix un al paràmetre implícit. Retorna un Text de titol "NULL" si no existeix cap o m�s d'un.
 		*/
 		Text existeix_text_amb_paraules(vector<string> paraules);
+
+		Text obtenir_text(string titol);
 
 		//Modificadores
 
@@ -106,6 +109,7 @@ class Autor
 	private:
 		string nom, referencia;
 		set<Text, custom_sort> textos;
+		vector<string> split(string str, char delimiter);
 };
 
 #endif

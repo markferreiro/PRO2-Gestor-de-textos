@@ -43,7 +43,7 @@ void Text::construir_taula_de_frequencies() {
 }
 
 Text::Text() {
-  
+
 }
 Text::Text (string titol) {
 	this->titol = titol;
@@ -116,10 +116,17 @@ pair<int,int> Text::existeix_paraula (string paraula) {
 		vector<string> par = split(frases[f], ' ');
 		for (int p = 0 ; p < par.size(); p++) {
 			if (par[p] == paraula) {
+        cout << "Comprobem contingut: " << par[p] << " - " << paraula << endl;
 				return (pair<int,int>(f,p));
 			}
 		}
 	}
+  vector<string> par = split(consultar_titol(), ' ');
+  for (int p = 0 ; p < par.size(); p++) {
+    if (par[p] == paraula) {
+      return (pair<int,int>(-1,p));
+    }
+  }
 	return (pair<int,int>(-1,-1));
 }
 

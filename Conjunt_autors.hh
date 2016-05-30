@@ -28,8 +28,8 @@ private:
 	};
 	set<Autor, classcomp> autors;
 	static bool text_esta_seleccionat;
-	static Autor* autor_text_seleccionat;
-	static Text* text_seleccionat;
+	string autor_text_seleccionat;
+	string text_seleccionat;
 
 public:
 	//Constructores
@@ -64,13 +64,13 @@ public:
 		\pre Ha d'haber un text seleccionat previament i com a conseqüencia un autor seleccionat.
 		\post Retorna l'objecte Autor corresponent al text seleccionat per la consulta "triar text"
 	*/
-	static Autor* obtenir_autor_text_seleccionat();
+	string obtenir_autor_text_seleccionat();
 
   /** @brief Obté el Text seleccionat.
 		\pre Ha d'haber un text seleccionat previament.
 		\post Retorna l'objecte Text corresponent al text seleccionat per la consulta "triar text"
 	*/
-	static Text* obtenir_text_seleccionat();
+	string obtenir_text_seleccionat();
 
 	/** @brief Consulta si existeix un text pel titol
 		@param titol: Titol del text que es vol cercar.
@@ -84,7 +84,7 @@ public:
 		/pre cert
 		/post retorna l'autor de nom = "nom", sino existeix retorna 0
 	*/
-	const Autor* obtenir_autor(string nom);
+	const Autor obtenir_autor(string nom);
 
 	/** @brief Consulta tots els autors del sistema
 		/pre cert

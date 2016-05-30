@@ -3,14 +3,15 @@
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 Gestor_de_textos::Gestor_de_textos() {
-	Gestor_de_textos::autors = Conjunt_autors();
-	Gestor_de_textos::cites = Conjunt_cites();
+	autors = Conjunt_autors();
+	cites = Conjunt_cites();
 	consultes = Consultes();
 }
 void Gestor_de_textos::afegir(string consulta) {
 	istringstream iss(consulta);
 	string paraula;
 	iss >> paraula;
+	cout << "call afegir text..." << endl;
 	if (paraula == "text") afegir_text(consulta.substr(paraula.size()+1));
 	else if (paraula == "cita") afegir_cita(consulta.substr(paraula.size()+1));
 }
@@ -49,16 +50,10 @@ void Gestor_de_textos::afegir_text(string consulta) {
 		iss >> paraula;
 	}
 	text.afegir_contingut(frases);
-	/*cout << "Text llegit!" << endl;
-	cout << "Titol: " << text.consultar_titol() << endl;
-	cout << "Autor: " << autor_llegit << endl;
-	cout << "Contingut(" << frases.size() << "): "  << endl;
-	for (int i = 0 ; i < frases.size()-1 ; i++) {
-		cout << i << ": " << frases[i] << endl;
-	}*/
-	//cout << "intentem afegir" << endl;
+
+	cout << "intentem afegir" << endl;
 	autors.afegir_text_a_autor(text, autor_llegit);
-	//cout << "text afegit" << endl;
+	//cout << "autor: " << autors.obtenir_autor(autor_llegit)->consultar_nom() << " textos: " << autors.obtenir_autor(autor_llegit)->nombre_de_textos() << endl;
 }
 
 void Gestor_de_textos::afegir_cita(string consulta) {
@@ -107,17 +102,20 @@ void Gestor_de_textos::eliminar_cita(string consulta) {
 }
 void Gestor_de_textos::triar_text(string consulta) {
 	istringstream iss(consulta);
+	bool final = false;
 	string paraula;
 	iss >> paraula;
 	vector<string> paraules(0);
-	while(paraula[paraula.size()-1] != '}') {
+	do {
+		iss >> paraula;
+		if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
+		else if (paraula[paraula.size()] != '}') {
+			final = true;
+			paraula = paraula.substr(0, paraula.size()-1);
+		}
 		cout << "paraula: " << paraula << endl;
-			if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
-			paraules.push_back(paraula);
-			iss >> paraula;
-	}
-	paraula = paraula.substr(1, paraula.size()-2);
-	paraules.push_back(paraula);
+		paraules.push_back(paraula);
+	} while (!final);
 
 	if(!autors.triar_text(paraules)) cout << "error" << endl;
 	else {
@@ -133,16 +131,18 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	iss >> paraula2;
 	paraula1 = paraula1.substr(1, paraula1.size()-2);
 	paraula2 = paraula2.substr(1, paraula2.size()-2);
-	Text* text = autors.obtenir_text_seleccionat();
-	text->substitueix_paraula(paraula1, paraula2);
+	Autor a = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat());
+	Text text = a.obtenir_text(autors.obtenir_text_seleccionat());
+	text.substitueix_paraula(paraula1, paraula2);
+	a.afegir_text(text);
 	consulta = "";
 }
 
 Conjunt_autors Gestor_de_textos::obtenir_conjunt_autors() {
-	return Conjunt_autors();
+	return autors;
 }
 Conjunt_cites Gestor_de_textos::obtenir_conjunt_cites() {
-	return Conjunt_cites();
+	return cites;
 }
 
 int main() {
@@ -162,6 +162,7 @@ int main() {
 			gestor.eliminar(linia.substr(paraula.size()));
 		} else if (paraula == "triar") {
 			gestor.triar_text(linia.substr(paraula.size()));
+			cout << "Text triat: " << gestor.obtenir_conjunt_autors().obtenir_autor_text_seleccionat() << " - " << gestor.obtenir_conjunt_autors().obtenir_text_seleccionat() << endl;
 		} else if (paraula == "substitueix") {
 			gestor.substituir_paraules(linia.substr(paraula.size()));
 		} else {
@@ -170,6 +171,7 @@ int main() {
 		cout << "Reading new line..." << endl;
 		paraula = "";
 		linia = "";
+		cout << "Autors (" << gestor.obtenir_conjunt_autors().tots_autors().size() << ")" << endl;
 		getline(cin, linia);
 	}
 }
