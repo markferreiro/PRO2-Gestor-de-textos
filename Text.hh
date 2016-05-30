@@ -87,11 +87,16 @@ class Text
 			\post Retorna un vector amb la taula de frequencia del contingut del paràmetre implícit.
 		*/
 		vector<list<string> > consultar_taula_frequencies();
-		/** @brief Retorna les frases que contenen l'string del paràmetre.
+		/** @brief Retorna si la frase i conte les paraules del par?metre.
 			\pre cert
-			\post Retorna una llista amb les posicions de les frases del paràmetre implícit que contenen les paraules del paràmetre.
+			\post Retorna true si la frase i conte les paraules del par?metre, false si no.
 		*/
-		list<int> obtenir_frases_amb_paraules(vector<string> paraules);
+		bool conte_paraules(int i, vector<string> paraules);
+		/** @brief Retorna true si la frase i conte les paraules que indica l'expressio del parametre.
+			\pre cert
+			\post Retorna true si la frase i conte les paraules del par?metre d'acord amb l'expressio, false si no.
+		*/
+		bool conte_expressio(string expressio);
 		/** @brief Substitueix les aparicions de la "paraula1" per la "paraula2".
 			@param paraula1: Paraula que es vol substituir.
 			@param paraula2: Paraula per la que es substituirà la "paraula1".
