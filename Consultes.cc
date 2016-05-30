@@ -79,7 +79,7 @@ void Consultes::totes_cites() {
     string titol_text = aux[i].consultar_titol();
 		string nom_autor = aux[i].consultar_nom_autor();
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-    pair<int, int> interval = aux[i].consultar_frases();
+    pair<int, int> interval = aux[i].consultar_x_y();
     map<int, string> frases = text.consultar_frases(interval.first, interval.second);
     map<int, string>::iterator it = frases.begin();
 		while (it != frases.end()) {
@@ -115,7 +115,7 @@ void Consultes::info(string consulta) {
 			vector<Cita> aux = cites.cites_autor(autor.consultar_referencia());
 			for (int c = 0; c < aux.size(); c++) {
 				cout << aux[c].consultar_referencia();
-        pair<int, int> interval = aux[c].consultar_frases();
+        pair<int, int> interval = aux[c].consultar_x_y();
         map<int, string> frases = text.consultar_frases(interval.first, interval.second);
         map<int, string>::iterator it = frases.begin();
 
@@ -133,11 +133,11 @@ void Consultes::info_cita(string referencia) {
 	Cita cita = cites.cita_referencia(referencia);
 	cout << cita.consultar_nom_autor() << " ";
 	cout << "\"" << cita.consultar_titol() << "\"" << endl;
-	cout << cita.consultar_frases().first << "-" << cita.consultar_frases().second << endl;
+	cout << cita.consultar_x_y().first << "-" << cita.consultar_x_y().second << endl;
   string titol_text = cita.consultar_titol();
   string nom_autor = cita.consultar_nom_autor();
   Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-  pair<int, int> interval = cita.consultar_frases();
+  pair<int, int> interval = cita.consultar_x_y();
   map<int, string> frases = text.consultar_frases(interval.first, interval.second);
   map<int, string>::iterator it = frases.begin();
 
@@ -152,13 +152,21 @@ void Consultes::frases(string consulta) {
 	char lletra;
 	iss >> lletra;
 	if (lletra >= '0' and lletra <= '9') {
-
+		int x = lletra - 48, y;
+		iss >> y;
+		frases_text_triat(x,y);
 	}
 	else if (lletra == '\(') {
-
+		frases_expressio(consulta);
 	}
 	else if (lletra == '\"') {
-
+		string paraula;
+		vector<string> paraules;
+		while(iss >> paraula) {
+			if (paraula[paraula.size()-1] == '\"') paraula.substr(0, paraula.size()-2);
+			paraules.push_back(paraula);
+		}
+		frases_sequencia(paraules);
 	}
 }
 
@@ -167,12 +175,15 @@ void Consultes::frases_text_triat(int x, int y) {
 		string titol_text = autors.obtenir_text_seleccionat();
 		string nom_autor = autors.existeix_titol(titol_text);
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-		map<int, string> frases = text.consultar_frases(x, y);
-		map<int, string>::iterator it = frases.begin();
-		while (it != frases.end()) {
-			cout << it->first << " " << it->second << endl;
-			it++;
+		if (x >= 1 and (y >= x and y <= text.consultar_numero_frases())) {
+			map<int, string> frases = text.consultar_frases(x, y);
+			map<int, string>::iterator it = frases.begin();
+			while (it != frases.end()) {
+				cout << it->first << " " << it->second << endl;
+				it++;
+			}
 		}
+		else cout << "error" << endl;
 	}
 	else cout << "error" << endl;
 }
