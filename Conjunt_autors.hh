@@ -84,7 +84,7 @@ public:
 		/pre cert
 		/post retorna l'autor de nom = "nom", sino existeix retorna 0
 	*/
-	const Autor obtenir_autor(string nom);
+	Autor obtenir_autor(string nom);
 
 	/** @brief Consulta tots els autors del sistema
 		/pre cert

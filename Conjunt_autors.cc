@@ -44,11 +44,12 @@ string Conjunt_autors::existeix_titol(string titol) {
 	return "NULL";
 }
 
-const Autor Conjunt_autors::obtenir_autor(string nom) {
+Autor Conjunt_autors::obtenir_autor(string nom) {
 	set<Autor, classcomp>::iterator it;
 	for (it =  autors.begin(); it != autors.end(); it++) {
 		if (it->consultar_nom() == nom)  {
-			return *it;
+			Autor a = *it;
+			return a;
 		}
 	}
 	Autor autor = Autor("NULL", "NULL");
