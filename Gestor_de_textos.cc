@@ -101,7 +101,7 @@ void Gestor_de_textos::triar_text(string consulta) {
 	vector<string> paraules(0);
 	do {
 		iss >> paraula;
-		if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
+		if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-2);
 		else if (paraula[paraula.size()] != '}') {
 			final = true;
 			paraula = paraula.substr(0, paraula.size()-1);

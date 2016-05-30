@@ -142,7 +142,7 @@ private:
 
 	*/
 
-	void frases_sequencia (string sequencia);
+	void frases_sequencia (vector<string> paraules);
 
 	/** @brief Processador de consultes que comencen per "nombre de"
 		@param consulta: String corresponent a la consulta a processar.

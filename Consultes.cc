@@ -181,8 +181,18 @@ void Consultes::frases_expressio(string expressio) {
 	expressio = "";
 }
 
-void Consultes::frases_sequencia(string sequencia) {
-	sequencia = "";
+void Consultes::frases_sequencia(vector<string> paraules) {
+	if(autors.hi_ha_text_seleccionat()) {
+		string titol_text = autors.obtenir_text_seleccionat();
+		string nom_autor = autors.existeix_titol(titol_text);
+		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
+		list<int> frases = text.obtenir_frases_amb_paraules(paraules);
+		list<int>::iterator it;
+		for (it = frases.begin(); it != frases.end(); it++) {
+			cout << *it << " " << text.consultar_frase(*it) << endl;
+		}
+	}
+	else cout << "error" << endl;
 }
 
 void Consultes::nombre_de(string consulta) {
