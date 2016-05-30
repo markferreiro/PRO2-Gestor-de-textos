@@ -88,24 +88,25 @@ vector<list<string> > Text::consultar_taula_frequencies() {
 	return aux;
 }
 
-bool Text::conte_paraules (int i, vector<string> paraules) {
-	string frase = obtenir_frase(i);
-	int paraula = 0;
-	vector<string> par = split(frase, ' ');
-	for (int p = 0; p < par.size(); p++) {
-		if(paraula < paraules.size()) {
-			if (par[p] == paraules[paraula]) {
-				paraula++;
+list<int> Text::obtenir_frases_amb_paraules (vector<string> paraules) {
+	list<int> aux;
+	for (int f = 0; f < frases.size(); f++) {
+		int paraula = 0;
+		vector<string> par = split(frases[f], ' ');
+		for (int p = 0; p < par.size(); p++) {
+			if (paraula < paraules.size()) {
+				if (par[p] == paraules[paraula]) {
+					paraula++;
+				} else {
+					paraula = 0;
+				}
 			} else {
-				paraula = 0;
+				aux.insert(aux.end(), f);
+				p = par.size();
 			}
-		} else return true;
+		}
 	}
-	return false;
-}
-
-bool Text::conte_expressio(string expressio) {
-	
+  return aux;
 }
 
 void Text::substitueix_paraula (string paraula1, string paraula2) {
