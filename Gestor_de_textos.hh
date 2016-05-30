@@ -54,7 +54,7 @@ private:
 		\pre Hi ha d'haber un text seleccionat i existent.
 		\post S'haurà eliminat el text seleccionat i ja no hi haurà cap text seleccionat.
 	*/
-	void eliminar_text(string consulta);
+	void eliminar_text();
 	/** @brief Elimina la cita especificada pel paràmetre.
 		@param consulta: String corresponent a la consulta a tractar.
 		\pre La cita especificada a la consulta ha d'existir.

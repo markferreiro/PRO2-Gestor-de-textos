@@ -2,4 +2,8 @@ afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el conting
 
 triar text {palotes contingut}
 
+eliminar text
+
+triar text {palotes contingut}
+
 sortir

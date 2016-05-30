@@ -72,21 +72,14 @@ void Gestor_de_textos::eliminar(string consulta) {
 	istringstream iss(consulta);
 	string paraula;
 	iss >> paraula;
-	if (paraula == "text") afegir_text(consulta.substr(paraula.size()));
-	else if (paraula == "cita") afegir_cita(consulta.substr(paraula.size()));
+	if (paraula == "text") eliminar_text();
+	else if (paraula == "cita") eliminar_cita(consulta.substr(paraula.size()));
 }
 
-void Gestor_de_textos::eliminar_text(string consulta) {
-	istringstream iss(consulta);
-	string titol;
-	iss >> titol;
-	string nom_autor = autors.existeix_titol(titol);
-	if (nom_autor != "NULL") {
-		if(!autors.eliminar_text_de_autor(titol, nom_autor)) cout << "error" << endl;
-		else consulta = "eliminant text";
-	}
-	else cout << "error" << endl;
-	cout << consulta << endl;
+void Gestor_de_textos::eliminar_text() {
+	string titol_text = autors.obtenir_text_seleccionat();
+	string nom_autor = autors.obtenir_autor_text_seleccionat();
+	autors.eliminar_text_de_autor(titol_text, nom_autor);
 }
 
 void Gestor_de_textos::eliminar_cita(string consulta) {

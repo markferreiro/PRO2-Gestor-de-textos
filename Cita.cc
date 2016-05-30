@@ -4,12 +4,13 @@
 Cita::Cita() {
 
 }
-Cita::Cita (string nom_autor, string titol_text, string referencia, int x, int y) {
+Cita::Cita (string nom_autor, string titol_text, string referencia, int x, int y, vector<string> frases) {
 	this->nom_autor = nom_autor;
 	this->titol_text = titol_text;
 	this->referencia = referencia;
 	this->x = x;
 	this->y = y;
+	this->frases = frases;
 }
 
 string Cita::consultar_titol() {
@@ -24,6 +25,10 @@ string Cita::consultar_nom_autor() {
 	return nom_autor;
 }
 
-pair<int, int> Cita::consultar_frases() {
+pair<int, int> Cita::consultar_x_y() {
 	return make_pair(x, y);
+}
+
+vector<string> Cita::obtenir_frases() {
+
 }
