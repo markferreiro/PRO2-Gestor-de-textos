@@ -85,6 +85,11 @@ public:
 		/post retorna l'autor de nom = "nom", sino existeix retorna 0
 	*/
 	Autor obtenir_autor(string nom);
+	/** @brief Consulta un text d'un autor
+		\pre existeix un autor i un text amb Nom = nom i Titol = titol
+		\post Retorna el text de titol = Titol de l'autor amb nom = Nom
+	*/
+	Text obtenir_text_autor(string nom, string titol);	
 
 	/** @brief Consulta tots els autors del sistema
 		/pre cert

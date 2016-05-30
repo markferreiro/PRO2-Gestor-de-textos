@@ -76,7 +76,9 @@ void Consultes::totes_cites() {
 	vector<Cita> aux = cites.totes_cites();
 	for (int i = 0; i < aux.size(); i++) {
 		cout << aux[i].consultar_referencia() << endl;
-    Text text = autors.obtenir_autor(aux[i].consultar_nom_autor()).obtenir_text(aux[i].consultar_titol());
+    string titol_text = aux[i].consultar_titol();
+		string nom_autor = aux[i].consultar_nom_autor();
+		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
     pair<int, int> interval = aux[i].consultar_frases();
     map<int, string> frases = text.consultar_frases(interval.first, interval.second);
     map<int, string>::iterator it = frases.begin();
@@ -103,7 +105,7 @@ void Consultes::info(string consulta) {
 			string titol_text_seleccionat = autors.obtenir_text_seleccionat();
 			string nom_autor_text_seleccionat = autors.obtenir_autor_text_seleccionat();
       Autor autor = autors.obtenir_autor(nom_autor_text_seleccionat);
-      Text text = autor.obtenir_text(titol_text_seleccionat);
+  		Text text = autors.obtenir_text_autor(nom_autor_text_seleccionat, titol_text_seleccionat);
 			//info text
 			cout << nom_autor_text_seleccionat << " ";
 			cout << "\"" << titol_text_seleccionat << "\" ";
@@ -132,7 +134,9 @@ void Consultes::info_cita(string referencia) {
 	cout << cita.consultar_nom_autor() << " ";
 	cout << "\"" << cita.consultar_titol() << "\"" << endl;
 	cout << cita.consultar_frases().first << "-" << cita.consultar_frases().second << endl;
-  Text text = autors.obtenir_autor(cita.consultar_nom_autor()).obtenir_text(cita.consultar_titol());
+  string titol_text = cita.consultar_titol();
+  string nom_autor = cita.consultar_nom_autor();
+  Text text = autors.obtenir_text_autor(nom_autor, titol_text);
   pair<int, int> interval = cita.consultar_frases();
   map<int, string> frases = text.consultar_frases(interval.first, interval.second);
   map<int, string>::iterator it = frases.begin();
@@ -160,9 +164,11 @@ void Consultes::frases(string consulta) {
 
 void Consultes::frases_text_triat(int x, int y) {
 	if (autors.hi_ha_text_seleccionat()) {
-    Text text = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat()).obtenir_text(autors.obtenir_text_seleccionat());
-    map<int, string> frases = text.consultar_frases(x, y);
-    map<int, string>::iterator it = frases.begin();
+		string titol_text = autors.obtenir_text_seleccionat();
+		string nom_autor = autors.existeix_titol(titol_text);
+		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
+		map<int, string> frases = text.consultar_frases(x, y);
+		map<int, string>::iterator it = frases.begin();
 		while (it != frases.end()) {
 			cout << it->first << " " << it->second << endl;
 			it++;
@@ -188,12 +194,16 @@ void Consultes::nombre_de(string consulta) {
 }
 
 void Consultes::nombre_de_frases() {
-  Text text = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat()).obtenir_text(autors.obtenir_text_seleccionat());
+  string titol_text = autors.obtenir_text_seleccionat();
+  string nom_autor = autors.existeix_titol(titol_text);
+  Text text = autors.obtenir_text_autor(nom_autor, titol_text);
 	cout << text.consultar_numero_frases() << endl;
 }
 
 void Consultes::nombre_de_paraules() {
-  Text text = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat()).obtenir_text(autors.obtenir_text_seleccionat());
+  string titol_text = autors.obtenir_text_seleccionat();
+  string nom_autor = autors.existeix_titol(titol_text);
+  Text text = autors.obtenir_text_autor(nom_autor, titol_text);
 	cout << text.consultar_numero_paraules() << endl;
 }
 
@@ -211,7 +221,9 @@ void Consultes::autor() {
 }
 
 void Consultes::contingut() {
-	Text text = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat()).obtenir_text(autors.obtenir_text_seleccionat());
+  string titol_text = autors.obtenir_text_seleccionat();
+  string nom_autor = autors.existeix_titol(titol_text);
+  Text text = autors.obtenir_text_autor(nom_autor, titol_text);
 	vector<string> frases = text.consultar_contingut();
 	for (int i = 0; i < frases.size(); i++) {
 		cout << i+1 << " " << frases[i] << endl;
@@ -219,7 +231,9 @@ void Consultes::contingut() {
 }
 
 void Consultes::taula_de_frequencies() {
-	Text text = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat()).obtenir_text(autors.obtenir_text_seleccionat());
+  string titol_text = autors.obtenir_text_seleccionat();
+  string nom_autor = autors.existeix_titol(titol_text);
+  Text text = autors.obtenir_text_autor(nom_autor, titol_text);
 	vector<list<string> > taula = text.consultar_taula_frequencies();
 	for (int i = 0; i < taula.size(); i++) {
 		list<string>::iterator it = taula[i].begin();
