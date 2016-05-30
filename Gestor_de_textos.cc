@@ -11,7 +11,7 @@ void Gestor_de_textos::afegir(string consulta) {
 	istringstream iss(consulta);
 	string paraula;
 	iss >> paraula;
-	cout << "call afegir text..." << endl;
+	//cout << "call afegir text..." << endl;
 	if (paraula == "text") afegir_text(consulta.substr(paraula.size()+1));
 	else if (paraula == "cita") afegir_cita(consulta.substr(paraula.size()+1));
 }
@@ -51,7 +51,7 @@ void Gestor_de_textos::afegir_text(string consulta) {
 	}
 	text.afegir_contingut(frases);
 
-	cout << "intentem afegir" << endl;
+	//cout << "intentem afegir" << endl;
 	autors.afegir_text_a_autor(text, autor_llegit);
 	//cout << "autor: " << autors.obtenir_autor(autor_llegit)->consultar_nom() << " textos: " << autors.obtenir_autor(autor_llegit)->nombre_de_textos() << endl;
 }
@@ -79,9 +79,14 @@ void Gestor_de_textos::eliminar(string consulta) {
 void Gestor_de_textos::eliminar_text() {
 	string titol_text = autors.obtenir_text_seleccionat();
 	string nom_autor = autors.obtenir_autor_text_seleccionat();
-	autors.eliminar_text_de_autor(titol_text, nom_autor);
+	bool result = autors.eliminar_text_de_autor(titol_text, nom_autor);
 	autors.esborrar_text_triat();
-	cout << "Text eliminat" << endl;
+	if (result) {
+		cout << "Text eliminat" << endl;
+	} else {
+		cout << "No hi ha text seleccionat" << endl;
+	}
+
 }
 
 void Gestor_de_textos::eliminar_cita(string consulta) {
@@ -108,7 +113,7 @@ void Gestor_de_textos::triar_text(string consulta) {
 			final = true;
 			paraula = paraula.substr(0, paraula.size()-1);
 		}
-		cout << "paraula: " << paraula << endl;
+		//cout << "paraula: " << paraula << endl;
 		paraules.push_back(paraula);
 	} while (!final);
 
@@ -126,11 +131,14 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	iss >> paraula2;
 	paraula1 = paraula1.substr(1, paraula1.size()-2);
 	paraula2 = paraula2.substr(1, paraula2.size()-2);
+	cout << "paraula1: " << paraula1 << endl;
+	cout << "paraula2: " << paraula2 << endl;
 	Autor a = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat());
-	Text text = a.obtenir_text(autors.obtenir_text_seleccionat());
+	Text text = autors.obtenir_text_autor(autors.obtenir_autor_text_seleccionat(), autors.obtenir_text_seleccionat());
+	cout << "Text sense substituir: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
 	text.substitueix_paraula(paraula1, paraula2);
 	a.afegir_text(text);
-	consulta = "";
+	cout << "Text substituit: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
 }
 
 Conjunt_autors Gestor_de_textos::obtenir_conjunt_autors() {
@@ -148,25 +156,25 @@ int main() {
 	while (linia != "sortir"){
 	    cout << linia << endl;
 	    istringstream iss(linia);
-			cout << "Reading first word... ";
+			//cout << "Reading first word... ";
 	    iss >> paraula;
-			cout << ": " << paraula << endl;
+			//cout << ": " << paraula << endl;
 	    if (paraula == "afegir"){
 			gestor.afegir(linia.substr(paraula.size()));
 		} else if (paraula == "eliminar") {
 			gestor.eliminar(linia.substr(paraula.size()));
 		} else if (paraula == "triar") {
 			gestor.triar_text(linia.substr(paraula.size()));
-			cout << "Text triat: " << gestor.obtenir_conjunt_autors().obtenir_autor_text_seleccionat() << " - " << gestor.obtenir_conjunt_autors().obtenir_text_seleccionat() << endl;
+			//cout << "Text triat: " << gestor.obtenir_conjunt_autors().obtenir_autor_text_seleccionat() << " - " << gestor.obtenir_conjunt_autors().obtenir_text_seleccionat() << endl;
 		} else if (paraula == "substitueix") {
 			gestor.substituir_paraules(linia.substr(paraula.size()));
 		} else {
 			gestor.consultes.processar_consulta(paraula, gestor.obtenir_conjunt_autors(), gestor.obtenir_conjunt_cites());
 		}
-		cout << "Reading new line..." << endl;
+		//cout << "Reading new line..." << endl;
 		paraula = "";
 		linia = "";
-		cout << "Autors (" << gestor.obtenir_conjunt_autors().tots_autors().size() << ")" << endl;
+		//cout << "Autors (" << gestor.obtenir_conjunt_autors().tots_autors().size() << ")" << endl;
 		getline(cin, linia);
 	}
 }

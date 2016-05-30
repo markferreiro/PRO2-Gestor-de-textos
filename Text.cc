@@ -26,9 +26,11 @@ bool Text::classcomp::operator() (const std::string& lhs, const std::string& rhs
 }
 
 void Text::modificar_contingut (const string paraula1, const string paraula2) {
-	for (int frase = 0; frase < frases.size(); frase++) {
+  //replace(frases.begin(), frases.end(), paraula1, paraula2);
+  for (int frase = 0; frase < frases.size(); frase++) {
     //string f = frases[frase];
-		replace(frases.begin(), frases.end(), paraula1, paraula2);
+
+    replaceAll(frases[frase], paraula1, paraula2);
     //frases[frase] = f;
 	}
 }
@@ -116,7 +118,7 @@ pair<int,int> Text::existeix_paraula (string paraula) {
 		vector<string> par = split(frases[f], ' ');
 		for (int p = 0 ; p < par.size(); p++) {
 			if (par[p] == paraula) {
-        cout << "Comprobem contingut: " << par[p] << " - " << paraula << endl;
+        //cout << "Comprobem contingut: " << par[p] << " - " << paraula << endl;
 				return (pair<int,int>(f,p));
 			}
 		}
@@ -149,4 +151,25 @@ int Text::consultar_frequencia_maxima() {
 		if (it->second > freq) freq = it->second;
 	}
 	return freq;
+}
+
+void Text::replaceAll( string& source, const string& from, const string& to )
+{
+    string newString;
+    newString.reserve( source.length() );  // avoids a few memory allocations
+
+    string::size_type lastPos = 0;
+    string::size_type findPos;
+
+    while( string::npos != ( findPos = source.find( from, lastPos )))
+    {
+        newString.append( source, lastPos, findPos - lastPos );
+        newString += to;
+        lastPos = findPos + from.length();
+    }
+
+    // Care for the rest after last occurrence
+    newString += source.substr( lastPos );
+
+    source.swap( newString );
 }

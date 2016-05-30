@@ -137,6 +137,7 @@ class Text
 		void construir_taula_de_frequencies();
 		int consultar_frequencia_maxima();
 		vector<string> split(string str, char delimiter);
+		void replaceAll( string& source, const string& from, const string& to );
 
 };
 

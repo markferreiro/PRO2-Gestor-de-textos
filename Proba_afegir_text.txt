@@ -1,9 +1,23 @@
 afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
 
+afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
+
+afegir text "Titol exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
+
 triar text {palotes contingut}
+
+triar text {palo al agua}
 
 eliminar text
 
-triar text {palotes contingut}
+afegir text "Segon text afegit" autor "Antonio Bolzano" Contingut del segon text. Curt, el segon. Pero no es tonto, es el segon. Concís. ****
+
+triar text {Segon del}
+
+substitueix "segon" per "tonto"
+
+eliminar text
+
+triar text {Segon del}
 
 sortir
