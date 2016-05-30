@@ -60,7 +60,7 @@ void Gestor_de_textos::afegir_cita(string consulta) {
 	istringstream iss(consulta);
 	int x, y;
 	iss >> x >> y;
-	if(!autors.hi_ha_text_seleccionat() or !cites.afegir_cita(x, y))
+	if(!autors.hi_ha_text_seleccionat() /*or !cites.afegir_cita(x, y, titol, nom, referencia)*/)
 		cout << "error" << endl;
 	else {
 		consulta = "afegint cita";

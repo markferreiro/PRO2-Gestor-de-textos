@@ -44,7 +44,7 @@ class Conjunt_cites
 			/post retorna false si ja existia una cita amb les mateixes frases del
 			 mateix text i autor, sino retorna true i s'ha afegit una cita al Conjunt_cites
 		*/
-		bool afegir_cita (int x, int y);
+		bool afegir_cita (int x, int y, string titol_text, string nom_autor, string referencia);
 
 		/** @brief Eliminar una cita del Conjunt_cites
 			@param referencia: Referencia de la cita que es vol eliminar.
@@ -85,15 +85,16 @@ class Conjunt_cites
 			/post retorna un vector amb totes les cites de l'ultim Text_seleccionat,
 			 retorna NULL si no hi ha cap text triat
 		*/
-		vector<Cita> cites_text_seleccionat();
+		vector<Cita> cites_text_seleccionat(string titol_text_seleccionat);
 
-		
+
 		string IntToString (int a);
 
 	private:
 		struct p_cita {
-	  		Autor* autor;
-	  		Text* text;
+				string referencia;
+	  		string autor;
+	  		string text;
 	  		vector<int> frases;
 	  		p_cita() {
 
@@ -102,6 +103,6 @@ class Conjunt_cites
 		map<string, p_cita> cites;
 		map<string, int> max_ref;
 		int maxima_referencia(string inicials);
-		bool existeix_cita(Text *text, int x, int y);
+		bool existeix_cita(string titol_text, int x, int y);
 };
 #endif
