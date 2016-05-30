@@ -36,7 +36,7 @@ class Cita
 			\post Retorna un nou objecte de tipus Cita amb tots els seus parametres inicialitzats.
 		*/
 		Cita();
-		Cita(string nom_autor, string titol_text, string referencia, int x, int y, vector<string> frases);
+		Cita(string nom_autor, string titol_text, string referencia, int x, int y, map<int, string> frases);
 
 		//Consultores
 
@@ -61,12 +61,12 @@ class Cita
 		*/
 		pair<int, int> consultar_x_y();
 
-		vector<string> obtenir_frases();
+		map<int, string> obtenir_frases();
 
 	private:
 		string referencia, nom_autor, titol_text;
 		int x, y;
-		vector<string> frases;
+		map<int, string> frases;
 };
 
 #endif

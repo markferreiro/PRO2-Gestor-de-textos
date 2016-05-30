@@ -73,14 +73,14 @@ void Consultes::tots_autors() {
 }
 
 void Consultes::totes_cites() {
-	vector<Cita> aux = cites.totes_cites();
+	vector<Cita> aux = cites.totes_cites(autors);
 	for (int i = 0; i < aux.size(); i++) {
 		cout << aux[i].consultar_referencia() << endl;
     string titol_text = aux[i].consultar_titol();
 		string nom_autor = aux[i].consultar_nom_autor();
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-    pair<int, int> interval = aux[i].consultar_x_y();
-    map<int, string> frases = text.consultar_frases(interval.first, interval.second);
+    map<int, string> interval = aux[i].obtenir_frases();
+    map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
     map<int, string>::iterator it = frases.begin();
 		while (it != frases.end()) {
 			cout << it->first << " " << it->second << endl;
@@ -112,11 +112,11 @@ void Consultes::info(string consulta) {
 			cout << text.consultar_numero_frases() << " " << text.consultar_numero_paraules() << endl;
 			//cites associades
 			cout << "Cites Associades:" << endl;
-			vector<Cita> aux = cites.cites_autor(autor.consultar_referencia());
+			vector<Cita> aux = cites.cites_autor(autor.consultar_referencia(), autors);
 			for (int c = 0; c < aux.size(); c++) {
 				cout << aux[c].consultar_referencia();
-        pair<int, int> interval = aux[c].consultar_x_y();
-        map<int, string> frases = text.consultar_frases(interval.first, interval.second);
+        map<int, string> interval = aux[c].obtenir_frases();
+        map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
         map<int, string>::iterator it = frases.begin();
 
 				while (it != frases.end()) {
@@ -130,15 +130,15 @@ void Consultes::info(string consulta) {
 }
 
 void Consultes::info_cita(string referencia) {
-	Cita cita = cites.cita_referencia(referencia);
+	Cita cita = cites.cita_referencia(referencia, autors);
 	cout << cita.consultar_nom_autor() << " ";
 	cout << "\"" << cita.consultar_titol() << "\"" << endl;
-	cout << cita.consultar_x_y().first << "-" << cita.consultar_x_y().second << endl;
+	cout << cita.obtenir_frases().begin()->first << "-" << cita.obtenir_frases().rbegin()->first << endl;
   string titol_text = cita.consultar_titol();
   string nom_autor = cita.consultar_nom_autor();
   Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-  pair<int, int> interval = cita.consultar_x_y();
-  map<int, string> frases = text.consultar_frases(interval.first, interval.second);
+  map<int, string> interval = cita.obtenir_frases();
+  map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
   map<int, string>::iterator it = frases.begin();
 
 	while (it != frases.end()) {

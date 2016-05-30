@@ -61,7 +61,7 @@ class Conjunt_cites
 			/pre el p.i. no es buit
 			/post retorna un vector amb totes les cites que conte p.i. ordenades per referencia
 		*/
-		vector<Cita> totes_cites();
+		vector<Cita> totes_cites(Conjunt_autors autors);
 
 		/** @brief Consulta les cites d'un autor
 			@param nom_autor: Nom de l'autor del que es volen obtenir les cites.
@@ -69,7 +69,7 @@ class Conjunt_cites
 			/post retorna un vector amb totes les cites de l'autor amb nom == "nom_autor",
 			 ordenades per referencia
 		*/
-		vector<Cita> cites_autor(string nom_autor);
+		vector<Cita> cites_autor(string nom_autor, Conjunt_autors autors);
 
 		/** @brief Consulta una Cita per la seva referencia
 			@param referencia: Referencia de la cita que es vol obtenir.
@@ -77,7 +77,7 @@ class Conjunt_cites
 			/post retorna la Cita amb referencia = "referencia", retorna NULL
 			 si no hi ha cap Cita amb la referencia = "referencia"
 		*/
-		Cita cita_referencia (string referencia);
+		Cita cita_referencia (string referencia, Conjunt_autors autors);
 
 		/** @brief Consulta les cites de l'ultim Text_seleccionat
 
@@ -85,7 +85,7 @@ class Conjunt_cites
 			/post retorna un vector amb totes les cites de l'ultim Text_seleccionat,
 			 retorna NULL si no hi ha cap text triat
 		*/
-		vector<Cita> cites_text_seleccionat(string titol_text_seleccionat);
+		vector<Cita> cites_text_seleccionat(string titol_text_seleccionat, Conjunt_autors autors);
 
 
 		string IntToString (int a);

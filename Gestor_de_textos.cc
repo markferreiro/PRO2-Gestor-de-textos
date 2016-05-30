@@ -80,6 +80,8 @@ void Gestor_de_textos::eliminar_text() {
 	string titol_text = autors.obtenir_text_seleccionat();
 	string nom_autor = autors.obtenir_autor_text_seleccionat();
 	autors.eliminar_text_de_autor(titol_text, nom_autor);
+	autors.esborrar_text_triat();
+	cout << "Text eliminat" << endl;
 }
 
 void Gestor_de_textos::eliminar_cita(string consulta) {
@@ -101,7 +103,7 @@ void Gestor_de_textos::triar_text(string consulta) {
 	vector<string> paraules(0);
 	do {
 		iss >> paraula;
-		if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-2);
+		if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
 		else if (paraula[paraula.size()] != '}') {
 			final = true;
 			paraula = paraula.substr(0, paraula.size()-1);
