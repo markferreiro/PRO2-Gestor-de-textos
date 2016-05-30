@@ -152,13 +152,21 @@ void Consultes::frases(string consulta) {
 	char lletra;
 	iss >> lletra;
 	if (lletra >= '0' and lletra <= '9') {
-
+		int x = lletra - 48, y;
+		iss >> y;
+		frases_text_triat(x,y);
 	}
 	else if (lletra == '\(') {
-
+		frases_expressio(consulta);
 	}
 	else if (lletra == '\"') {
-
+		string paraula;
+		vector<string> paraules;
+		while(iss >> paraula) {
+			if (paraula[paraula.size()-1] == '\"') paraula.substr(0, paraula.size()-2);
+			paraules.push_back(paraula);
+		}
+		frases_sequencia(paraules);
 	}
 }
 
@@ -167,12 +175,15 @@ void Consultes::frases_text_triat(int x, int y) {
 		string titol_text = autors.obtenir_text_seleccionat();
 		string nom_autor = autors.existeix_titol(titol_text);
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-		map<int, string> frases = text.consultar_frases(x, y);
-		map<int, string>::iterator it = frases.begin();
-		while (it != frases.end()) {
-			cout << it->first << " " << it->second << endl;
-			it++;
+		if (x >= 1 and (y >= x and y <= text.consultar_numero_frases())) {
+			map<int, string> frases = text.consultar_frases(x, y);
+			map<int, string>::iterator it = frases.begin();
+			while (it != frases.end()) {
+				cout << it->first << " " << it->second << endl;
+				it++;
+			}
 		}
+		else cout << "error" << endl;
 	}
 	else cout << "error" << endl;
 }
@@ -181,8 +192,18 @@ void Consultes::frases_expressio(string expressio) {
 	expressio = "";
 }
 
-void Consultes::frases_sequencia(string sequencia) {
-	sequencia = "";
+void Consultes::frases_sequencia(vector<string> paraules) {
+	if(autors.hi_ha_text_seleccionat()) {
+		string titol_text = autors.obtenir_text_seleccionat();
+		string nom_autor = autors.existeix_titol(titol_text);
+		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
+		list<int> frases = text.obtenir_frases_amb_paraules(paraules);
+		list<int>::iterator it;
+		for (it = frases.begin(); it != frases.end(); it++) {
+			cout << *it << " " << text.consultar_frase(*it) << endl;
+		}
+	}
+	else cout << "error" << endl;
 }
 
 void Consultes::nombre_de(string consulta) {
