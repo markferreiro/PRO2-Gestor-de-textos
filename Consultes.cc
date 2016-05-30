@@ -197,11 +197,17 @@ void Consultes::frases_sequencia(vector<string> paraules) {
 		string titol_text = autors.obtenir_text_seleccionat();
 		string nom_autor = autors.existeix_titol(titol_text);
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-		list<int> frases = text.obtenir_frases_amb_paraules(paraules);
+		int n = text.consultar_numero_frases();
+		for (int i = 0; i < n; i++) {
+			if(text.conte_paraules(i, paraules)) {
+				cout << i << " " << text.consultar_frase(i) << endl;
+			}
+		}
+		/*list<int> frases = text.obtenir_frases_amb_paraules(paraules);
 		list<int>::iterator it;
 		for (it = frases.begin(); it != frases.end(); it++) {
 			cout << *it << " " << text.consultar_frase(*it) << endl;
-		}
+		}*/
 	}
 	else cout << "error" << endl;
 }
