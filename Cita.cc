@@ -4,7 +4,7 @@
 Cita::Cita() {
 
 }
-Cita::Cita (string nom_autor, string titol_text, string referencia, int x, int y, vector<string> frases) {
+Cita::Cita (string nom_autor, string titol_text, string referencia, int x, int y, map<int, string> frases) {
 	this->nom_autor = nom_autor;
 	this->titol_text = titol_text;
 	this->referencia = referencia;
@@ -29,6 +29,6 @@ pair<int, int> Cita::consultar_x_y() {
 	return make_pair(x, y);
 }
 
-vector<string> Cita::obtenir_frases() {
+map<int, string> Cita::obtenir_frases() {
 
 }

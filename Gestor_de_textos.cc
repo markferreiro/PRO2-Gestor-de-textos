@@ -80,6 +80,8 @@ void Gestor_de_textos::eliminar_text() {
 	string titol_text = autors.obtenir_text_seleccionat();
 	string nom_autor = autors.obtenir_autor_text_seleccionat();
 	autors.eliminar_text_de_autor(titol_text, nom_autor);
+	autors.esborrar_text_triat();
+	cout << "Text eliminat" << endl;
 }
 
 void Gestor_de_textos::eliminar_cita(string consulta) {

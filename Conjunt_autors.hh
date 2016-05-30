@@ -89,13 +89,15 @@ public:
 		\pre existeix un autor i un text amb Nom = nom i Titol = titol
 		\post Retorna el text de titol = Titol de l'autor amb nom = Nom
 	*/
-	Text obtenir_text_autor(string nom, string titol);	
+	Text obtenir_text_autor(string nom, string titol);
 
 	/** @brief Consulta tots els autors del sistema
 		/pre cert
 		/post retorna tots els autors del conjunt ordenats alfabeticament
 	*/
 	set<Autor, classcomp> tots_autors();
+
+	void esborrar_text_triat();
 
 	/** @brief Tria el text que contingui paraules
 		@param paraules: Vector d'strings amb les paraules que es vol que contingui el text triat.

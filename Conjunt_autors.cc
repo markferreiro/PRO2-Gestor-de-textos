@@ -136,14 +136,24 @@ bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
     	if (it->consultar_nom() == nom_autor) {
 				Autor a = *it;
 				done = a.eliminar_text(titol);
-				autors.insert(it, a);
+				if (done) {
+					autors.erase(it);
+					it = autors.end();
+					it = autors.insert(it, a);
+				}
     		//done = (*it).eliminar_text(titol); //aixo igual que l'anterior
     		it = autors.end();
-    	}
-    	it++;
+    	} else {
+				it++;
+			}
 	}
 }
 
 bool Conjunt_autors::hi_ha_text_seleccionat() {
 	return text_esta_seleccionat;
+}
+
+void Conjunt_autors::esborrar_text_triat() {
+	autor_text_seleccionat = "";
+	text_seleccionat = "";
 }
