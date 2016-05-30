@@ -8,8 +8,8 @@ Conjunt_cites::Conjunt_cites() {
 }
 
 bool Conjunt_cites::afegir_cita(int x, int y) {
-	string text_seleccionat = Conjunt_autors::obtenir_text_seleccionat();
-	string autor_text_seleccionat = Conjunt_autors::obtenir_autor_text_seleccionat();
+	string text_seleccionat = obtenir_text_seleccionat();
+	string autor_text_seleccionat = obtenir_autor_text_seleccionat();
 	//Comprovar si el rang de frases es correcte ( 1 <= x <= y <= n� frases )
 	//Comprovant aix� primer, en certs casos ens estalviarem la comprovaci� seg�ent.
 	if ( (x >= 1 && y >= x) && text_seleccionat->consultar_numero_frases() >= y) {
