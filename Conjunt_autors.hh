@@ -21,17 +21,11 @@
 
 class Conjunt_autors
 {
-private:
+public:
 	struct classcomp
 	{
 		bool operator() (const Autor& lhs, const Autor& rhs) const;
 	};
-	set<Autor, classcomp> autors;
-	static bool text_esta_seleccionat;
-	string autor_text_seleccionat;
-	string text_seleccionat;
-
-public:
 	//Constructores
 
 	/** @brief Creadora per defecte
@@ -113,6 +107,12 @@ public:
 	bool eliminar_text_de_autor(string titol, string nom_autor);
 
 	bool hi_ha_text_seleccionat();
+
+private:
+	set<Autor, classcomp> autors;
+	static bool text_esta_seleccionat;
+	string autor_text_seleccionat;
+	string text_seleccionat;
 };
 
 #endif

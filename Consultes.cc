@@ -43,7 +43,7 @@ void Consultes::tots(string consulta) {
 	else if (paraula == "autors") tots_autors();
 }
 void Consultes::tots_textos() {
-	set<Autor, Consultes::classcomp>::iterator it_autors = autors.tots_autors().begin();
+	set<Autor, Conjunt_autors::classcomp>::iterator it_autors = autors.tots_autors().begin();
 	while (it_autors != autors.tots_autors().end()) {
 		Autor autor = *it_autors;
 		set<Text, Autor::custom_sort> textos = autor.tots_textos();
@@ -127,20 +127,24 @@ void Consultes::info(string consulta) {
 
 void Consultes::info_cita(string referencia) {
 	Cita cita = cites.cita_referencia(referencia, autors);
-	cout << cita.consultar_nom_autor() << " ";
-	cout << "\"" << cita.consultar_titol() << "\"" << endl;
-	cout << cita.obtenir_frases().begin()->first << "-" << cita.obtenir_frases().rbegin()->first << endl;
-	string titol_text = cita.consultar_titol();
-	string nom_autor = cita.consultar_nom_autor();
-	Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-	map<int, string> interval = cita.obtenir_frases();
-	map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
-	map<int, string>::iterator it = frases.begin();
+  if (cita.consultar_titol() != "NULL") {
+    cout << cita.consultar_nom_autor() << " ";
+  	cout << "\"" << cita.consultar_titol() << "\"" << endl;
+  	cout << cita.obtenir_frases().begin()->first << "-" << cita.obtenir_frases().rbegin()->first << endl;
+  	string titol_text = cita.consultar_titol();
+  	string nom_autor = cita.consultar_nom_autor();
+  	Text text = autors.obtenir_text_autor(nom_autor, titol_text);
+  	map<int, string> interval = cita.obtenir_frases();
+  	map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
+  	map<int, string>::iterator it = frases.begin();
 
-	while (it != frases.end()) {
-		cout << it->first << " " << it->second << endl;
-		it++;
-	}
+  	while (it != frases.end()) {
+  		cout << it->first << " " << it->second << endl;
+  		it++;
+  	}
+  } else {
+    cout << "error" << endl;
+  }
 }
 
 void Consultes::frases(string consulta) {

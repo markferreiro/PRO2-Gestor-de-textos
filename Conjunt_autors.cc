@@ -63,7 +63,7 @@ Text Conjunt_autors::obtenir_text_autor(string nom, string titol) {
 		Autor a = *it;
 		if (a.consultar_nom() == nom) {
 			text = a.obtenir_text(titol);
-			cout << "titol: " << text.consultar_titol() << endl;
+			//cout << "titol: " << text.consultar_titol() << endl;
 			return text;
 		}
 		it++;

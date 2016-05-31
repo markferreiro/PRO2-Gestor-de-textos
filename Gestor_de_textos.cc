@@ -100,7 +100,7 @@ void Gestor_de_textos::eliminar(string consulta) {
 	string paraula;
 	iss >> paraula;
 	if (paraula == "text") eliminar_text();
-	else if (paraula == "cita") eliminar_cita(consulta.substr(paraula.size()));
+	else if (paraula == "cita") eliminar_cita(consulta.substr(paraula.size()+1));
 }
 
 void Gestor_de_textos::eliminar_text() {
@@ -123,7 +123,7 @@ void Gestor_de_textos::eliminar_cita(string consulta) {
 	referencia = referencia.substr(1, referencia.size()-2);
 	if (!cites.eliminar_cita(referencia)) cout << "error" << endl;
 	else {
-		consulta = "eliminant cita";
+		consulta = "Cita eliminada.";
 		cout << consulta << endl;
 	}
 }
@@ -173,6 +173,7 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	//cout << "Text sense substituir: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
 	text.substitueix_paraula(paraula1, paraula2);
 	a.afegir_text(text);
+	cout << "Substitució correcte." << endl;
 	//cout << "Text substituit: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
 }
 

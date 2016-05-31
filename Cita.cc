@@ -2,7 +2,11 @@
 #include <utility>
 
 Cita::Cita() {
-
+	this->nom_autor = "NULL";
+	this->titol_text = "NULL";
+	this->referencia = "NULL";
+	this->x = -1;
+	this->y = -1;
 }
 Cita::Cita (string nom_autor, string titol_text, string referencia, int x, int y, map<int, string> frases) {
 	this->nom_autor = nom_autor;
