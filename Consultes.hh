@@ -232,6 +232,7 @@ private:
 	*/
 
 	void taula_de_frequencies();
+<<<<<<< HEAD
 	
 	/** @brief Escriu una cita
 		\pre la cita es valida
@@ -239,6 +240,12 @@ private:
 		
 	*/
 	void escriure_cita(Cita& cita);
+=======
+
+	bool frases_expressio_algebraica(string consulta, const string frase);
+
+	vector<string> split(string str, char delimiter);
+>>>>>>> origin/master
 };
 
 #endif

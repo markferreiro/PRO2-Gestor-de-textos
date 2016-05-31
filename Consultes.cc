@@ -135,7 +135,8 @@ void Consultes::frases(string consulta) {
 		frases_text_triat(x,y);
 	}
 	else if (lletra == '\(') {
-		frases_expressio(consulta);
+    //cout << consulta.substr(1, consulta.size()) << endl;
+		frases_expressio(consulta.substr(1, consulta.size()));
 	}
 	else if (lletra == '\"') {
 		string paraula;
@@ -173,8 +174,134 @@ void Consultes::frases_text_triat(int x, int y) {
 }
 
 void Consultes::frases_expressio(string expressio) {
-	expressio = "";
+  if (autors.hi_ha_text_seleccionat()) {
+    expressio = expressio.substr(1, expressio.size()-2);
+    string titol_text = autors.obtenir_text_seleccionat();
+    string nom_autor = autors.existeix_titol(titol_text);
+
+    Text text = autors.obtenir_text_autor(nom_autor, titol_text);
+    vector<string> frases = text.consultar_frases();
+    vector<string>::iterator it = frases.begin();
+    int i = 1;
+    while (it != frases.end()) {
+      //cout << "intentem trobar" << endl;
+      if (frases_expressio_algebraica(expressio, *it)) {
+        cout << i << " - " << *it << endl;
+      }
+      i++;
+      it++;
+    }
+  } else {
+    cout << "error" << endl;
+  }
+
+  //frases_expressio_algebraica(expressio.substr(1, expressio.size()-2), frase);
 }
+
+bool Consultes::frases_expressio_algebraica(string consulta, const string frase) {
+  /* La idea es fer crides recursives per cada expresió, es a dir,
+  per tots els subconjunts de caracters inclosos entre els parentesis '(' i ')'
+  Partint de la idea que:
+    - conjunt_de_paraules = '{' + paraula* + '}'.
+    - expressió = '(' + (expressió|conjunt_de_paraules) + ')'. */
+  /*
+  Forma del programa:
+    expressio_exquerre = obtenir_expressio;
+    operand = obtenir_operand;
+    expressio_dreta = obtenir_expressio;
+    return expressio_esquerre operand expressio_dreta;
+  */
+  //cout << consulta << endl;
+  string expressio_e, expressio_d, operand;
+  bool resultat_e_e, resultat_e_d;
+  int posicio_lectura = 0;
+  //obtenir_expressio_esquerre
+  if (consulta[0] == '(') { //en cas que sigui una expressio composta, la recollim i fem recursivitat.
+    //string expressio_e = "(";
+    expressio_e = "";
+    posicio_lectura = 1;
+    while (consulta[posicio_lectura] != ')') {
+      expressio_e += consulta[posicio_lectura];
+      posicio_lectura++;
+    }
+    posicio_lectura++;
+    //expressio_e += ")";
+    //cout << "cridem recursivitat amb:" << expressio_e << endl;
+    resultat_e_e = frases_expressio_algebraica(expressio_e, frase);
+  } else { //en cas que sigui una expressio simple, la tractem.
+    expressio_e = "";
+    posicio_lectura = 1;
+    while (consulta[posicio_lectura] != '}') {
+      expressio_e += consulta[posicio_lectura];
+      posicio_lectura++;
+    }
+    posicio_lectura++;
+    vector<string> paraules = split(expressio_e, ' ');
+    resultat_e_e = true;
+    for(int i = 0 ; i < paraules.size() && resultat_e_e ; i++) {
+      if (frase.find(paraules[i]) == string::npos) resultat_e_e = false;
+    }
+  }
+  while (consulta[posicio_lectura] != '(' && consulta[posicio_lectura] != '{') {
+    if (consulta[posicio_lectura] == '&' || consulta[posicio_lectura] == '|') {
+      operand = consulta[posicio_lectura];
+    }
+    posicio_lectura++;
+  }
+
+  //obtenir_expressio_dreta
+  if (consulta[posicio_lectura] == '(') { //en cas que sigui una expressio composta, la recollim i fem recursivitat.
+    //expressio_d = "(";
+    expressio_d = "";
+    posicio_lectura++;
+    while (consulta[posicio_lectura] != ')') {
+      expressio_d += consulta[posicio_lectura];
+      posicio_lectura++;
+    }
+    posicio_lectura++;
+    //expressio_d += ")";
+    //cout << "cridem recursivitat ambasdascdscda:" << expressio_d << endl;
+    resultat_e_d = frases_expressio_algebraica(expressio_d, frase);
+  } else { //en cas que sigui una expressio simple, la tractem.
+    expressio_d = "";
+    posicio_lectura++;
+    while (consulta[posicio_lectura] != '}') {
+      expressio_d += consulta[posicio_lectura];
+      posicio_lectura++;
+    }
+    posicio_lectura++;
+    vector<string> paraules = split(expressio_d, ' ');
+    resultat_e_d = true;
+    for(int i = 0 ; i < paraules.size() && resultat_e_d ; i++) {
+      if (frase.find(paraules[i]) == string::npos) resultat_e_d = false;
+    }
+  }
+  //cout << "resultat esquerre: " << resultat_e_e << " amb esquerre = '" << expressio_e << "'" << " resultat dret: " << resultat_e_d << " amb dreta = '" << expressio_d << "'" << endl;
+  return (operand == "&") ? (resultat_e_e && resultat_e_d) : (resultat_e_e || resultat_e_d);
+}
+
+/*bool Consultes::frases_expressio_recursiu(int parentesi, string consulta, vector<string> paraules) {
+  if (parentesi == 0) return frases;
+  if (consulta[0] == '(') frases_expressio_recursiu(frases, parentesi++, consulta.substr(1, consulta.size()), paraules);
+  else if (consulta[0] == '}') {
+    int i = 1;
+    while (consulta[i] != ')' && consulta[i] != '&' && consulta[i] != '|') { i++; }
+    if (consulta[i] == ')') {
+      //realitzar busqueda;
+      frases_expressio_recursiu(frases, parentesi--, consulta.substr(1, consulta.size()), paraules);
+    }
+    else frases_expressio_recursiu(frases, , consulta.substr(1, consulta.size()), paraules);
+  }
+  else if (consulta[0] == '{') {
+    string paraula ""; paraules.push_back(paraula);
+    frases_expressio_recursiu(frases, parentesi, consulta.substr(1, consulta.size()), paraules);
+  }
+  else if (consulta[0] == '&')
+  else if (consulta[0] == '|')
+  else {
+    paraules[paraules.size()-1] +=
+  }
+}*/
 
 void Consultes::frases_sequencia(vector<string> paraules) {
 	//for (int x = 0; 0 < paraules.size();x++) cout << paraules[x] <<  " " << endl;
@@ -300,6 +427,7 @@ void Consultes::taula_de_frequencies() {
 	}
 }
 
+<<<<<<< HEAD
 void Consultes::escriure_cita(Cita& cita) {
 	cout << cita.consultar_referencia() << endl;
 	map<int, string> frases = cita.obtenir_frases();
@@ -308,4 +436,16 @@ void Consultes::escriure_cita(Cita& cita) {
 		cout << it->first << " " << it->second << endl;
 		it++;
 	}
+=======
+vector<string> Consultes::split(string str, char delimiter) {
+	vector<string> internal;
+	stringstream ss(str); // Turn the string into a stream.
+	string tok;
+
+	while(getline(ss, tok, delimiter)) {
+    	internal.push_back(tok);
+	}
+
+	return internal;
+>>>>>>> origin/master
 }
