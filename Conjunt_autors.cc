@@ -72,9 +72,9 @@ Text Conjunt_autors::obtenir_text_autor(string nom, string titol) {
 	return text;
 }
 
-set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
+/*set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
 	return autors;
-}
+}*/
 
 bool Conjunt_autors::triar_text (vector<string> paraules) {
 	set<Autor, classcomp>::iterator it;
@@ -100,10 +100,8 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 	}
 	//cout << "autor: " << autor_text_seleccionat << " / titol: " << text_seleccionat << endl;
 	if (not trobat) {
-		autor_text_seleccionat = "";
-		text_seleccionat = "";
+		esborrar_text_triat();
 	}
-	text_esta_seleccionat = trobat;
 	//else cout << "TRIAT" << endl;
 	return trobat;
 }
@@ -159,11 +157,47 @@ bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
 	return done;
 }
 
+vector<string> Conjunt_autors::tots_autors() {
+	vector<string> aux(autors.size());
+	int i = 0;
+	set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
+	while (it != autors.end()) {
+		Autor a = *it;
+		//string linia = it->consultar_nom() + " " + IntToString(it->nombre_de_textos()) + " " + IntToString(it->nombre_de_frases()) " " + IntToString(it->nombre_de_paraules());
+		aux[i] = a.consultar_nom()  + " " + IntToString(a.nombre_de_textos()) + " " + IntToString(a.nombre_de_frases()) + " " + IntToString(a.nombre_de_paraules());
+		it++;
+		i++;
+	}
+	return aux;
+}
+
+vector<string> Conjunt_autors::tots_textos() {
+	vector<string> aux(0);
+	set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
+	while (it != autors.end()) {
+		Autor autor = *it;
+		vector <string> textos = autor.tots_textos();
+		for (int i = 0; i < textos.size(); i++) {
+			string linia = autor.consultar_nom() + " \"" + textos[i] + "\"";
+			aux.push_back(linia);
+		}
+		it++;
+	}
+	return aux;
+}
+
 bool Conjunt_autors::hi_ha_text_seleccionat() {
 	return (autor_text_seleccionat != "" && text_seleccionat != "");
 }
 
 void Conjunt_autors::esborrar_text_triat() {
+	text_esta_seleccionat = false;
 	autor_text_seleccionat = "";
 	text_seleccionat = "";
+}
+
+string Conjunt_autors::IntToString(int a) {
+	ostringstream temp;
+    temp<<a;
+    return temp.str();
 }

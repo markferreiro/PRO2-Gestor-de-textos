@@ -131,10 +131,6 @@ void Gestor_de_textos::triar_text(string consulta) {
 	} while (!final);
 
 	if(!autors.triar_text(paraules)) cout << "error" << endl;
-	else {
-		consulta = "text triat";
-		cout << consulta << endl;
-	}
 }
 void Gestor_de_textos::substituir_paraules(string consulta) {
 	istringstream iss(consulta);
@@ -150,8 +146,9 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	Text text = autors.obtenir_text_autor(autors.obtenir_autor_text_seleccionat(), autors.obtenir_text_seleccionat());
 	//cout << "Text sense substituir: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
 	text.substitueix_paraula(paraula1, paraula2);
-	a.afegir_text(text);
-	cout << "Substitució correcte." << endl;
+	autors.eliminar_text_de_autor(text.consultar_titol(), a.consultar_nom());
+	autors.afegir_text_a_autor(text, a.consultar_nom());
+	//cout << "Substitució correcte." << endl;
 	//cout << "Text substituit: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
 }
 
@@ -162,7 +159,7 @@ Conjunt_cites Gestor_de_textos::obtenir_conjunt_cites() {
 	return cites;
 }
 
-int main() {
+/*int main() {
 	Gestor_de_textos gestor = Gestor_de_textos();
 	string linia, paraula;
 	getline(cin,linia);
@@ -191,4 +188,4 @@ int main() {
 		//cout << "Autors (" << gestor.obtenir_conjunt_autors().tots_autors().size() << ")" << endl;
 		getline(cin, linia);
 	}
-}
+}*/

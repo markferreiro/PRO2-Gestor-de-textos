@@ -102,10 +102,6 @@ map<int, string > Text::consultar_frases (int x, int y) {
 	return aux;
 }
 
-vector<string> Text::consultar_frases() {
-  return frases;
-}
-
 vector<vector<string> > Text::consultar_taula_frequencies() {
 	vector<vector<string> > aux(consultar_frequencia_maxima()+1);
 	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {

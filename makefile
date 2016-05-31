@@ -1,9 +1,12 @@
 OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -ansi -O2 -Wall -Wextra -Wno-uninitialized -Wno-sign-compare -std=c++0x
 OPCIONS2 = -D_GLIBCXX_DEBUG
 
-Gestor_de_textos.exe: Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o
+program.exe: Program.o Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o
 	g++ Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o -o Gestor_de_textos.exe
 	#rm *.o
+
+program.o: Program.cc Gestor_de_textos.hh 
+	g++ -c Program.cc $(OPCIONS)
 
 Gestor_de_textos.o: Gestor_de_textos.cc Conjunt_cites.hh Conjunt_autors.hh Consultes.hh
 	g++ -c Gestor_de_textos.cc $(OPCIONS)

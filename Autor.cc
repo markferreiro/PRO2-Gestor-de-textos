@@ -44,10 +44,6 @@ vector <string> Autor::consultar_titol_textos() const {
 	return textos_to_return;
 }
 
-set<Text, Autor::custom_sort> Autor::tots_textos() const {
-	return textos;
-}
-
 int Autor::nombre_de_textos() const {
 	return textos.size();
 }
@@ -152,6 +148,18 @@ bool Autor::afegir_text (Text text) {
 	else {
 		return false;
 	}
+}
+
+vector<string> Autor::tots_textos() {
+	vector<string> titols (textos.size());
+	int i = 0;
+	set<Text, Autor::custom_sort>::iterator it = textos.begin();
+	while (it != textos.end()) {
+		titols[i] = it->consultar_titol();
+		it++;
+		i++;
+	}
+	return titols;
 }
 
 bool Autor::eliminar_text (string titol) {

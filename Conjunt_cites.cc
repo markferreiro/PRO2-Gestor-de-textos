@@ -1,6 +1,5 @@
 #include "Conjunt_cites.hh"
 
-//Conjunt_cites::p_cita() : frases(2){ }
 
 Conjunt_cites::Conjunt_cites() {
 	cites = map<string, Cita>();
@@ -37,7 +36,7 @@ vector<Cita> Conjunt_cites::totes_cites(Conjunt_autors autors) {
 	}
 	return cites_to_return;
 }
-vector<Cita> Conjunt_cites::cites_autor(string nom, Conjunt_autors& autors) {
+vector<Cita> Conjunt_cites::cites_autor(string nom, Conjunt_autors autors) {
 	vector<Cita> cites_to_return;
 	map<string, Cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
