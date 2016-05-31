@@ -65,15 +65,21 @@ void Gestor_de_textos::afegir_cita(string consulta) {
 	else {
 		Autor autor = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat());
 		Text text = autor.obtenir_text(autors.obtenir_text_seleccionat());
-		map<int, string> frases = text.consultar_frases(x-1, y-1);
+		if (text.rang_correcte(x, y)) {
+			map<int, string> frases = text.consultar_frases(x-1, y-1);
+			cites.afegir_cita(x, y, text, autor.consultar_nom(), autor.consultar_referencia(), frases);
+		} else {
+			cout << "error" << endl;
+		}
+
 		/*map<int, string>::iterator it = frases.begin();
 		while(it != frases.end()) {
 			cout << it->first << ": " << it->second << endl;
 			it++;
 		}*/
-		cites.afegir_cita(x, y, text, autor.consultar_nom(), autor.consultar_referencia(), frases);
 
-		Cita cita = cites.cita_referencia("AB1", autors);
+
+		//Cita cita = cites.cita_referencia("AB1", autors);
 
 		/*map<int, string> frases2 = cita.obtenir_frases();
 		cout << "Frases: " << endl;

@@ -16,7 +16,7 @@ triar text {Segon del}
 
 afegir cita 2 3
 
-afegir cita 2 3
+afegir cita 2 9
 
 substitueix "segon" per "tonto"
 

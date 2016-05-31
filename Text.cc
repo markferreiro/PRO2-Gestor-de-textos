@@ -180,3 +180,8 @@ void Text::replaceAll( string& source, const string& from, const string& to )
 
     source.swap( newString );
 }
+
+bool Text::rang_correcte(int x, int y) {
+  //cout << "comprovant rang..." << endl;
+  return ( (x < y) && (x >= 1 && y <= frases.size()) );
+}

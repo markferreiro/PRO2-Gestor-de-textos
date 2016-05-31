@@ -11,30 +11,21 @@ bool Conjunt_cites::afegir_cita(int x, int y, Text text, string nom_autor, strin
 	//Comprovar si el rang de frases es correcte ( 1 <= x <= y <= n� frases )
 	//Comprovant aix� primer, en certs casos ens estalviarem la comprovaci� seg�ent.
 	//cout << "frases a llegir: " << x << " - " << y << endl;
-	if ( (x >= 1 && y >= x) /*&& text->consultar_numero_frases() >= y*/) {
-		if (!existeix_cita(text.consultar_titol(), x, y)) {
-			Cita cita = Cita(nom_autor, text.consultar_titol(), referencia, x, y, frases);
-			/*map<int, string> frases2 = cita.obtenir_frases();
-			cout << "Frases: " << endl;
-			map<int, string>::iterator it = frases2.begin();
-			while(it != frases2.end()) {
-				cout << it->first << ": " << it->second << endl;
-				it++;
-			}*/
-			cites.insert(pair<string, Cita>(referencia + IntToString(maxima_referencia(referencia)), cita));
-			/*map<int, string> frases2 = (cites.begin()->second).obtenir_frases();
-			cout << "Frases: " << endl;
-			map<int, string>::iterator it = frases2.begin();
-			while(it != frases2.end()) {
-				cout << it->first << ": " << it->second << endl;
-				it++;
-			}*/
-			cout << "Cita afegida." << endl;
-			return true;
-		} else {
-			cout << "La cita ja existeix." << endl;
-		}
-	}
+	if (!existeix_cita(text.consultar_titol(), x, y)) {
+		Cita cita = Cita(nom_autor, text.consultar_titol(), referencia, x, y, frases);
+		/*map<int, string> frases2 = cita.obtenir_frases();
+		cout << "Frases: " << endl;
+		map<int, string>::iterator it = frases2.begin();
+		while(it != frases2.end()) {
+			cout << it->first << ": " << it->second << endl;
+			it++;
+		}*/
+		cites.insert(pair<string, Cita>(referencia + IntToString(maxima_referencia(referencia)), cita));
+		cout << "Cita afegida." << endl;
+		return true;
+	} /*else {
+		cout << "La cita ja existeix." << endl;
+	}*/
 	return false;
 	//Comprovar si ja existeix una cita del text seleccionat amb les mateixes frases.
 	//Afegir cita.
