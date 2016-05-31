@@ -52,7 +52,11 @@ void Gestor_de_textos::afegir_text(string consulta) {
 	text.afegir_contingut(frases);
 
 	//cout << "intentem afegir" << endl;
-	autors.afegir_text_a_autor(text, autor_llegit);
+	if (autors.afegir_text_a_autor(text, autor_llegit)) {
+		cout << "text afegit" << endl;
+	} else {
+		cout << "error" << endl;
+	}
 	//cout << "autor: " << autors.obtenir_autor(autor_llegit).consultar_nom() << " textos: " << autors.obtenir_autor(autor_llegit).nombre_de_textos() << endl;
 }
 
