@@ -169,7 +169,7 @@ int main() {
 		} else if (paraula == "substitueix") {
 			gestor.substituir_paraules(linia.substr(paraula.size()));
 		} else {
-			gestor.consultes.processar_consulta(paraula, gestor.obtenir_conjunt_autors(), gestor.obtenir_conjunt_cites());
+			gestor.consultes.processar_consulta(linia, gestor.obtenir_conjunt_autors(), gestor.obtenir_conjunt_cites());
 		}
 		//cout << "Reading new line..." << endl;
 		paraula = "";

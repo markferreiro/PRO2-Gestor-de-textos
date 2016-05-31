@@ -89,7 +89,7 @@ vector<list<string> > Text::consultar_taula_frequencies() {
 }
 
 bool Text::conte_paraules (int i, vector<string> paraules) {
-	string frase = obtenir_frase(i);
+	string frase = consultar_frase(i);
 	int paraula = 0;
 	vector<string> par = split(frase, ' ');
 	for (int p = 0; p < par.size(); p++) {
