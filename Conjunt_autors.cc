@@ -103,6 +103,7 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 		autor_text_seleccionat = "";
 		text_seleccionat = "";
 	}
+	text_esta_seleccionat = trobat;
 	//else cout << "TRIAT" << endl;
 	return trobat;
 }

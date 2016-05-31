@@ -43,6 +43,7 @@ void Gestor_de_textos::afegir_text(string consulta) {
 		} else {
 			frase += " " + paraula;
 			if (paraula[paraula.size()-1] == '.' || paraula[paraula.size()-1] == '?' || paraula[paraula.size()-1] == '!') { //aquesta linia tampoc compila, he intentat mirar perq pero no hi ha manera
+				frase = frase.substr(1, frase.size()-1);
 				frases.push_back(frase);
 				frase = "";
 			}
@@ -162,7 +163,7 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	istringstream iss(consulta);
 	string paraula1, paraula2;
 	iss >> paraula1;
-	iss >> paraula2;
+	iss >> paraula2; //llegint per
 	iss >> paraula2;
 	paraula1 = paraula1.substr(1, paraula1.size()-2);
 	paraula2 = paraula2.substr(1, paraula2.size()-2);

@@ -58,7 +58,10 @@ void Text::construir_taula_de_frequencies() {
 	for(int frase = 0 ; frase < frases.size() ; frase++) {
 		vector<string> paraules = split(frases[frase], ' ');
 		for (int paraula = 0 ; paraula < paraules.size() ; paraula++) {
-			frequencies[ paraules[paraula] ]++;
+			//cout << "paraula bruta: " << paraules[paraula] << endl;
+			string paraula_neta = clean_word(paraules[paraula]);
+			//cout << "paraula neta: " << paraula_neta << endl;
+			frequencies[paraula_neta]++;
 		}
 	}
 }
@@ -107,12 +110,12 @@ vector<string> Text::consultar_frases() {
   return frases;
 }
 
-vector<list<string> > Text::consultar_taula_frequencies() {
-
-	vector<list<string> > aux(consultar_frequencia_maxima());
+vector<vector<string> > Text::consultar_taula_frequencies() {
+	vector<vector<string> > aux(consultar_frequencia_maxima()+1);
 	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
-		cout << it->first << " " << it->second;
-		aux[it->second].insert(aux[it->second].end(), it->first);
+		//cout << it->first << " " << it->second << endl;
+		aux[it->second].push_back(it->first);
+		//cout << aux[it->second][i] << " " << it->second << endl;
 	}
 	return aux;
 }
@@ -123,12 +126,14 @@ bool Text::conte_paraules (int i, vector<string> paraules) {
 	vector<string> par = split(frase, ' ');
 	for (int p = 0; p < par.size(); p++) {
 		if(paraula < paraules.size()) {
-			if (par[p] == paraules[paraula]) {
+			string paraula_neta = clean_word(par[p]);
+			if (paraula_neta == paraules[paraula]) {
 				paraula++;
 			} else {
-				return true;
+				paraula == 0;
 			}
 		}
+		if (paraula == paraules.size()) return true;
 	}
 	return false;
 }
@@ -139,6 +144,7 @@ bool Text::conte_expressio(string expressio) {
 
 void Text::substitueix_paraula (string paraula1, string paraula2) {
 	modificar_contingut(paraula1, paraula2);
+	construir_taula_de_frequencies();
 }
 
 pair<int,int> Text::existeix_paraula (string paraula) {
@@ -171,7 +177,7 @@ int Text::consultar_numero_paraules() {
 	for (int f = 0; f < frases.size(); f++) {
 		vector<string> par = split(frases[f], ' ');
 		//cout << "frase " << f << ": " << par.size()-1 << endl;
-		paraules += par.size() -1;
+		paraules += par.size();
 	}
 	return paraules;
 }
@@ -181,7 +187,7 @@ int Text::consultar_frequencia_maxima() {
 	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
 		if (it->second > freq) freq = it->second;
 	}
-	cout << "freq maxima: " << freq << endl;
+	//cout << "freq maxima: " << freq << endl;
 	return freq;
 }
 
@@ -207,7 +213,7 @@ void Text::replaceAll( string& source, const string& from, const string& to )
 }
 
 string Text::clean_word (string paraula) {
-	string p;
+	string p = "";
 	for (int i = 0; i < paraula.length(); i++) {
 		if ((paraula[i] >= 'a' and paraula[i] <= 'z') or (paraula[i] >= 'A' and paraula[i] <= 'Z') or (paraula[i] >= '0' and paraula[i] <= '9')) {
 			p += paraula[i];

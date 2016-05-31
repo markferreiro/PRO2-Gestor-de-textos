@@ -88,7 +88,7 @@ class Text
 			\pre cert
 			\post Retorna un vector amb la taula de frequencia del contingut del paràmetre implícit.
 		*/
-		vector<list<string> > consultar_taula_frequencies();
+		vector<vector<string> > consultar_taula_frequencies();
 		/** @brief Retorna si la frase i conte les paraules del par?metre.
 			\pre cert
 			\post Retorna true si la frase i conte les paraules del par?metre, false si no.

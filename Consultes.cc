@@ -100,7 +100,7 @@ void Consultes::info(string consulta) {
 		if (autors.hi_ha_text_seleccionat()) {
 			string titol_text_seleccionat = autors.obtenir_text_seleccionat();
 			string nom_autor_text_seleccionat = autors.obtenir_autor_text_seleccionat();
-    	Autor autor = autors.obtenir_autor(nom_autor_text_seleccionat);
+    		Autor autor = autors.obtenir_autor(nom_autor_text_seleccionat);
 			Text text = autors.obtenir_text_autor(nom_autor_text_seleccionat, titol_text_seleccionat);
 			//info text
 			cout << nom_autor_text_seleccionat << " ";
@@ -108,18 +108,18 @@ void Consultes::info(string consulta) {
 			cout << text.consultar_numero_frases() << " " << text.consultar_numero_paraules() << endl;
 			//cites associades
 			cout << "Cites Associades:" << endl;
-			vector<Cita> aux = cites.cites_autor(autor.consultar_referencia(), autors);
+			/*vector<Cita> aux = cites.cites_autor(autor.consultar_referencia(), autors);
 			for (int c = 0; c < aux.size(); c++) {
 				cout << aux[c].consultar_referencia();
-        map<int, string> interval = aux[c].obtenir_frases();
-        map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
-        map<int, string>::iterator it = frases.begin();
+        		map<int, string> interval = aux[c].obtenir_frases();
+        		map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
+        		map<int, string>::iterator it = frases.begin();
 
 				while (it != frases.end()) {
 					cout << it->first << " " << it->second << endl;
 					it++;
 				}
-			}
+			}*/
 		}
 		else cout << "error" << endl;
 	}
@@ -163,7 +163,8 @@ void Consultes::frases(string consulta) {
 		string paraula;
 		vector<string> paraules;
 		while(iss >> paraula) {
-			if (paraula[paraula.size()-1] == '\"') paraula.substr(0, paraula.size()-2);
+			if (paraula[paraula.size()-1] == '\"') paraula = paraula.substr(0, paraula.size()-1);
+			//cout << paraula << endl;
 			paraules.push_back(paraula);
 		}
 		frases_sequencia(paraules);
@@ -194,11 +195,12 @@ void Consultes::frases_expressio(string expressio) {
 
 void Consultes::frases_sequencia(vector<string> paraules) {
 	if(autors.hi_ha_text_seleccionat()) {
+		//cout << "hi ha text seleccionat" << endl;
 		string titol_text = autors.obtenir_text_seleccionat();
 		string nom_autor = autors.existeix_titol(titol_text);
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
 		int n = text.consultar_numero_frases();
-		for (int i = 0; i < n; i++) {
+		for (int i = 1; i <= n; i++) {
 			if(text.conte_paraules(i, paraules)) {
 				cout << i << " " << text.consultar_frase(i) << endl;
 			}
@@ -245,33 +247,37 @@ void Consultes::textos_autor(string nom) {
 }
 
 void Consultes::autor() {
-	string autor = autors.obtenir_autor_text_seleccionat();
-	cout << autor << endl;
+	if (autors.hi_ha_text_seleccionat()) {
+		string autor = autors.obtenir_autor_text_seleccionat();
+		cout << autor << endl;
+	}
+	else cout << "error" << endl;
 }
 
 void Consultes::contingut() {
-	cout << "text seleccionat :" << endl;
-	string titol_text = autors.obtenir_text_seleccionat();
-	string nom_autor = autors.existeix_titol(titol_text);
-	cout << "titol: " << titol_text << " / autor: " << nom_autor << endl;
-	Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-	vector<string> frases = text.consultar_contingut();
-	for (int i = 0; i < frases.size(); i++) {
-		cout << i+1 << " " << frases[i] << endl;
+	if (autors.hi_ha_text_seleccionat()) {
+		//cout << "text seleccionat :" << endl;
+		string titol_text = autors.obtenir_text_seleccionat();
+		string nom_autor = autors.existeix_titol(titol_text);
+		//cout << "titol: " << titol_text << " / autor: " << nom_autor << endl;
+		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
+		vector<string> frases = text.consultar_contingut();
+		for (int i = 0; i < frases.size(); i++) {
+			cout << i+1 << " " << frases[i] << endl;
+		}
 	}
+	else cout << "error" << endl;
 }
 
 void Consultes::taula_de_frequencies() {
 	string titol_text = autors.obtenir_text_seleccionat();
 	string nom_autor = autors.existeix_titol(titol_text);
-	cout << "titol : " << titol_text << " / autor :" << nom_autor << endl;
+	//cout << "titol : " << titol_text << " / autor: " << nom_autor << endl;
 	Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-	vector<list<string> > taula = text.consultar_taula_frequencies();
-	for (int i = 0; i < taula.size(); i++) {
-		list<string>::iterator it = taula[i].begin();
-		while (it != taula[i].end()) {
-			cout << *it << " " << i << endl;
-			it++;
+	vector<vector<string> > taula = text.consultar_taula_frequencies();
+	for (int i = taula.size()-1; i > 0; i--) {
+		for (int j = 0; j < taula[i].size(); j++){
+			cout << taula[i][j] << " " << i << endl;
 		}
 	}
 }
