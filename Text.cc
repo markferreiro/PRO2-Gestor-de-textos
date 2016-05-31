@@ -100,7 +100,7 @@ map<int, string > Text::consultar_frases (int x, int y) {
 	for (int i = x; i <= y; i++) {
 		//aux[i-x] = frases[i];
     	//cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
-    	aux[i+1] = frases[i];
+    	aux[i] = frases[i-1];
     	//cout << "Extrayendo frase: " << frases[i-1] << " (" << i << "," << y-x << ")" << endl;
 	}
 	return aux;
@@ -121,6 +121,7 @@ vector<vector<string> > Text::consultar_taula_frequencies() {
 }
 
 bool Text::conte_paraules (int i, vector<string> paraules) {
+	//for (int x = 0; 0 < paraules.size();x++) cout << paraules[x] <<  " " << endl;
 	string frase = consultar_frase(i);
 	int paraula = 0;
 	vector<string> par = split(frase, ' ');
@@ -128,12 +129,13 @@ bool Text::conte_paraules (int i, vector<string> paraules) {
 		if(paraula < paraules.size()) {
 			string paraula_neta = clean_word(par[p]);
 			if (paraula_neta == paraules[paraula]) {
+				//cout << "paraula neta:" << paraula_neta << endl;
 				paraula++;
 			} else {
 				paraula == 0;
 			}
 		}
-		if (paraula == paraules.size()) return true;
+		else if (paraula == paraules.size()) return true;
 	}
 	return false;
 }

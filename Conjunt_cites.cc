@@ -98,7 +98,7 @@ Cita Conjunt_cites::cita_referencia (string referencia, Conjunt_autors autors) {
 	}
 	return Cita();
 }
-vector<Cita> Conjunt_cites::cites_text_seleccionat(string titol_text_seleccionat, Conjunt_autors autors) {
+vector<Cita> Conjunt_cites::cites_text_seleccionat(string titol_text_seleccionat, Conjunt_autors& autors) {
 	vector<Cita> cites_to_return;
 	map<string, Cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
