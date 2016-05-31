@@ -63,8 +63,25 @@ void Gestor_de_textos::afegir_cita(string consulta) {
 	if(!autors.hi_ha_text_seleccionat() /*or !cites.afegir_cita(x, y, titol, nom, referencia)*/)
 		cout << "error" << endl;
 	else {
-		consulta = "afegint cita";
-		cout << consulta << endl;
+		Autor autor = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat());
+		Text text = autor.obtenir_text(autors.obtenir_text_seleccionat());
+		map<int, string> frases = text.consultar_frases(x-1, y-1);
+		/*map<int, string>::iterator it = frases.begin();
+		while(it != frases.end()) {
+			cout << it->first << ": " << it->second << endl;
+			it++;
+		}*/
+		cites.afegir_cita(x, y, text, autor.consultar_nom(), autor.consultar_referencia(), frases);
+
+		Cita cita = cites.cita_referencia("AB1", autors);
+
+		map<int, string> frases2 = cita.obtenir_frases();
+		cout << "Frases: " << endl;
+		map<int, string>::iterator it2 = frases2.begin();
+		while(it2 != frases2.end()) {
+			cout << it2->first << ": " << it2->second << endl;
+			it2++;
+		}
 	}
 }
 
@@ -131,14 +148,14 @@ void Gestor_de_textos::substituir_paraules(string consulta) {
 	iss >> paraula2;
 	paraula1 = paraula1.substr(1, paraula1.size()-2);
 	paraula2 = paraula2.substr(1, paraula2.size()-2);
-	cout << "paraula1: " << paraula1 << endl;
-	cout << "paraula2: " << paraula2 << endl;
+	//cout << "paraula1: " << paraula1 << endl;
+	//cout << "paraula2: " << paraula2 << endl;
 	Autor a = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat());
 	Text text = autors.obtenir_text_autor(autors.obtenir_autor_text_seleccionat(), autors.obtenir_text_seleccionat());
-	cout << "Text sense substituir: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
+	//cout << "Text sense substituir: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
 	text.substitueix_paraula(paraula1, paraula2);
 	a.afegir_text(text);
-	cout << "Text substituit: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
+	//cout << "Text substituit: " << "titol: " << text.consultar_titol() << " / " << text.consultar_contingut()[0] << " / " << text.consultar_contingut()[1] << " / " << text.consultar_contingut()[2] << endl;
 }
 
 Conjunt_autors Gestor_de_textos::obtenir_conjunt_autors() {

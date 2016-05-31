@@ -30,5 +30,5 @@ pair<int, int> Cita::consultar_x_y() {
 }
 
 map<int, string> Cita::obtenir_frases() {
-
+	return frases;
 }

@@ -14,6 +14,8 @@ afegir text "Segon text afegit" autor "Antonio Bolzano" Contingut del segon text
 
 triar text {Segon del}
 
+afegir cita 2 3
+
 substitueix "segon" per "tonto"
 
 eliminar text
