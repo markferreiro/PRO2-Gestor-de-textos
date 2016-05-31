@@ -212,6 +212,10 @@ private:
 	*/
 
 	void taula_de_frequencies();
+
+	bool frases_expressio_algebraica(string consulta, const string frase);
+
+	vector<string> split(string str, char delimiter);
 };
 
 #endif
