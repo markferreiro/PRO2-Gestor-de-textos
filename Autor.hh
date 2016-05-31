@@ -81,7 +81,13 @@ class Autor
 			\pre cert
 			\post Retorna "True" si el paràmetre implícit ja té un text amb el titol rebut. Retorna "False" en cas contrari.
 		*/
-		set<Text, custom_sort>::iterator existeix_titol(string titol) const;
+		bool existeix_titol(string titol);
+		/** @brief Comprova si el paràmetre implícit ja té un text amb un titol rebut per paràmetre.
+			@param titol: Titol del text a buscar.
+			\pre cert
+			\post Retorna "True" si el paràmetre implícit ja té un text amb el titol rebut. Retorna "False" en cas contrari.
+		*/
+		set<Text, custom_sort>::iterator existeix_text(string titol) const;
 		/** @brief Comprova si el paràmetre implícit té un text en el qual aparegui unes paraules no necessariament seguides (tant en el titol com en el contingut).
 			@param paraula: Paraules a cercar.
 			\pre cert

@@ -145,6 +145,7 @@ class Text
 		int consultar_frequencia_maxima();
 		vector<string> split(string str, char delimiter);
 		void replaceAll( string& source, const string& from, const string& to );
+		string clean_word (string paraula);
 
 };
 
