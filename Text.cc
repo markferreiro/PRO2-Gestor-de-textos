@@ -93,11 +93,19 @@ vector<string> Text::consultar_contingut () {
 map<int, string > Text::consultar_frases (int x, int y) {
 	map<int, string > aux = map<int, string>();
   //cout << "Preparat per llegir de la " << x << " a la " << y << endl;
+<<<<<<< HEAD
 	for (int i = x; i <= y; i++) {
 		//aux[i-x] = frases[i];
     	//cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
     	aux[i] = frases[i-1];
     	//cout << "Extrayendo frase: " << frases[i-1] << " (" << i << "," << y-x << ")" << endl;
+=======
+	for (int i = x; i <= y-x+1; i++) {
+		//aux[i-x] = frases[i];
+    //cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
+    aux[i+1] = frases[i];
+    //cout << "Extrayendo frase: " << frases[i] << " (" << i << "," << y-x+1 << ")" << endl;
+>>>>>>> origin/master
 	}
 	return aux;
 }
@@ -133,7 +141,7 @@ bool Text::conte_paraules (int i, vector<string> paraules) {
 }
 
 bool Text::conte_expressio(string expressio) {
-	
+
 }
 
 void Text::substitueix_paraula (string paraula1, string paraula2) {
@@ -204,6 +212,7 @@ void Text::replaceAll( string& source, const string& from, const string& to )
     source.swap( newString );
 }
 
+<<<<<<< HEAD
 string Text::clean_word (string paraula) {
 	string p;
 	for (int i = 0; i < paraula.length(); i++) {
@@ -212,4 +221,9 @@ string Text::clean_word (string paraula) {
 		}
 	}
 	return p;
+=======
+bool Text::rang_correcte(int x, int y) {
+  //cout << "comprovant rang..." << endl;
+  return ( (x < y) && (x >= 1 && y <= frases.size()) );
+>>>>>>> origin/master
 }

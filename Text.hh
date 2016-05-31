@@ -125,6 +125,8 @@ class Text
 		*/
 		int consultar_numero_paraules();
 
+		bool rang_correcte(int x, int y);
+
 	private:
 		string titol;
 		vector< string > frases;

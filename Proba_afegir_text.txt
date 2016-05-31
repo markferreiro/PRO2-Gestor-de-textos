@@ -10,11 +10,13 @@ triar text {palo al agua}
 
 eliminar text
 
-afegir text "Segon text afegit" autor "Antonio Bolzano" Contingut del segon text. Curt, el segon. Pero no es tonto, es el segon. Concís. ****
+afegir text "Segon text afegit" autor "Antonio Bolzano" Contingut del segont text. Curt, el segon. Pero no es tonto, es el segon. Concís. ****
 
 triar text {Segon del}
 
 afegir cita 2 3
+
+afegir cita 2 9
 
 substitueix "segon" per "tonto"
 
