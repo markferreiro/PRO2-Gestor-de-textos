@@ -135,10 +135,18 @@ void Gestor_de_textos::triar_text(string consulta) {
 	vector<string> paraules(0);
 	do {
 		iss >> paraula;
-		if (paraula[0] == '{') paraula = paraula.substr(1, paraula.size()-1);
-		else if (paraula[paraula.size()] != '}') {
+		if (paraula[0] == '{') {
+			paraula = paraula.substr(1, paraula.size()-1);
+			/*if (paraula[paraula.size()-1] == '}') {
+				final = true;
+				paraula = paraula.substr(0, paraula.size()-1);
+			}*/
+			//cout << "primera : " << paraula << endl;
+		}
+		if (paraula[paraula.size()-1] == '}') {
 			final = true;
 			paraula = paraula.substr(0, paraula.size()-1);
+			//cout << "ultima : " << paraula << endl;
 		}
 		//cout << "paraula: " << paraula << endl;
 		paraules.push_back(paraula);

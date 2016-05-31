@@ -74,7 +74,16 @@ int Autor::nombre_de_paraules() {
 	return paraules;
 }
 
-set<Text, Autor::custom_sort>::iterator Autor::existeix_titol (string titol) const {
+bool Autor::existeix_titol (string titol) {
+	for (set<Text, Autor::custom_sort>::iterator it = textos.begin() ; it != textos.end() ; it++) {
+    Text text = *it;
+    //cout << "Comprobant " << text.consultar_titol() << "/" << titol;
+		if (text.consultar_titol() == titol) return true;
+	}
+	return false;
+}
+
+set<Text, Autor::custom_sort>::iterator Autor::existeix_text (string titol) const {
 	for (set<Text, Autor::custom_sort>::iterator it = textos.begin() ; it != textos.end() ; it++) {
     Text text = *it;
     //cout << "Comprobant " << text.consultar_titol() << "/" << titol;
@@ -96,24 +105,24 @@ Text Autor::existeix_text_amb_paraules (vector<string> paraules) {
 	Text aux = Text("NULL");
 	//Comprova si existeix un text amb les paraules
 	while (it != textos.end()) {
-    Text text = *it;
-    //cout << "Consultant text: " << text.consultar_titol() << endl;
-    bool trobades = true;
-    for (int p = 0; p < paraules.size() and trobades; p++) {
-      bool result2 = false;
-      vector<string> par = split(nom, ' ');
-      for (int i = 0 ; i < par.size() ; i++) {
-        if (par[i] == paraules[p]) {
-          //cout << "Comprobem nom autor: " << par[i] << " - " << paraules[p] << endl;
-          result2 = true;
-        }
-      }
-      pair<int, int> result = text.existeix_paraula(paraules[p]);
-      //cout << "Resultat. Busqueda al titol: " << result.second << ". Busqueda al contingut: " << result2 << endl;
-      if (result.second == -1 && !result2) {
-          trobades = false;
-      }
-	  }
+	    Text text = *it;
+	    //cout << "Consultant text: " << text.consultar_titol() << endl;
+	    bool trobades = true;
+	    for (int p = 0; p < paraules.size() and trobades; p++) {
+	    	bool result2 = false;
+	    	vector<string> par = split(nom, ' ');
+	    	for (int i = 0 ; i < par.size() ; i++) {
+		        if (par[i] == paraules[p]) {
+		          //cout << "Comprobem nom autor: " << par[i] << " - " << paraules[p] << endl;
+		          result2 = true;
+		        }
+	    	}
+	    	pair<int, int> result = text.existeix_paraula(paraules[p]);
+	    	//cout << "Resultat. Busqueda al titol: " << result.second << ". Busqueda al contingut: " << result2 << endl;
+	    	if (result.second == -1 && !result2) {
+	        	trobades = false;
+	    	}
+		}
 		if (trobades) {
 			//Comprova si s'ha trobat un text amb les paraules anteriorment
 			if (aux.consultar_titol() == "NULL") {
@@ -127,14 +136,14 @@ Text Autor::existeix_text_amb_paraules (vector<string> paraules) {
 				return aux;
 			}
 		}
-    it++;
+	  it++;
 	}
 	return aux;
 }
 
 bool Autor::afegir_text (Text text) {
 	//Comprova si existeix un text al p.i. amb el mateix titol que "text"
-  set<Text, Autor::custom_sort>::iterator iterador_text = existeix_titol(text.consultar_titol());
+	set<Text, Autor::custom_sort>::iterator iterador_text = existeix_text(text.consultar_titol());
 	if (iterador_text == textos.end()) {
     //cout << "Text " << text.consultar_titol() << " no existeix..." << endl;
     textos.insert(iterador_text, text);

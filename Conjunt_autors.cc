@@ -39,7 +39,7 @@ string Conjunt_autors::existeix_titol(string titol) {
 	for (it =  autors.begin(); it != autors.end(); it++) {
 		Autor aux = *it;
 
-		if (aux.existeix_titol(titol) != aux.tots_textos().end()) return aux.consultar_nom();
+		if (aux.existeix_titol(titol)/* != aux.tots_textos().end()*/) return aux.consultar_nom();
 	}
 	return "NULL";
 }
@@ -57,17 +57,18 @@ Autor Conjunt_autors::obtenir_autor(string nom) {
 }
 
 Text Conjunt_autors::obtenir_text_autor(string nom, string titol) {
-	bool trobat = false;
 	set<Autor, classcomp>::iterator it = autors.begin();
 	Text text = Text("NULL");
-	while (it != autors.end() and not false) {
-		if (it->consultar_nom() == nom) {
-			Autor a = *it;
+	while (it != autors.end()) {
+		Autor a = *it;
+		if (a.consultar_nom() == nom) {
 			text = a.obtenir_text(titol);
-			trobat = true;
+			cout << "titol: " << text.consultar_titol() << endl;
+			return text;
 		}
 		it++;
 	}
+	//cout << "titol text: " << text.consultar_titol() << endl;
 	return text;
 }
 
@@ -78,7 +79,7 @@ set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
 bool Conjunt_autors::triar_text (vector<string> paraules) {
 	set<Autor, classcomp>::iterator it;
 	bool trobat = false;
-	//cout << "arribem aqui... sabent que autors(" << autors.size() << ")" << endl;
+	cout << "arribem aqui... sabent que autors(" << autors.size() << ")" << endl;
 	for (it = autors.begin(); it != autors.end(); it++) {
 		Autor autor = *it;
 		//cout << "Comprovem textos de: " << autor.consultar_nom() << "(" << autor.nombre_de_textos() << ")" << endl;
@@ -97,6 +98,12 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 			}
 		}
 	}
+	cout << "autor: " << autor_text_seleccionat << " / titol: " << text_seleccionat << endl;
+	if (not trobat) {
+		autor_text_seleccionat = "";
+		text_seleccionat = "";
+	}
+	//else cout << "TRIAT" << endl;
 	return trobat;
 }
 
