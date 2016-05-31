@@ -113,14 +113,15 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
 				//cout << "inserted! Autor textos...(" << a.nombre_de_textos() << "): ";
 				//if (a.existeix_titol(text.consultar_titol()) != a.tots_textos().end()) cout << "book exists";
 				//else { //cout << "book doesnt exists" << endl;};
+				//cout <<  "eliminem autor: " << it->consultar_nom() << " / " << it->tots_textos().size() <<  endl;
+				autors.erase(it);
+				//cout << "estem afegint un autor amb " << a.tots_textos().size() << " textos..." << endl;
+				it = autors.end();
+				set<Autor, Conjunt_autors::classcomp>::iterator it2 = autors.insert(it, a);
+				//cout <<  "autor inserted: " << it2->consultar_nom() << " / " << it2->tots_textos().size() <<  endl;
+			} else {
+				cout << "error" << endl;
 			}
-			//cout <<  "eliminem autor: " << it->consultar_nom() << " / " << it->tots_textos().size() <<  endl;
-			autors.erase(it);
-			//cout << "estem afegint un autor amb " << a.tots_textos().size() << " textos..." << endl;
-			it = autors.end();
-			set<Autor, Conjunt_autors::classcomp>::iterator it2 = autors.insert(it, a);
-			//cout <<  "autor inserted: " << it2->consultar_nom() << " / " << it2->tots_textos().size() <<  endl;
-      //done = (*it).afegir_text(text); //mira't aixo que nose pq no compila
       it = autors.end();
     } else {
 			it++;

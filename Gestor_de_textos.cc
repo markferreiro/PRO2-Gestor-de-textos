@@ -53,7 +53,7 @@ void Gestor_de_textos::afegir_text(string consulta) {
 
 	//cout << "intentem afegir" << endl;
 	autors.afegir_text_a_autor(text, autor_llegit);
-	//cout << "autor: " << autors.obtenir_autor(autor_llegit)->consultar_nom() << " textos: " << autors.obtenir_autor(autor_llegit)->nombre_de_textos() << endl;
+	//cout << "autor: " << autors.obtenir_autor(autor_llegit).consultar_nom() << " textos: " << autors.obtenir_autor(autor_llegit).nombre_de_textos() << endl;
 }
 
 void Gestor_de_textos::afegir_cita(string consulta) {
@@ -75,13 +75,13 @@ void Gestor_de_textos::afegir_cita(string consulta) {
 
 		Cita cita = cites.cita_referencia("AB1", autors);
 
-		map<int, string> frases2 = cita.obtenir_frases();
+		/*map<int, string> frases2 = cita.obtenir_frases();
 		cout << "Frases: " << endl;
 		map<int, string>::iterator it2 = frases2.begin();
 		while(it2 != frases2.end()) {
 			cout << it2->first << ": " << it2->second << endl;
 			it2++;
-		}
+		}*/
 	}
 }
 

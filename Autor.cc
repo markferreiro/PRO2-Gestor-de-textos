@@ -136,17 +136,17 @@ bool Autor::afegir_text (Text text) {
 	//Comprova si existeix un text al p.i. amb el mateix titol que "text"
   set<Text, Autor::custom_sort>::iterator iterador_text = existeix_titol(text.consultar_titol());
 	if (iterador_text == textos.end()) {
-    cout << "Text " << text.consultar_titol() << " no existeix..." << endl;
+    //cout << "Text " << text.consultar_titol() << " no existeix..." << endl;
     textos.insert(iterador_text, text);
-		return false;
+		return true;
 	}
 	else {
-    cout << "Text " << text.consultar_titol() << " ja existia..." << endl;
-    textos.erase(iterador_text);
+    //cout << "Text " << text.consultar_titol() << " ja existia..." << endl;
+    /*textos.erase(iterador_text);
     iterador_text = textos.end();
-    textos.insert(iterador_text, text);
+    textos.insert(iterador_text, text);*/
     //cout << "text insertat: " << textos.begin()->consultar_titol() << endl;
-		return true;
+		return false;
 	}
 }
 

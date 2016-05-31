@@ -74,11 +74,11 @@ vector<string> Text::consultar_contingut () {
 map<int, string > Text::consultar_frases (int x, int y) {
 	map<int, string > aux = map<int, string>();
   //cout << "Preparat per llegir de la " << x << " a la " << y << endl;
-	for (int i = 0; i <= y-x; i++) {
+	for (int i = x; i <= y-x+1; i++) {
 		//aux[i-x] = frases[i];
     //cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
-    aux[i+x+1] = frases[i+x];
-    cout << "Extrayendo frase: " << frases[i+x] << " (" << i << "," << y-x << ")" << endl;
+    aux[i+1] = frases[i];
+    //cout << "Extrayendo frase: " << frases[i] << " (" << i << "," << y-x+1 << ")" << endl;
 	}
 	return aux;
 }
@@ -113,7 +113,7 @@ bool Text::conte_paraules (int i, vector<string> paraules) {
 }
 
 bool Text::conte_expressio(string expressio) {
-	
+
 }
 
 void Text::substitueix_paraula (string paraula1, string paraula2) {
