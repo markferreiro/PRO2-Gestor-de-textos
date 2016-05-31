@@ -72,7 +72,7 @@ void Gestor_de_textos::afegir_cita(string consulta) {
 		Text text = autor.obtenir_text(autors.obtenir_text_seleccionat());
 		if (text.rang_correcte(x, y)) {
 			map<int, string> frases = text.consultar_frases(x-1, y-1);
-			cites.afegir_cita(x, y, text, autor.consultar_nom(), autor.consultar_referencia(), frases);
+			cites.afegir_cita(x, y, text.consultar_titol(), autor.consultar_nom(), autor.consultar_referencia(), frases);
 		} else {
 			cout << "error" << endl;
 		}

@@ -44,7 +44,7 @@ class Conjunt_cites
 			/post retorna false si ja existia una cita amb les mateixes frases del
 			 mateix text i autor, sino retorna true i s'ha afegit una cita al Conjunt_cites
 		*/
-		bool afegir_cita (int x, int y, Text text, string nom_autor, string referencia, map<int, string> frases);
+		bool afegir_cita (int x, int y, string titol_text, string nom_autor, string referencia, map<int, string> frases);
 
 		/** @brief Eliminar una cita del Conjunt_cites
 			@param referencia: Referencia de la cita que es vol eliminar.
@@ -92,7 +92,7 @@ class Conjunt_cites
 
 	private:
 		struct p_cita {
-				string referencia;
+			string referencia;
 	  		string autor;
 	  		string text;
 	  		vector<int> frases;
