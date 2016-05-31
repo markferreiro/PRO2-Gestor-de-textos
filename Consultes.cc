@@ -71,7 +71,17 @@ void Consultes::tots_autors() {
 void Consultes::totes_cites() {
 	vector<Cita> aux = cites.totes_cites(autors);
 	for (int i = 0; i < aux.size(); i++) {
-		cout << aux[i].consultar_referencia() << endl;
+		Cita cita = aux[i];
+		cout << cita.consultar_referencia() << endl;
+		map<int, string> frases = cita.obtenir_frases();
+		map<int, string>::iterator it = frases.begin();
+		while (it != frases.end()) {
+			cout << it->first << " " << it->second << endl;
+			it++;
+		}
+		cout << cita.consultar_nom_autor() << " ";
+		cout << "\"" << cita.consultar_titol() << "\"" << endl;
+		/*cout << aux[i].consultar_referencia() << endl;
     	string titol_text = aux[i].consultar_titol();
 		string nom_autor = aux[i].consultar_nom_autor();
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
@@ -83,7 +93,7 @@ void Consultes::totes_cites() {
 			it++;
 		}
 		cout << aux[i].consultar_nom_autor() << " ";
-		cout << "\"" << aux[i].consultar_titol() <<"\"" << endl;
+		cout << "\"" << aux[i].consultar_titol() <<"\"" << endl;*/
 	}
 }
 
