@@ -136,7 +136,7 @@ Text Autor::existeix_text_amb_paraules (vector<string> paraules) {
 				return aux;
 			}
 		}
-	    it++;
+	  it++;
 	}
 	return aux;
 }

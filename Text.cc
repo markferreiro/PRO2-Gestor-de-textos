@@ -48,7 +48,7 @@ void Text::modificar_contingut (const string paraula1, const string paraula2) {
 			frase += par[p];
 		}
 		noves_frases.push_back(frase);*/
-	    
+
 	    //frases[frase] = f;
 	}
 	//afegir_contingut(noves_frases);
@@ -97,7 +97,7 @@ map<int, string > Text::consultar_frases (int x, int y) {
 	for (int i = x; i <= y; i++) {
 		//aux[i-x] = frases[i];
     	//cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
-    	aux[i] = frases[i-1];
+    	aux[i+1] = frases[i];
     	//cout << "Extrayendo frase: " << frases[i-1] << " (" << i << "," << y-x << ")" << endl;
 	}
 	return aux;

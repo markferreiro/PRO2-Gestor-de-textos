@@ -100,7 +100,7 @@ void Consultes::info(string consulta) {
 		if (autors.hi_ha_text_seleccionat()) {
 			string titol_text_seleccionat = autors.obtenir_text_seleccionat();
 			string nom_autor_text_seleccionat = autors.obtenir_autor_text_seleccionat();
-    		Autor autor = autors.obtenir_autor(nom_autor_text_seleccionat);
+    	Autor autor = autors.obtenir_autor(nom_autor_text_seleccionat);
 			Text text = autors.obtenir_text_autor(nom_autor_text_seleccionat, titol_text_seleccionat);
 			//info text
 			cout << nom_autor_text_seleccionat << " ";
@@ -111,9 +111,9 @@ void Consultes::info(string consulta) {
 			vector<Cita> aux = cites.cites_autor(autor.consultar_referencia(), autors);
 			for (int c = 0; c < aux.size(); c++) {
 				cout << aux[c].consultar_referencia();
-		        map<int, string> interval = aux[c].obtenir_frases();
-		        map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
-		        map<int, string>::iterator it = frases.begin();
+        map<int, string> interval = aux[c].obtenir_frases();
+        map<int, string> frases = text.consultar_frases(interval.begin()->first, interval.rbegin()->first);
+        map<int, string>::iterator it = frases.begin();
 
 				while (it != frases.end()) {
 					cout << it->first << " " << it->second << endl;

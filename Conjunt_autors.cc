@@ -79,7 +79,7 @@ set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
 bool Conjunt_autors::triar_text (vector<string> paraules) {
 	set<Autor, classcomp>::iterator it;
 	bool trobat = false;
-	cout << "arribem aqui... sabent que autors(" << autors.size() << ")" << endl;
+	//cout << "arribem aqui... sabent que autors(" << autors.size() << ")" << endl;
 	for (it = autors.begin(); it != autors.end(); it++) {
 		Autor autor = *it;
 		//cout << "Comprovem textos de: " << autor.consultar_nom() << "(" << autor.nombre_de_textos() << ")" << endl;
@@ -98,7 +98,7 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 			}
 		}
 	}
-	cout << "autor: " << autor_text_seleccionat << " / titol: " << text_seleccionat << endl;
+	//cout << "autor: " << autor_text_seleccionat << " / titol: " << text_seleccionat << endl;
 	if (not trobat) {
 		autor_text_seleccionat = "";
 		text_seleccionat = "";
@@ -108,7 +108,8 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 }
 
 bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
-	bool result = afegir_autor(nom_autor);
+	afegir_autor(nom_autor);
+	bool result = false;
 	//cout << "insert autor result: " << result << endl;
   set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
   while(it != autors.end()) {
@@ -125,9 +126,10 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
 				//cout << "estem afegint un autor amb " << a.tots_textos().size() << " textos..." << endl;
 				it = autors.end();
 				set<Autor, Conjunt_autors::classcomp>::iterator it2 = autors.insert(it, a);
+				result = true;
 				//cout <<  "autor inserted: " << it2->consultar_nom() << " / " << it2->tots_textos().size() <<  endl;
 			} else {
-				cout << "error" << endl;
+				result = false;
 			}
       it = autors.end();
     } else {

@@ -1,10 +1,10 @@
-afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
+afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. Caca. ****
 
 afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
 
 afegir text "Titol exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
 
-triar text {palotes contingut}
+triar text {palotes contingut Caca}
 
 triar text {palo al agua}
 
