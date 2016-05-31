@@ -93,8 +93,8 @@ set<Text, Autor::custom_sort>::iterator Autor::existeix_text (string titol) cons
 }
 
 Text Autor::obtenir_text(string titol) {
-  for (set<Text, Autor::custom_sort>::iterator it = textos.begin() ; it != textos.end() ; it++) {
-    Text text = *it;
+	for (set<Text, Autor::custom_sort>::iterator it = textos.begin() ; it != textos.end() ; it++) {
+		Text text = *it;
 		if (text.consultar_titol() == titol) return text;
 	}
 	return Text("NULL");
@@ -150,11 +150,6 @@ bool Autor::afegir_text (Text text) {
 		return true;
 	}
 	else {
-    //cout << "Text " << text.consultar_titol() << " ja existia..." << endl;
-    /*textos.erase(iterador_text);
-    iterador_text = textos.end();
-    textos.insert(iterador_text, text);*/
-    //cout << "text insertat: " << textos.begin()->consultar_titol() << endl;
 		return false;
 	}
 }

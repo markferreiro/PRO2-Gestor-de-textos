@@ -8,42 +8,19 @@ Conjunt_cites::Conjunt_cites() {
 }
 
 bool Conjunt_cites::afegir_cita(int x, int y, string titol_text, string nom_autor, string referencia, map<int, string> frases) {
-	//Comprovar si el rang de frases es correcte ( 1 <= x <= y <= n� frases )
-	//Comprovant aix� primer, en certs casos ens estalviarem la comprovaci� seg�ent.
-	//cout << "frases a llegir: " << x << " - " << y << endl;
 	if (!existeix_cita(titol_text, x, y)) {
 		Cita cita = Cita(nom_autor, titol_text, referencia + IntToString(maxima_referencia(referencia)), x, y, frases);
-		/*map<int, string> frases2 = cita.obtenir_frases();
-		cout << "Frases: " << endl;
-		map<int, string>::iterator it = frases2.begin();
-		while(it != frases2.end()) {
-			cout << it->first << ": " << it->second << endl;
-			it++;
-		}*/
 		cites.insert(pair<string, Cita>(cita.consultar_referencia(), cita));
-		cout << "Cita afegida." << endl;
+		//cout << "Cita afegida." << endl;
 		return true;
-	} /*else {
-		cout << "La cita ja existeix." << endl;
-	}*/
+	}
 	return false;
 	//Comprovar si ja existeix una cita del text seleccionat amb les mateixes frases.
 	//Afegir cita.
 }
 bool Conjunt_cites::eliminar_cita(string referencia) {
 	int original_size = cites.size();
-	/*map<string, Cita>::iterator iterator = cites.begin();
-	while (iterator != cites.end()) {
-		cout << "cita: " << iterator->first  << endl;
-		iterator++;
-	}*/
 	int elementa_eliminats = cites.erase(referencia);
-	//cout << "despres d'eliminar: size: " << elementa_eliminats << endl;
-	/*map<string, Cita>::iterator iterator2 = cites.begin();
-	while (iterator2 != cites.end()) {
-		cout << "cita: " << iterator2->first  << endl;
-		iterator2++;
-	}*/
 	if (elementa_eliminats == 0) {
 		return false;
 	}
@@ -55,26 +32,17 @@ vector<Cita> Conjunt_cites::totes_cites(Conjunt_autors autors) {
 	map<string, Cita>::iterator it = cites.begin();
 	for (int i = 0 ; i < size ; i++) {
 		Cita cita = it->second;
-		/*Text text = autors.obtenir_text_autor(cita.consultar_nom_autor(), cita.consultar_titol());
-		pair<int, int> pair = cita.consultar_x_y();
-		map<int, string> frases = text.consultar_frases(pair.first, pair.second);
-		Cita c = Cita(cita.consultar_nom_autor(), cita.consultar_titol(), it->first, pair.first, pair.second, frases);*/
 		cites_to_return[i] = cita;
 		it++;
 	}
 	return cites_to_return;
 }
-vector<Cita> Conjunt_cites::cites_autor(string referencia, Conjunt_autors autors) {
+vector<Cita> Conjunt_cites::cites_autor(string nom, Conjunt_autors& autors) {
 	vector<Cita> cites_to_return;
-	referencia = referencia.substr(0,referencia.size()-2);
 	map<string, Cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
 		Cita cita = iterator->second;
-		if (cita.consultar_nom_autor() == referencia) {
-			/*Text text = autors.obtenir_text_autor(cita.consultar_nom_autor(), cita.consultar_titol());
-			pair<int, int> pair = cita.consultar_x_y();
-			map<int, string> frases = text.consultar_frases(pair.first, pair.second);
-			Cita c = Cita(cita.consultar_nom_autor(), cita.consultar_titol(), iterator->first, pair.first, pair.second, frases);*/
+		if (cita.consultar_nom_autor() == nom) {
 			cites_to_return.push_back (cita);
 		}
 		iterator++;
@@ -86,12 +54,8 @@ Cita Conjunt_cites::cita_referencia (string referencia, Conjunt_autors autors) {
 	map<string, Cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
 		if (iterator->first == referencia) {
-			cout << "cita trobada!" << endl;
+			//cout << "cita trobada!" << endl;
 			Cita cita = iterator->second;
-			/*Text text = autors.obtenir_text_autor(cita.consultar_nom_autor(), cita.consultar_titol());
-			pair<int, int> pair = cita.consultar_x_y();
-			map<int, string> frases = text.consultar_frases(pair.first, pair.second);
-			Cita c = Cita(cita.consultar_nom_autor(), cita.consultar_titol(), iterator->first, pair.first, pair.second, frases);*/
 			return cita;
 		}
 		iterator++;
@@ -104,10 +68,6 @@ vector<Cita> Conjunt_cites::cites_text_seleccionat(string titol_text_seleccionat
 	while (iterator != cites.end()) {
 		Cita cita = iterator->second;
 		if (cita.consultar_titol() == titol_text_seleccionat) {
-			/*Text text = autors.obtenir_text_autor(cita.consultar_nom_autor(), cita.consultar_titol());
-			pair<int, int> pair = cita.consultar_x_y();
-			map<int, string> frases = text.consultar_frases(pair.first, pair.second);
-			Cita c = Cita(cita.consultar_nom_autor(), cita.consultar_titol(), iterator->first, pair.first, pair.second, frases);*/
 			cites_to_return.push_back (cita);
 		}
 		iterator++;

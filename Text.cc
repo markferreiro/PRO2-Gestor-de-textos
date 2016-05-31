@@ -96,12 +96,8 @@ vector<string> Text::consultar_contingut () {
 
 map<int, string > Text::consultar_frases (int x, int y) {
 	map<int, string > aux = map<int, string>();
-  //cout << "Preparat per llegir de la " << x << " a la " << y << endl;
 	for (int i = x; i <= y; i++) {
-		//aux[i-x] = frases[i];
-    	//cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
     	aux[i] = frases[i-1];
-    	//cout << "Extrayendo frase: " << frases[i-1] << " (" << i << "," << y-x << ")" << endl;
 	}
 	return aux;
 }

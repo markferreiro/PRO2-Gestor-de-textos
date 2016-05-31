@@ -69,7 +69,7 @@ class Conjunt_cites
 			/post retorna un vector amb totes les cites de l'autor amb nom == "nom_autor",
 			 ordenades per referencia
 		*/
-		vector<Cita> cites_autor(string nom_autor, Conjunt_autors autors);
+		vector<Cita> cites_autor(string nom_autor, Conjunt_autors& autors);
 
 		/** @brief Consulta una Cita per la seva referencia
 			@param referencia: Referencia de la cita que es vol obtenir.

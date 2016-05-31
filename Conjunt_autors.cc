@@ -112,16 +112,14 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
 	afegir_autor(nom_autor);
 	bool result = false;
 	//cout << "insert autor result: " << result << endl;
-  set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
-  while(it != autors.end()) {
-    if (it->consultar_nom() == nom_autor) {
+	set<Autor, Conjunt_autors::classcomp>::iterator it = autors.begin();
+	while(it != autors.end()) {
+	    if (it->consultar_nom() == nom_autor) {
 			Autor a = *it;
 			//cout << "intentem afegir 2...: " << it->consultar_nom() << "/" << nom_autor << "||" << a.nombre_de_textos() << endl;
 			bool done = a.afegir_text(text);
 			if (done) {
 				//cout << "inserted! Autor textos...(" << a.nombre_de_textos() << "): ";
-				//if (a.existeix_titol(text.consultar_titol()) != a.tots_textos().end()) cout << "book exists";
-				//else { //cout << "book doesnt exists" << endl;};
 				//cout <<  "eliminem autor: " << it->consultar_nom() << " / " << it->tots_textos().size() <<  endl;
 				autors.erase(it);
 				//cout << "estem afegint un autor amb " << a.tots_textos().size() << " textos..." << endl;
@@ -132,12 +130,12 @@ bool Conjunt_autors::afegir_text_a_autor (Text text, string nom_autor) {
 			} else {
 				result = false;
 			}
-      it = autors.end();
-    } else {
-			it++;
+			it = autors.end();
+	    } else {
+				it++;
 		}
 	}
-  return result;
+	return result;
 }
 
 bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
@@ -145,18 +143,18 @@ bool Conjunt_autors::eliminar_text_de_autor (string titol, string nom_autor) {
 	bool done = false;
 	while(it != autors.end()) {
     	if (it->consultar_nom() == nom_autor) {
-				Autor a = *it;
-				done = a.eliminar_text(titol);
-				if (done) {
-					autors.erase(it);
-					it = autors.end();
-					it = autors.insert(it, a);
-				}
+			Autor a = *it;
+			done = a.eliminar_text(titol);
+			if (done) {
+				autors.erase(it);
+				it = autors.end();
+				it = autors.insert(it, a);
+			}
     		//done = (*it).eliminar_text(titol); //aixo igual que l'anterior
     		it = autors.end();
     	} else {
-				it++;
-			}
+			it++;
+		}
 	}
 	return done;
 }
