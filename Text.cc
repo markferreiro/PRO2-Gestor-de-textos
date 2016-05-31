@@ -72,6 +72,7 @@ Text::Text (string titol) {
 
 void Text::afegir_contingut (vector<string> frases) {
 	this->frases = frases;
+	construir_taula_de_frequencies();
 }
 
 void Text::modificar_titol(string titol) {
@@ -93,19 +94,11 @@ vector<string> Text::consultar_contingut () {
 map<int, string > Text::consultar_frases (int x, int y) {
 	map<int, string > aux = map<int, string>();
   //cout << "Preparat per llegir de la " << x << " a la " << y << endl;
-<<<<<<< HEAD
 	for (int i = x; i <= y; i++) {
 		//aux[i-x] = frases[i];
     	//cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
     	aux[i] = frases[i-1];
     	//cout << "Extrayendo frase: " << frases[i-1] << " (" << i << "," << y-x << ")" << endl;
-=======
-	for (int i = x; i <= y-x+1; i++) {
-		//aux[i-x] = frases[i];
-    //cout << "Intentando acceder a la frase: " << i+x << " de " << y-x+1 << endl;
-    aux[i+1] = frases[i];
-    //cout << "Extrayendo frase: " << frases[i] << " (" << i << "," << y-x+1 << ")" << endl;
->>>>>>> origin/master
 	}
 	return aux;
 }
@@ -188,6 +181,7 @@ int Text::consultar_frequencia_maxima() {
 	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
 		if (it->second > freq) freq = it->second;
 	}
+	cout << "freq maxima: " << freq << endl;
 	return freq;
 }
 
@@ -212,7 +206,6 @@ void Text::replaceAll( string& source, const string& from, const string& to )
     source.swap( newString );
 }
 
-<<<<<<< HEAD
 string Text::clean_word (string paraula) {
 	string p;
 	for (int i = 0; i < paraula.length(); i++) {
@@ -221,9 +214,9 @@ string Text::clean_word (string paraula) {
 		}
 	}
 	return p;
-=======
+}
+
 bool Text::rang_correcte(int x, int y) {
   //cout << "comprovant rang..." << endl;
   return ( (x < y) && (x >= 1 && y <= frases.size()) );
->>>>>>> origin/master
 }
