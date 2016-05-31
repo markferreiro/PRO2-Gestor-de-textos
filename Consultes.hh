@@ -170,7 +170,7 @@ private:
 	*/
 
 	void nombre_de_paraules();
-	
+
 	/** @brief Processador de consultes que comencen per "cites"
 		@param consulta: String corresponent a la consulta a processar.
 		/pre s'ha llegit la primera paraula de la consulta i es "cites"
@@ -179,18 +179,18 @@ private:
 		 emet un error si no hi ha cap text triat
 
 	*/
-	
+
 	void cites_consultar (string consulta);
-	
+
 	/** @brief Processador de consulta "cites autor "<autor>"?"
 		\pre s'ha comprovat que la consulta es "cites autor "<autor>"?"
 		\post s'haura realitzat la consulta, mostrant totes les cites de l'autor de Nom = nom, mostrant la referencia
 		i frases de cada cita
-		
+
 	*/
-	
+
 	void cites_autor (string nom);
-	
+
 	/** @brief Processador de la consulta "textos autor "<autor>" ?"
 		@param nom: Nom de l'autor del que es volen obtenir els textos.
 		/pre s'ha comprovat que la consulta es "textos autor "<autor>" ?"
@@ -198,7 +198,7 @@ private:
 		 alfabeticament per titol; emetra un error si no hi ha cap text triat
 
 	*/
-	
+
 	void textos_autor (string nom);
 
 	/** @brief Processador de la consulta "autor ?"
@@ -232,20 +232,17 @@ private:
 	*/
 
 	void taula_de_frequencies();
-<<<<<<< HEAD
-	
+
 	/** @brief Escriu una cita
 		\pre la cita es valida
 		\post escriu la referencia de la cita seguida de les frases de la cita
-		
+
 	*/
 	void escriure_cita(Cita& cita);
-=======
 
 	bool frases_expressio_algebraica(string consulta, const string frase);
 
 	vector<string> split(string str, char delimiter);
->>>>>>> origin/master
 };
 
 #endif
