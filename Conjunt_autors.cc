@@ -79,7 +79,7 @@ set<Autor, Conjunt_autors::classcomp> Conjunt_autors::tots_autors() {
 bool Conjunt_autors::triar_text (vector<string> paraules) {
 	set<Autor, classcomp>::iterator it;
 	bool trobat = false;
-	cout << "arribem aqui... sabent que autors(" << autors.size() << ")" << endl;
+	//cout << "arribem aqui... sabent que autors(" << autors.size() << ")" << endl;
 	for (it = autors.begin(); it != autors.end(); it++) {
 		Autor autor = *it;
 		//cout << "Comprovem textos de: " << autor.consultar_nom() << "(" << autor.nombre_de_textos() << ")" << endl;
@@ -98,7 +98,7 @@ bool Conjunt_autors::triar_text (vector<string> paraules) {
 			}
 		}
 	}
-	cout << "autor: " << autor_text_seleccionat << " / titol: " << text_seleccionat << endl;
+	//cout << "autor: " << autor_text_seleccionat << " / titol: " << text_seleccionat << endl;
 	if (not trobat) {
 		autor_text_seleccionat = "";
 		text_seleccionat = "";
