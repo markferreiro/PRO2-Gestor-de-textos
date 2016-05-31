@@ -7,12 +7,12 @@ Conjunt_cites::Conjunt_cites() {
 	max_ref = map<string, int>();
 }
 
-bool Conjunt_cites::afegir_cita(int x, int y, Text text, string nom_autor, string referencia, map<int, string> frases) {
+bool Conjunt_cites::afegir_cita(int x, int y, string titol_text, string nom_autor, string referencia, map<int, string> frases) {
 	//Comprovar si el rang de frases es correcte ( 1 <= x <= y <= n� frases )
 	//Comprovant aix� primer, en certs casos ens estalviarem la comprovaci� seg�ent.
 	//cout << "frases a llegir: " << x << " - " << y << endl;
-	if (!existeix_cita(text.consultar_titol(), x, y)) {
-		Cita cita = Cita(nom_autor, text.consultar_titol(), referencia + IntToString(maxima_referencia(referencia)), x, y, frases);
+	if (!existeix_cita(titol_text, x, y)) {
+		Cita cita = Cita(nom_autor, titol_text, referencia + IntToString(maxima_referencia(referencia)), x, y, frases);
 		/*map<int, string> frases2 = cita.obtenir_frases();
 		cout << "Frases: " << endl;
 		map<int, string>::iterator it = frases2.begin();
@@ -98,7 +98,7 @@ Cita Conjunt_cites::cita_referencia (string referencia, Conjunt_autors autors) {
 	}
 	return Cita();
 }
-vector<Cita> Conjunt_cites::cites_text_seleccionat(string titol_text_seleccionat, Conjunt_autors autors) {
+vector<Cita> Conjunt_cites::cites_text_seleccionat(string titol_text_seleccionat, Conjunt_autors& autors) {
 	vector<Cita> cites_to_return;
 	map<string, Cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
