@@ -427,7 +427,6 @@ void Consultes::taula_de_frequencies() {
 	}
 }
 
-<<<<<<< HEAD
 void Consultes::escriure_cita(Cita& cita) {
 	cout << cita.consultar_referencia() << endl;
 	map<int, string> frases = cita.obtenir_frases();
@@ -436,7 +435,8 @@ void Consultes::escriure_cita(Cita& cita) {
 		cout << it->first << " " << it->second << endl;
 		it++;
 	}
-=======
+}
+	
 vector<string> Consultes::split(string str, char delimiter) {
 	vector<string> internal;
 	stringstream ss(str); // Turn the string into a stream.
@@ -447,5 +447,4 @@ vector<string> Consultes::split(string str, char delimiter) {
 	}
 
 	return internal;
->>>>>>> origin/master
 }
