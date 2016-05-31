@@ -1,16 +1,16 @@
 @@ -1,22 +1,3 @@
 [Editors]
-Order=5,4,9,7,8,6,11,3,2,0,13,12,10,1
+Order=5,4,9,7,8,6,11,3,2,0,12,10,1
 Focused=8
 [Editor_0]
-CursorCol=5
+CursorCol=4
 CursorRow=141
 TopLine=116
 LeftChar=1
 [Editor_8]
-CursorCol=57
-CursorRow=111
-TopLine=167
+CursorCol=35
+CursorRow=75
+TopLine=61
 LeftChar=1
 [Editor_9]
 CursorCol=20
@@ -62,7 +62,7 @@ LeftChar=1
 [Editor_10]
 CursorCol=71
 CursorRow=146
-TopLine=133
+TopLine=137
 LeftChar=1
 [Editor_11]
 CursorCol=30
@@ -77,7 +77,7 @@ LeftChar=1
 [Editor_12]
 CursorCol=67
 CursorRow=265
-TopLine=245
+TopLine=237
 LeftChar=1
 [Editor_14]
 CursorCol=1
