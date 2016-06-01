@@ -119,18 +119,21 @@ void Gestor_de_textos::triar_text(string consulta) {
 	if(!autors.triar_text(paraules)) cout << "error" << endl;
 }
 void Gestor_de_textos::substituir_paraules(string consulta) {
-	istringstream iss(consulta);
-	string paraula1, paraula2;
-	iss >> paraula1;
-	iss >> paraula2; //llegint per
-	iss >> paraula2;
-	paraula1 = paraula1.substr(1, paraula1.size()-2);
-	paraula2 = paraula2.substr(1, paraula2.size()-2);
-	Autor a = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat());
-	Text text = autors.obtenir_text_autor(autors.obtenir_autor_text_seleccionat(), autors.obtenir_text_seleccionat());
-	text.substitueix_paraula(paraula1, paraula2);
-	autors.eliminar_text_de_autor(text.consultar_titol(), a.consultar_nom());
-	autors.afegir_text_a_autor(text, a.consultar_nom());
+	if (autors.hi_ha_text_seleccionat()) {
+		istringstream iss(consulta);
+		string paraula1, paraula2;
+		iss >> paraula1;
+		iss >> paraula2; //llegint per
+		iss >> paraula2;
+		paraula1 = paraula1.substr(1, paraula1.size()-2);
+		paraula2 = paraula2.substr(1, paraula2.size()-2);
+		Autor a = autors.obtenir_autor(autors.obtenir_autor_text_seleccionat());
+		Text text = autors.obtenir_text_autor(autors.obtenir_autor_text_seleccionat(), autors.obtenir_text_seleccionat());
+		text.substitueix_paraula(paraula1, paraula2);
+		autors.eliminar_text_de_autor(text.consultar_titol(), a.consultar_nom());
+		autors.afegir_text_a_autor(text, a.consultar_nom());
+	}
+	else cout << "error" << endl;
 }
 
 Conjunt_autors Gestor_de_textos::obtenir_conjunt_autors() {
