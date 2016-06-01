@@ -1,3 +1,5 @@
+afegir text "The Picture of Dorian Gray"
+
 afegir text "Numeros numeros y numeros"
 
 triar text {un dos tres}

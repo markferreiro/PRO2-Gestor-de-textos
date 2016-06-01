@@ -2,7 +2,7 @@ OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -ansi -O2 -Wall -Wextra -Wno-uninitialized 
 
 program.exe: program.o Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o
 	g++ program.o Gestor_de_textos.o Cita.o Autor.o Text.o Conjunt_autors.o Conjunt_cites.o Consultes.o -o program.exe
-	tar -cvf practica.tar makefile program.cc Gestor_de_textos.cc Gestor_de_textos.hh Conjunt_autors.cc Conjunt_autors.hh Conjunt_cites.cc Conjunt_cites.hh Autor.cc Autor.hh Text.cc Text.hh Cita.cc Cita.hh Consultes.cc Consultes.hh
+	tar -cvf practica.tar equip.pdf makefile program.cc Gestor_de_textos.cc Gestor_de_textos.hh Conjunt_autors.cc Conjunt_autors.hh Conjunt_cites.cc Conjunt_cites.hh Autor.cc Autor.hh Text.cc Text.hh Cita.cc Cita.hh Consultes.cc Consultes.hh
 	#rm *.o
 
 program.o: program.cc
