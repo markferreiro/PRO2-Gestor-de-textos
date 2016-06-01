@@ -246,9 +246,21 @@ private:
 
 	*/
 	void escriure_cita(Cita& cita);
+	
+	/** @brief Escriu una cita
 
+		\pre la cita es valida
+		\post escriu les frases de la cita
+
+	*/
 	void escriure_frases_cita(Cita& cita);
-
+	
+	/** @brief Conte la paraula
+		@param paraula: paraula a buscar
+		@param frase: frase on buscar la paraula
+		
+		/pre cert
+		/post Retorna true si s'ha trobat la paraula dins de la frase
 	bool conte_paraula(string paraula, string frase);
 
 	vector<string> split(string str, char delimiter);
