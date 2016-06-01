@@ -24,7 +24,7 @@ Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase
 ****
 
 
-triar text {palotes contingut Caca}
+triar text {Palotes contingut Caca}
 
 triar text {palo al agua}
 

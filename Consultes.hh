@@ -30,16 +30,16 @@ public:
 
 	Conjunt_autors autors;
 	Conjunt_cites cites;
-	
+
 	/** @brief Processador de consultes
 		@param consulta: String corresponent a la consulta a processar.
-		
+
 		/pre cert
 		/post haura fet la consulta que ens indica "consulta"
 
 	*/
 	void processar_consulta (string consulta, Conjunt_autors autors, Conjunt_cites cites);
-	
+
 private:
 
 	struct classcomp
@@ -47,13 +47,13 @@ private:
 		bool operator() (const Autor& lhs, const Autor& rhs) const;
 		bool operator() (const Text& lhs, const Text& rhs) const;
 	};
-	
+
 	/** @brief Processador consultes que comencen per "tots"
 		@param consulta: String corresponent a la consulta a processar.
-		
+
 		/pre s'ha llegit la primera paraula de la consulta i es "tots"
 		/post s'haura fet la consulta "tots textos ?" o "tots autors ?"
-		
+
 	*/
 	void tots (string consulta);
 
@@ -96,7 +96,7 @@ private:
 
 	/** @brief Processador consulta "info cita <referencia> ?"
 		@param referencia: String corresponent a la referenica a consultar.
-		
+
 		/pre s'ha comprovat que la consulta es "info cita <referencia> ?"
 		/post mostra informacio d'una cita, indicant l'autor i titol d'on provenen,
 		 numero de la frase inicial i final, i el contingut de la frase o frases que la componen
@@ -106,7 +106,7 @@ private:
 
 	/** @brief Processador de les consultes que comencen per "frases"
 		@param consulta: String corresponent a la consulta a processar.
-		
+
 		/pre s'ha llegit la primera paraula de la consulta i es "frases"
 		/post s'haura fet la consulta "frases x y ?", "frases (expressio) ?" o "frases "sequencia" ?"
 
@@ -116,7 +116,7 @@ private:
 	/** @brief Processador de la consulta "frases x y ?"
 		@param x: Part petita (posici� m�s petita) del rang de frases que es vol agafar del text.
 		@param y: Part gran (posici� m�s gran) del rang de frases que es vol agafar del text.
-		
+
 		/pre s'ha comprovat que la consulta es "frases x y ?"
 		/post mostra les frases entre la x-esima i la y-esima del contingut de l'ultim text triat, extrems
 		 inclosos; emetra un error si l'interval de frases no es valid, es valid si 1 <= x <= y <= n,
@@ -127,7 +127,7 @@ private:
 
 	/** @brief Processador de la comanda "frases <expressio> ?"
 		@param expressio: String corresponent a la expressi� corresponent a la consulta "frases <expresi�>".
-		
+
 		/pre s'ha comprovat que la comanada es "frases <expressio> ?"
 		/post mostra les frases del contingut de l'ultim text triat que copleixen l'expressio,
 		 indicant per a cada frase el seu numero i el contingut, ordenades creixentment pel
@@ -135,11 +135,11 @@ private:
 
 	*/
 	void frases_expressio (string expressio);
-	
+
 	/** @brief Funcio recursiva auxiliar de frases_expressio
 		@param consulta: expressio per trobar a la frase
 		@param frase: frase del text on es vol trobar l'expressio de consulta
-		
+
 		/pre cert
 		/post retorna true si a frase es troben les paraules com indica l'expressio, retorna false si no
 	*/
@@ -147,7 +147,7 @@ private:
 
 	/** @brief Processador de la consulta "frases "sequencia" ?"
 		@param sequencia: String corresponent a la seq�encia de paraules a utilitzar en la consulta.
-		
+
 		/pre s'ha comprovat que la consulta es "frases "sequencia"?"
 		/post mostra les frases on hi apareix (consecutivament, sense signes de puntuacio) la "sequencia"
 		 en el contingut de l'ultim text triat; emetra un error si no hi ha cap text triat
@@ -157,7 +157,7 @@ private:
 
 	/** @brief Processador de consultes que comencen per "nombre de"
 		@param consulta: String corresponent a la consulta a processar.
-		
+
 		/pre s'ha llegit les primeres paraules de la consulta i es "nombre de"
 		/post s'haura fet la consulta "nombre de frases ?" o "nombre de paraules ?"
 
@@ -179,10 +179,10 @@ private:
 
 	*/
 	void nombre_de_paraules();
-	
+
 	/** @brief Processador de consultes que comencen per "cites"
 		@param consulta: String corresponent a la consulta a processar.
-		
+
 		/pre s'ha llegit la primera paraula de la consulta i es "cites"
 		/post s'haura fet la consulta "cites ?", que mostra les cites de l'ultim text triat indicant
 		 la referencia i les frases de cada cita; o "cites autor "<autor> ?";
@@ -190,19 +190,19 @@ private:
 
 	*/
 	void cites_consultar (string consulta);
-	
+
 	/** @brief Processador de consulta "cites autor "<autor>"?"
-	
+
 		\pre s'ha comprovat que la consulta es "cites autor "<autor>"?"
 		\post s'haura realitzat la consulta, mostrant totes les cites de l'autor de Nom = nom, mostrant la referencia
 		i frases de cada cita
-		
+
 	*/
 	void cites_autor (string nom, Conjunt_autors autors);
-	
+
 	/** @brief Processador de la consulta "textos autor "<autor>" ?"
 		@param nom: Nom de l'autor del que es volen obtenir els textos.
-		
+
 		/pre s'ha comprovat que la consulta es "textos autor "<autor>" ?"
 		/post mostra tots els textos d'un determindat autor (nomes el titol de cada text) ordenats
 		 alfabeticament per titol; emetra un error si no hi ha cap text triat
@@ -238,15 +238,17 @@ private:
 
 	*/
 	void taula_de_frequencies();
-	
+
 	/** @brief Escriu una cita
-	
+
 		\pre la cita es valida
 		\post escriu la referencia de la cita seguida de les frases de la cita
-		
+
 	*/
 	void escriure_cita(Cita& cita);
-	
+
+	void escriure_frases_cita(Cita& cita);
+
 	bool conte_paraula(string paraula, string frase);
 
 	vector<string> split(string str, char delimiter);

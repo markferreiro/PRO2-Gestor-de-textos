@@ -146,6 +146,7 @@ vector<string> Conjunt_autors::tots_autors() {
 	while (it != autors.end()) {
 		Autor a = *it;
 		aux[i] = a.consultar_nom()  + " " + IntToString(a.nombre_de_textos()) + " " + IntToString(a.nombre_de_frases()) + " " + IntToString(a.nombre_de_paraules());
+		if (a.nombre_de_textos() < 1) aux[i] = "";
 		it++;
 		i++;
 	}

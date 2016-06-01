@@ -1,0 +1,172 @@
+afegir text "Numeros numeros y numeros"
+
+triar text {un dos tres}
+error
+
+eliminar text
+error
+
+triar text {Un}
+
+triar text {Dos}
+
+triar text {quatre}
+error
+
+triar text {Son numeros no}
+
+afegir cita 2 4
+
+afegir cita 2 8
+
+afegir cita 2 13
+
+info ?
+Marc Ferreiro Aliberch "Numeros numeros y numeros" 13 22
+Cites Associades:
+MFA1
+2 Dos.
+3 Tres.
+4 Son els tres primers numeros, no?
+MFA2
+2 Dos.
+3 Tres.
+4 Son els tres primers numeros, no?
+5 Quatre.
+6 Cinc, sis.
+7 Hi ha molts mes!
+8 Set.
+MFA3
+2 Dos.
+3 Tres.
+4 Son els tres primers numeros, no?
+5 Quatre.
+6 Cinc, sis.
+7 Hi ha molts mes!
+8 Set.
+9 Vuit.
+10 Nou.
+11 Deu.
+12 Onze.
+13 Donze.
+
+eliminar cita "MFA1"
+
+info ?
+Marc Ferreiro Aliberch "Numeros numeros y numeros" 13 22
+Cites Associades:
+MFA2
+2 Dos.
+3 Tres.
+4 Son els tres primers numeros, no?
+5 Quatre.
+6 Cinc, sis.
+7 Hi ha molts mes!
+8 Set.
+MFA3
+2 Dos.
+3 Tres.
+4 Son els tres primers numeros, no?
+5 Quatre.
+6 Cinc, sis.
+7 Hi ha molts mes!
+8 Set.
+9 Vuit.
+10 Nou.
+11 Deu.
+12 Onze.
+13 Donze.
+
+eliminar cita "MFA2"
+
+info ?
+Marc Ferreiro Aliberch "Numeros numeros y numeros" 13 22
+Cites Associades:
+MFA3
+2 Dos.
+3 Tres.
+4 Son els tres primers numeros, no?
+5 Quatre.
+6 Cinc, sis.
+7 Hi ha molts mes!
+8 Set.
+9 Vuit.
+10 Nou.
+11 Deu.
+12 Onze.
+13 Donze.
+
+eliminar cita "MFA3"
+
+info ?
+Marc Ferreiro Aliberch "Numeros numeros y numeros" 13 22
+Cites Associades:
+
+autor ?
+Marc Ferreiro Aliberch
+
+contingut ?
+1 Un.
+2 Dos.
+3 Tres.
+4 Son els tres primers numeros, no?
+5 Quatre.
+6 Cinc, sis.
+7 Hi ha molts mes!
+8 Set.
+9 Vuit.
+10 Nou.
+11 Deu.
+12 Onze.
+13 Donze.
+
+nombre de frases ?
+13
+
+nombre de paraules ?
+22
+
+frases 1 13
+1 Un.
+2 Dos.
+3 Tres.
+4 Son els tres primers numeros, no?
+5 Quatre.
+6 Cinc, sis.
+7 Hi ha molts mes!
+8 Set.
+9 Vuit.
+10 Nou.
+11 Deu.
+12 Onze.
+13 Donze.
+
+frases ((({Un} | {Dos}) | {Tres}) | (({Quatre} | {Donze}) | {sis}))
+1 Un.
+2 Dos.
+3 Tres.
+5 Quatre.
+6 Cinc, sis.
+13 Donze.
+
+frases ({Un} | {Tres})
+1 Un.
+3 Tres.
+
+eliminar text
+
+triar text {un}
+error
+
+afegir text "Numeros numeros y numeros"
+
+afegir text "Numeros numeros"
+
+afegir text "Numeros numeros y"
+
+triar text {y}
+error
+
+triar text {Un Dos Tres}
+error
+

@@ -1,0 +1,75 @@
+afegir text "Numeros numeros y numeros"
+autor "Marc Ferreiro Aliberch"
+Un. Dos. Tres. Son els tres primers numeros, no? Quatre. Cinc, sis. Hi ha molts mes! Set. Vuit. Nou. Deu. Onze. Donze.
+****
+
+triar text {un dos tres}
+
+eliminar text
+
+triar text {Un}
+
+triar text {Dos}
+
+triar text {quatre}
+
+triar text {Son numeros no}
+
+afegir cita 2 4
+
+afegir cita 2 8
+
+afegir cita 2 13
+
+info ?
+
+eliminar cita "MFA1"
+
+info ?
+
+eliminar cita "MFA2"
+
+info ?
+
+eliminar cita "MFA3"
+
+info ?
+
+autor ?
+
+contingut ?
+
+nombre de frases ?
+
+nombre de paraules ?
+
+frases 1 13
+
+frases ((({Un} | {Dos}) | {Tres}) | (({Quatre} | {Donze}) | {sis}))
+
+frases ({Un} | {Tres})
+
+eliminar text
+
+triar text {un}
+
+afegir text "Numeros numeros y numeros"
+autor "Marc Ferreiro Aliberch"
+Un. Dos. Tres. Son els tres primers numeros, no? Quatre. Cinc, sis. Hi ha molts mes! Set. Vuit. Nou. Deu. Onze. Donze.
+****
+
+afegir text "Numeros numeros"
+autor "Marc Ferreiro Aliberch"
+Un. Dos. Tres. Son els tres primers numeros, no? Quatre. Cinc, sis. Hi ha molts mes! Set. Vuit. Nou. Deu. Onze. Donze.
+****
+
+afegir text "Numeros numeros y"
+autor "Marc Ferreiro Aliberch"
+Un. Dos. Tres. Son els tres primers numeros, no? Quatre. Cinc, sis. Hi ha molts mes! Set. Vuit. Nou. Deu. Onze. Donze.
+****
+
+triar text {y}
+
+triar text {Un Dos Tres}
+
+sortir

@@ -55,7 +55,9 @@ void Consultes::tots_textos() {
 
 void Consultes::tots_autors() {
 	vector<string> aux = autors.tots_autors();
-	for (int i = 0; i < aux.size();  i++) cout << aux[i] << endl;
+	for (int i = 0; i < aux.size();  i++) {
+    if (aux[i] != "") cout << aux[i] << endl;
+  }
 }
 
 void Consultes::totes_cites() {
@@ -103,7 +105,13 @@ void Consultes::info_cita(string referencia) {
 		cout << cita.consultar_nom_autor() << " ";
 		cout << "\"" << cita.consultar_titol() << "\"" << endl;
 		cout << cita.obtenir_frases().begin()->first << "-" << cita.obtenir_frases().rbegin()->first << endl;
-		escriure_cita(cita);
+
+  	map<int, string> frases = cita.obtenir_frases();
+  	map<int, string>::iterator it = frases.begin();
+  	while (it != frases.end()) {
+  		cout << it->first << " " << it->second << endl;
+  		it++;
+  	}
 	} else {
 		cout << "error" << endl;
 	}
@@ -161,7 +169,7 @@ void Consultes::frases_expressio(string expressio) {
 	    expressio = expressio.substr(1, expressio.size()-2);
 	    string titol_text = autors.obtenir_text_seleccionat();
 	    string nom_autor = autors.existeix_titol(titol_text);
-	
+
 	    Text text = autors.obtenir_text_autor(nom_autor, titol_text);
 	    vector<string> frases = text.consultar_contingut();
 	    vector<string>::iterator it = frases.begin();
@@ -198,12 +206,19 @@ bool Consultes::frases_expressio_algebraica(string consulta, Text text, int f) {
 	int posicio_lectura = 0;
 	//obtenir_expressio_esquerre
 	if (consulta[0] == '(') { //en cas que sigui una expressio composta, la recollim i fem recursivitat.
+      int par = 1;
 	    expressio_e = "";
 	    posicio_lectura = 1;
-	    while (consulta[posicio_lectura] != ')') {
+      if (consulta[posicio_lectura] == ')') par--;
+      else if (consulta[posicio_lectura] == '(') par++;
+	    while (par > 0) {
+        if (consulta[posicio_lectura+1] == ')') par--;
+        else if (consulta[posicio_lectura+1] == '(') par++;
 	      expressio_e += consulta[posicio_lectura];
-	      posicio_lectura++;
+        //cout << consulta[posicio_lectura] << endl;
+        posicio_lectura++;
 	    }
+      //cout << "FORA ESQUERRE: " << consulta[posicio_lectura] << endl;
 	    posicio_lectura++;
 	    resultat_e_e = frases_expressio_algebraica(expressio_e, text, f);
 	} else { //en cas que sigui una expressio simple, la tractem.
@@ -216,7 +231,7 @@ bool Consultes::frases_expressio_algebraica(string consulta, Text text, int f) {
 	    posicio_lectura++;
 	    vector<string> paraules = split(expressio_e, ' ');
 	    resultat_e_e = true;
-		
+
 	    for(int i = 0 ; i < paraules.size() && resultat_e_e ; i++) {
 	    	if (!text.conte_paraula(paraules[i], f)) resultat_e_e = false;
 	    }
@@ -232,10 +247,17 @@ bool Consultes::frases_expressio_algebraica(string consulta, Text text, int f) {
 	if (consulta[posicio_lectura] == '(') { //en cas que sigui una expressio composta, la recollim i fem recursivitat.
 	    expressio_d = "";
 	    posicio_lectura++;
-	    while (consulta[posicio_lectura] != ')') {
+      int par = 1;
+      if (consulta[posicio_lectura] == ')') par--;
+      else if (consulta[posicio_lectura] == '(') par++;
+	    while (par > 0) {
+        if (consulta[posicio_lectura+1] == ')') par--;
+        else if (consulta[posicio_lectura+1] == '(') par++;
 	      expressio_d += consulta[posicio_lectura];
-	      posicio_lectura++;
+        //cout << consulta[posicio_lectura] << endl;
+        posicio_lectura++;
 	    }
+      //cout << "FORA DRETA: " << consulta[posicio_lectura] << endl;
 	    posicio_lectura++;
 	    resultat_e_d = frases_expressio_algebraica(expressio_d, text, f);
 	} else { //en cas que sigui una expressio simple, la tractem.
@@ -248,11 +270,12 @@ bool Consultes::frases_expressio_algebraica(string consulta, Text text, int f) {
 	    posicio_lectura++;
 	    vector<string> paraules = split(expressio_d, ' ');
 	    resultat_e_d = true;
-	    
+
 		for(int i = 0 ; i < paraules.size() && resultat_e_d ; i++) {
 	    	if (!text.conte_paraula(paraules[i], f)) resultat_e_d = false;
 	    }
 	}
+  //cout << "Resultat: " << expressio_e << " = " << resultat_e_e << " | " << expressio_d << " = " << resultat_e_d << endl;
 	return (operand == "&") ? (resultat_e_e && resultat_e_d) : (resultat_e_e || resultat_e_d);
 }
 
@@ -329,6 +352,7 @@ void Consultes::cites_consultar(string consulta) {
 		vector<Cita> aux = cites.cites_text_seleccionat(autors.obtenir_text_seleccionat(), autors);
 		for (int c = 0; c < aux.size(); c++) {
 			escriure_cita(aux[c]);
+      cout << aux[c].consultar_nom_autor() << " \"" << aux[c].consultar_titol() << "\"" << endl;
 		}
 	}
 }
@@ -337,6 +361,7 @@ void Consultes::cites_autor(string nom, Conjunt_autors) {
 	vector<Cita> aux = cites.cites_autor(nom, autors);
 	for (int c = 0; c < aux.size(); c++) {
 		escriure_cita(aux[c]);
+    cout << "\"" << aux[c].consultar_titol() << "\"" << endl;
 	}
 }
 
@@ -390,7 +415,16 @@ void Consultes::escriure_cita(Cita& cita) {
 		it++;
 	}
 }
-	
+
+void Consultes::escriure_frases_cita(Cita& cita) {
+	map<int, string> frases = cita.obtenir_frases();
+	map<int, string>::iterator it = frases.begin();
+	while (it != frases.end()) {
+		cout << it->first << " " << it->second << endl;
+		it++;
+	}
+}
+
 vector<string> Consultes::split(string str, char delimiter) {
 	vector<string> internal;
 	stringstream ss(str); // Turn the string into a stream.

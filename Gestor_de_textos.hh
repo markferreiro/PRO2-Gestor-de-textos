@@ -25,7 +25,6 @@ using namespace std;
 	@brief Representa un gestor de de textos, autors i cites.
 
 */
-class Consultes;
 class Gestor_de_textos
 {
 private:
