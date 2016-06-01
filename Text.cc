@@ -26,41 +26,16 @@ bool Text::classcomp::operator() (const std::string& lhs, const std::string& rhs
 }
 
 void Text::modificar_contingut (const string paraula1, const string paraula2) {
-	//vector<string> noves_frases;
-	//replace(frases.begin(), frases.end(), paraula1, paraula2);
 	for (int f = 0; f < frases.size(); f++) {
-	    //string f = frases[frase];
 		replaceAll(frases[f], paraula1, paraula2);
-	    /*string frase;
-		vector<string> par = split(frases[f], ' ');
-		for (int p = 0; p < par.size(); p++) {
-			string paraula = clean_word(par[p]);
-			if (paraula == paraula1) {
-				char c = par[p][par[p].size()];
-				if ((c >= 'a' and c <= 'z') or (c >= 'A' and c <= 'Z') or (c >= '0' and c <= '9')) {
-					par[p] = paraula2;
-				}
-				else {
-					paraula2 += c;
-					par[p] = paraula2;
-				}
-			}
-			frase += par[p];
-		}
-		noves_frases.push_back(frase);*/
-
-	    //frases[frase] = f;
 	}
-	//afegir_contingut(noves_frases);
 }
 
 void Text::construir_taula_de_frequencies() {
 	for(int frase = 0 ; frase < frases.size() ; frase++) {
 		vector<string> paraules = split(frases[frase], ' ');
 		for (int paraula = 0 ; paraula < paraules.size() ; paraula++) {
-			//cout << "paraula bruta: " << paraules[paraula] << endl;
 			string paraula_neta = clean_word(paraules[paraula]);
-			//cout << "paraula neta: " << paraula_neta << endl;
 			frequencies[paraula_neta]++;
 		}
 	}
@@ -102,22 +77,15 @@ map<int, string > Text::consultar_frases (int x, int y) {
 	return aux;
 }
 
-vector<string> Text::consultar_frases() {
-  return frases;
-}
-
 vector<vector<string> > Text::consultar_taula_frequencies() {
 	vector<vector<string> > aux(consultar_frequencia_maxima()+1);
 	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
-		//cout << it->first << " " << it->second << endl;
 		aux[it->second].push_back(it->first);
-		//cout << aux[it->second][i] << " " << it->second << endl;
 	}
 	return aux;
 }
 
 bool Text::conte_paraules (int i, vector<string> paraules) {
-	//for (int x = 0; 0 < paraules.size();x++) cout << paraules[x] <<  " " << endl;
 	string frase = consultar_frase(i);
 	int paraula = 0;
 	vector<string> par = split(frase, ' ');
@@ -125,10 +93,10 @@ bool Text::conte_paraules (int i, vector<string> paraules) {
 		if(paraula < paraules.size()) {
 			string paraula_neta = clean_word(par[p]);
 			if (paraula_neta == paraules[paraula]) {
-				//cout << "paraula neta:" << paraula_neta << endl;
 				paraula++;
-			} else {
-				paraula == 0;
+			}
+			else {
+				paraula = 0;
 			}
 		}
 		else if (paraula == paraules.size()) return true;
@@ -136,8 +104,14 @@ bool Text::conte_paraules (int i, vector<string> paraules) {
 	return false;
 }
 
-bool Text::conte_expressio(string expressio) {
-
+bool Text::conte_paraula(string paraula, int i) {
+	string frase = consultar_frase(i);
+	vector<string> f = split(frase, ' ');
+	for (int i = 0; i < f.size(); ++i) {
+		string neta = clean_word(f[i]);
+		if (neta == paraula) return true;
+	}
+	return false;
 }
 
 void Text::substitueix_paraula (string paraula1, string paraula2) {
@@ -151,7 +125,6 @@ pair<int,int> Text::existeix_paraula (string paraula) {
 		for (int p = 0 ; p < par.size(); p++) {
 			string paraula_neta = clean_word(par[p]);
 			if (paraula_neta == paraula) {
-        		//cout << "Comprobem contingut: " << par[p] << " - " << paraula << endl;
 				return (pair<int,int>(f,p));
 			}
 		}
@@ -174,7 +147,6 @@ int Text::consultar_numero_paraules() {
 	int paraules = 0;
 	for (int f = 0; f < frases.size(); f++) {
 		vector<string> par = split(frases[f], ' ');
-		//cout << "frase " << f << ": " << par.size()-1 << endl;
 		paraules += par.size();
 	}
 	return paraules;
@@ -185,7 +157,6 @@ int Text::consultar_frequencia_maxima() {
 	for (map<string, int, Text::classcomp>::iterator it = frequencies.begin() ; it != frequencies.end() ; it++) {
 		if (it->second > freq) freq = it->second;
 	}
-	//cout << "freq maxima: " << freq << endl;
 	return freq;
 }
 
@@ -221,6 +192,5 @@ string Text::clean_word (string paraula) {
 }
 
 bool Text::rang_correcte(int x, int y) {
-  //cout << "comprovant rang..." << endl;
   return ( (x <= y) && (x >= 1 && y <= frases.size()) );
 }

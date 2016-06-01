@@ -49,29 +49,13 @@ void Consultes::tots(string consulta) {
 	else if (paraula == "autors") tots_autors();
 }
 void Consultes::tots_textos() {
-	set<Autor, Conjunt_autors::classcomp>::iterator it_autors = autors.tots_autors().begin();
-	while (it_autors != autors.tots_autors().end()) {
-		Autor autor = *it_autors;
-		set<Text, Autor::custom_sort> textos = autor.tots_textos();
-		set<Text, Autor::custom_sort>::iterator it_textos = textos.end();
-		while (it_textos != textos.end()) {
-			Text text = *it_textos;
-			cout << autor.consultar_nom() << " ";
-			cout << "\"" << text.consultar_titol() << "\" " << endl;
-			it_textos++;
-		}
-		it_autors++;
-	}
+	vector<string> textos = autors.tots_textos();
+	for (int i = 0; i < textos.size();  i++) cout << textos[i] << endl;
 }
 
 void Consultes::tots_autors() {
-	set<Autor, classcomp>::iterator it = autors.tots_autors().begin();
-	while (it != autors.tots_autors().end()) {
-		Autor autor = *it;
-		cout << autor.consultar_nom() << " " << autor.nombre_de_textos();
-		cout << " " << autor.nombre_de_frases() << " " << autor.nombre_de_paraules() << endl;
-		it++;
-	}
+	vector<string> aux = autors.tots_autors();
+	for (int i = 0; i < aux.size();  i++) cout << aux[i] << endl;
 }
 
 void Consultes::totes_cites() {
@@ -135,7 +119,6 @@ void Consultes::frases(string consulta) {
 		frases_text_triat(x,y);
 	}
 	else if (lletra == '\(') {
-    //cout << consulta.substr(1, consulta.size()) << endl;
 		frases_expressio(consulta.substr(1, consulta.size()));
 	}
 	else if (lletra == '\"') {
@@ -174,139 +157,115 @@ void Consultes::frases_text_triat(int x, int y) {
 }
 
 void Consultes::frases_expressio(string expressio) {
-  if (autors.hi_ha_text_seleccionat()) {
-    expressio = expressio.substr(1, expressio.size()-2);
-    string titol_text = autors.obtenir_text_seleccionat();
-    string nom_autor = autors.existeix_titol(titol_text);
-
-    Text text = autors.obtenir_text_autor(nom_autor, titol_text);
-    vector<string> frases = text.consultar_frases();
-    vector<string>::iterator it = frases.begin();
-    int i = 1;
-    while (it != frases.end()) {
-      //cout << "intentem trobar" << endl;
-      if (frases_expressio_algebraica(expressio, *it)) {
-        cout << i << " - " << *it << endl;
-      }
-      i++;
-      it++;
-    }
-  } else {
-    cout << "error" << endl;
-  }
-
-  //frases_expressio_algebraica(expressio.substr(1, expressio.size()-2), frase);
+	if (autors.hi_ha_text_seleccionat()) {
+	    expressio = expressio.substr(1, expressio.size()-2);
+	    string titol_text = autors.obtenir_text_seleccionat();
+	    string nom_autor = autors.existeix_titol(titol_text);
+	
+	    Text text = autors.obtenir_text_autor(nom_autor, titol_text);
+	    vector<string> frases = text.consultar_contingut();
+	    vector<string>::iterator it = frases.begin();
+	    int i = 1;
+	    while (it != frases.end()) {
+	      //cout << "intentem trobar" << endl;
+	      if (frases_expressio_algebraica(expressio, /* *it*/text, i)) {
+	        cout << i << " " << *it << endl;
+	      }
+	      i++;
+	      it++;
+	    }
+	} else {
+    	cout << "error" << endl;
+	}
 }
 
-bool Consultes::frases_expressio_algebraica(string consulta, const string frase) {
-  /* La idea es fer crides recursives per cada expresió, es a dir,
-  per tots els subconjunts de caracters inclosos entre els parentesis '(' i ')'
-  Partint de la idea que:
-    - conjunt_de_paraules = '{' + paraula* + '}'.
-    - expressió = '(' + (expressió|conjunt_de_paraules) + ')'. */
-  /*
-  Forma del programa:
-    expressio_exquerre = obtenir_expressio;
-    operand = obtenir_operand;
-    expressio_dreta = obtenir_expressio;
-    return expressio_esquerre operand expressio_dreta;
-  */
-  //cout << consulta << endl;
-  string expressio_e, expressio_d, operand;
-  bool resultat_e_e, resultat_e_d;
-  int posicio_lectura = 0;
-  //obtenir_expressio_esquerre
-  if (consulta[0] == '(') { //en cas que sigui una expressio composta, la recollim i fem recursivitat.
-    //string expressio_e = "(";
-    expressio_e = "";
-    posicio_lectura = 1;
-    while (consulta[posicio_lectura] != ')') {
-      expressio_e += consulta[posicio_lectura];
-      posicio_lectura++;
-    }
-    posicio_lectura++;
-    //expressio_e += ")";
-    //cout << "cridem recursivitat amb:" << expressio_e << endl;
-    resultat_e_e = frases_expressio_algebraica(expressio_e, frase);
-  } else { //en cas que sigui una expressio simple, la tractem.
-    expressio_e = "";
-    posicio_lectura = 1;
-    while (consulta[posicio_lectura] != '}') {
-      expressio_e += consulta[posicio_lectura];
-      posicio_lectura++;
-    }
-    posicio_lectura++;
-    vector<string> paraules = split(expressio_e, ' ');
-    resultat_e_e = true;
-    for(int i = 0 ; i < paraules.size() && resultat_e_e ; i++) {
-      if (frase.find(paraules[i]) == string::npos) resultat_e_e = false;
-    }
-  }
-  while (consulta[posicio_lectura] != '(' && consulta[posicio_lectura] != '{') {
-    if (consulta[posicio_lectura] == '&' || consulta[posicio_lectura] == '|') {
-      operand = consulta[posicio_lectura];
-    }
-    posicio_lectura++;
-  }
+bool Consultes::frases_expressio_algebraica(string consulta, Text text, int f) {
+	/* La idea es fer crides recursives per cada expresió, es a dir,
+	per tots els subconjunts de caracters inclosos entre els parentesis '(' i ')'
+	Partint de la idea que:
+    	- conjunt_de_paraules = '{' + paraula* + '}'.
+    	- expressió = '(' + (expressió|conjunt_de_paraules) + ')'. */
+	/*
+	Forma del programa:
+    	expressio_exquerre = obtenir_expressio;
+    	operand = obtenir_operand;
+		expressio_dreta = obtenir_expressio;
+		return expressio_esquerre operand expressio_dreta;
+	*/
+	//cout << consulta << endl;
+	string expressio_e, expressio_d, operand;
+	bool resultat_e_e, resultat_e_d;
+	int posicio_lectura = 0;
+	//obtenir_expressio_esquerre
+	if (consulta[0] == '(') { //en cas que sigui una expressio composta, la recollim i fem recursivitat.
+	    expressio_e = "";
+	    posicio_lectura = 1;
+	    while (consulta[posicio_lectura] != ')') {
+	      expressio_e += consulta[posicio_lectura];
+	      posicio_lectura++;
+	    }
+	    posicio_lectura++;
+	    resultat_e_e = frases_expressio_algebraica(expressio_e, text, f);
+	} else { //en cas que sigui una expressio simple, la tractem.
+	    expressio_e = "";
+	    posicio_lectura = 1;
+	    while (consulta[posicio_lectura] != '}') {
+	      expressio_e += consulta[posicio_lectura];
+	      posicio_lectura++;
+	    }
+	    posicio_lectura++;
+	    vector<string> paraules = split(expressio_e, ' ');
+	    resultat_e_e = true;
+		
+	    for(int i = 0 ; i < paraules.size() && resultat_e_e ; i++) {
+	    	if (!text.conte_paraula(paraules[i], f)) resultat_e_e = false;
+	    }
+	}
+	while (consulta[posicio_lectura] != '(' && consulta[posicio_lectura] != '{') {
+	    if (consulta[posicio_lectura] == '&' || consulta[posicio_lectura] == '|') {
+	    	operand = consulta[posicio_lectura];
+    	}
+    	posicio_lectura++;
+	}
 
-  //obtenir_expressio_dreta
-  if (consulta[posicio_lectura] == '(') { //en cas que sigui una expressio composta, la recollim i fem recursivitat.
-    //expressio_d = "(";
-    expressio_d = "";
-    posicio_lectura++;
-    while (consulta[posicio_lectura] != ')') {
-      expressio_d += consulta[posicio_lectura];
-      posicio_lectura++;
-    }
-    posicio_lectura++;
-    //expressio_d += ")";
-    //cout << "cridem recursivitat ambasdascdscda:" << expressio_d << endl;
-    resultat_e_d = frases_expressio_algebraica(expressio_d, frase);
-  } else { //en cas que sigui una expressio simple, la tractem.
-    expressio_d = "";
-    posicio_lectura++;
-    while (consulta[posicio_lectura] != '}') {
-      expressio_d += consulta[posicio_lectura];
-      posicio_lectura++;
-    }
-    posicio_lectura++;
-    vector<string> paraules = split(expressio_d, ' ');
-    resultat_e_d = true;
-    for(int i = 0 ; i < paraules.size() && resultat_e_d ; i++) {
-      if (frase.find(paraules[i]) == string::npos) resultat_e_d = false;
-    }
-  }
-  //cout << "resultat esquerre: " << resultat_e_e << " amb esquerre = '" << expressio_e << "'" << " resultat dret: " << resultat_e_d << " amb dreta = '" << expressio_d << "'" << endl;
-  return (operand == "&") ? (resultat_e_e && resultat_e_d) : (resultat_e_e || resultat_e_d);
+	//obtenir_expressio_dreta
+	if (consulta[posicio_lectura] == '(') { //en cas que sigui una expressio composta, la recollim i fem recursivitat.
+	    expressio_d = "";
+	    posicio_lectura++;
+	    while (consulta[posicio_lectura] != ')') {
+	      expressio_d += consulta[posicio_lectura];
+	      posicio_lectura++;
+	    }
+	    posicio_lectura++;
+	    resultat_e_d = frases_expressio_algebraica(expressio_d, text, f);
+	} else { //en cas que sigui una expressio simple, la tractem.
+	    expressio_d = "";
+	    posicio_lectura++;
+	    while (consulta[posicio_lectura] != '}') {
+	    	expressio_d += consulta[posicio_lectura];
+	    	posicio_lectura++;
+	    }
+	    posicio_lectura++;
+	    vector<string> paraules = split(expressio_d, ' ');
+	    resultat_e_d = true;
+	    
+		for(int i = 0 ; i < paraules.size() && resultat_e_d ; i++) {
+	    	if (!text.conte_paraula(paraules[i], f)) resultat_e_d = false;
+	    }
+	}
+	return (operand == "&") ? (resultat_e_e && resultat_e_d) : (resultat_e_e || resultat_e_d);
 }
 
-/*bool Consultes::frases_expressio_recursiu(int parentesi, string consulta, vector<string> paraules) {
-  if (parentesi == 0) return frases;
-  if (consulta[0] == '(') frases_expressio_recursiu(frases, parentesi++, consulta.substr(1, consulta.size()), paraules);
-  else if (consulta[0] == '}') {
-    int i = 1;
-    while (consulta[i] != ')' && consulta[i] != '&' && consulta[i] != '|') { i++; }
-    if (consulta[i] == ')') {
-      //realitzar busqueda;
-      frases_expressio_recursiu(frases, parentesi--, consulta.substr(1, consulta.size()), paraules);
-    }
-    else frases_expressio_recursiu(frases, , consulta.substr(1, consulta.size()), paraules);
-  }
-  else if (consulta[0] == '{') {
-    string paraula ""; paraules.push_back(paraula);
-    frases_expressio_recursiu(frases, parentesi, consulta.substr(1, consulta.size()), paraules);
-  }
-  else if (consulta[0] == '&')
-  else if (consulta[0] == '|')
-  else {
-    paraules[paraules.size()-1] +=
-  }
-}*/
+bool Consultes::conte_paraula (string paraula, const string frase) {
+	vector<string> f = split(frase, ' ');
+	for (int i = 0; i < f.size(); ++i) {
+		if (f[i] == paraula) return true;
+	}
+	return false;
+}
 
 void Consultes::frases_sequencia(vector<string> paraules) {
-	//for (int x = 0; 0 < paraules.size();x++) cout << paraules[x] <<  " " << endl;
 	if(autors.hi_ha_text_seleccionat()) {
-		//cout << "hi ha text seleccionat" << endl;
 		string titol_text = autors.obtenir_text_seleccionat();
 		string nom_autor = autors.existeix_titol(titol_text);
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
@@ -315,7 +274,6 @@ void Consultes::frases_sequencia(vector<string> paraules) {
 			if(text.conte_paraules(i, paraules)) {
 				cout << i << " " << text.consultar_frase(i) << endl;
 			}
-			//else cout << i << " no es troba " << endl;
 		}
 	}
 	else cout << "error" << endl;
@@ -365,7 +323,7 @@ void Consultes::cites_consultar(string consulta) {
 			nom += " " + paraula;
 			iss >> paraula;
 		}
-		cites_autor(nom.substr(2, nom.size()-3));
+		cites_autor(nom.substr(2, nom.size()-3), autors);
 	}
 	else {
 		vector<Cita> aux = cites.cites_text_seleccionat(autors.obtenir_text_seleccionat(), autors);
@@ -375,7 +333,7 @@ void Consultes::cites_consultar(string consulta) {
 	}
 }
 
-void Consultes::cites_autor(string nom) {
+void Consultes::cites_autor(string nom, Conjunt_autors) {
 	vector<Cita> aux = cites.cites_autor(nom, autors);
 	for (int c = 0; c < aux.size(); c++) {
 		escriure_cita(aux[c]);
@@ -383,7 +341,6 @@ void Consultes::cites_autor(string nom) {
 }
 
 void Consultes::textos_autor(string nom) {
-	//cout << "nom: " << nom << endl;
 	const Autor autor = autors.obtenir_autor(nom);
 	vector<string> textos = autor.consultar_titol_textos();
 	for (int i = 0; i < textos.size(); i++) {
@@ -401,10 +358,8 @@ void Consultes::autor() {
 
 void Consultes::contingut() {
 	if (autors.hi_ha_text_seleccionat()) {
-		//cout << "text seleccionat :" << endl;
 		string titol_text = autors.obtenir_text_seleccionat();
 		string nom_autor = autors.existeix_titol(titol_text);
-		//cout << "titol: " << titol_text << " / autor: " << nom_autor << endl;
 		Text text = autors.obtenir_text_autor(nom_autor, titol_text);
 		vector<string> frases = text.consultar_contingut();
 		for (int i = 0; i < frases.size(); i++) {
@@ -417,7 +372,6 @@ void Consultes::contingut() {
 void Consultes::taula_de_frequencies() {
 	string titol_text = autors.obtenir_text_seleccionat();
 	string nom_autor = autors.existeix_titol(titol_text);
-	//cout << "titol : " << titol_text << " / autor: " << nom_autor << endl;
 	Text text = autors.obtenir_text_autor(nom_autor, titol_text);
 	vector<vector<string> > taula = text.consultar_taula_frequencies();
 	for (int i = taula.size()-1; i > 0; i--) {

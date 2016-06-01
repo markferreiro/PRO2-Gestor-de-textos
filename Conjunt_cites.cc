@@ -1,6 +1,5 @@
 #include "Conjunt_cites.hh"
 
-//Conjunt_cites::p_cita() : frases(2){ }
 
 Conjunt_cites::Conjunt_cites() {
 	cites = map<string, Cita>();
@@ -11,12 +10,9 @@ bool Conjunt_cites::afegir_cita(int x, int y, string titol_text, string nom_auto
 	if (!existeix_cita(titol_text, x, y)) {
 		Cita cita = Cita(nom_autor, titol_text, referencia + IntToString(maxima_referencia(referencia)), x, y, frases);
 		cites.insert(pair<string, Cita>(cita.consultar_referencia(), cita));
-		//cout << "Cita afegida." << endl;
 		return true;
 	}
 	return false;
-	//Comprovar si ja existeix una cita del text seleccionat amb les mateixes frases.
-	//Afegir cita.
 }
 bool Conjunt_cites::eliminar_cita(string referencia) {
 	int original_size = cites.size();
@@ -26,6 +22,7 @@ bool Conjunt_cites::eliminar_cita(string referencia) {
 	}
 	return true;
 }
+
 vector<Cita> Conjunt_cites::totes_cites(Conjunt_autors autors) {
 	int size = cites.size();
 	vector<Cita> cites_to_return(size);
@@ -37,7 +34,7 @@ vector<Cita> Conjunt_cites::totes_cites(Conjunt_autors autors) {
 	}
 	return cites_to_return;
 }
-vector<Cita> Conjunt_cites::cites_autor(string nom, Conjunt_autors& autors) {
+vector<Cita> Conjunt_cites::cites_autor(string nom, Conjunt_autors autors) {
 	vector<Cita> cites_to_return;
 	map<string, Cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
@@ -54,7 +51,6 @@ Cita Conjunt_cites::cita_referencia (string referencia, Conjunt_autors autors) {
 	map<string, Cita>::iterator iterator = cites.begin();
 	while (iterator != cites.end()) {
 		if (iterator->first == referencia) {
-			//cout << "cita trobada!" << endl;
 			Cita cita = iterator->second;
 			return cita;
 		}
@@ -82,7 +78,6 @@ int Conjunt_cites::maxima_referencia(string inicials) {
 		to_return = (it->second) + 1;
 	}
 	max_ref[inicials] = to_return;
-	//cout << "Nova referencia maxima: " << max_ref[inicials] << endl;
 	return to_return;
 }
 
@@ -92,7 +87,6 @@ bool Conjunt_cites::existeix_cita(string titol_text, int x, int y) {
 	while (iterator != cites.end() && !resultat) {
 		Cita cita = iterator->second;
 		if (cita.consultar_titol() == titol_text && cita.consultar_x_y().first == x && cita.consultar_x_y().second == y) {
-			//cout << "la cita existeix!" << endl;
 			resultat = true;
 		}
 		iterator++;
