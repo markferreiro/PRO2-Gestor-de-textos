@@ -1,8 +1,28 @@
-afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. Caca. ****
+afegir text "The Picture of Dorian Gray"
+autor "Oscar Wilde"
+Those who find ugly meanings in beautiful things are corrupt without being charming. This is a fault.
+Those who find beautiful meanings in beautiful things are the cultivated. For these there is hope. They are the elect
+to whom beautiful things mean only Beauty. There is no such thing as a moral or an immoral book. Books are well written,
+or badly written. That is all.
+****
 
-afegir text "Titol d'exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
+afegir text "Titol d'exemple"
+autor "Pepito Palotes"
+Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. Caca.
+****
 
-afegir text "Titol exemple" autor "Pepito de los palotes" Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase. ****
+
+afegir text "Titol d'exemple"
+autor "Pepito Palotes"
+Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase.
+****
+
+
+afegir text "Titol exemple"
+autor "Pepito Palotes"
+Aquest es el contingut del text. Una frase! Tres frases? Capasao, con esta frase.
+****
+
 
 triar text {palotes contingut Caca}
 
@@ -10,7 +30,11 @@ triar text {palo al agua}
 
 eliminar text
 
-afegir text "Segon text afegit" autor "Antonio Bolzano" Contingut del segon text. Curt, el segon. Pero no es tonto, es el segon. Concís. ****
+afegir text "Segon text afegit"
+autor "Antonio Bolzano"
+Contingut del segon text. Curt, el segon. Pero no es tonto, es el segon. Concís.
+****
+
 
 triar text {Segon del}
 
