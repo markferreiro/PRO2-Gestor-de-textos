@@ -61,6 +61,8 @@ triar text {agua Nazca construcciones}
 
 afegir cita 3 4
 
+info cita "MBA1" ?
+
 triar text {things}
 
 triar text {things Max roars}
