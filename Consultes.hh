@@ -143,7 +143,7 @@ private:
 		/pre cert
 		/post retorna true si a frase es troben les paraules com indica l'expressio, retorna false si no
 	*/
-	bool frases_expressio_algebraica(string consulta, const string frase);
+	bool frases_expressio_algebraica(string consulta, Text text, int i);
 
 	/** @brief Processador de la consulta "frases "sequencia" ?"
 		@param sequencia: String corresponent a la seq�encia de paraules a utilitzar en la consulta.
@@ -247,6 +247,7 @@ private:
 	*/
 	void escriure_cita(Cita& cita);
 	
+	bool conte_paraula(string paraula, string frase);
 
 	vector<string> split(string str, char delimiter);
 };

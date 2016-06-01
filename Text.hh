@@ -128,6 +128,15 @@ class Text
 		*/
 		bool conte_paraules(int i, vector<string> paraules);
 		
+		/** @brief Comprova si la frase i conte la paraula
+			@param i: index de la frase que es vol consultar
+			@param paraula: paraula que es volen trobar a la frase
+			
+			\pre cert
+			\post Retorna true si la frase i conte la paraula del parametre, false si no;
+		*/
+		bool conte_paraula(string paraula, int i);
+		
 		/** @brief Retorna true si la frase i conte les paraules que indica l'expressio del parametre.
 		
 			\pre cert
